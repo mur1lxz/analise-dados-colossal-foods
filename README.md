@@ -1,835 +1,340 @@
-# 🍔 Análise do Sistema de Dados — Colossal Foods
-
-## 📌 Sobre o projeto
-
-Este projeto foi desenvolvido com o objetivo de analisar como funciona o fluxo de informações e dados da **Colossal Foods**, uma hamburgueria de pequeno/médio porte.
-
-A proposta do trabalho é compreender como os dados são gerados durante o atendimento, como os pedidos são processados e como essas informações podem ser representadas por meio de modelagem de dados.
-
-O projeto contempla:
-
-* Levantamento de requisitos;
-* Entrevista com a empresa;
-* Análise do funcionamento da operação;
-* Fluxo de dados;
-* MER — Modelo Entidade-Relacionamento;
-* DER — Diagrama Entidade-Relacionamento;
-* Identificação das principais entidades;
-* Relacionamentos entre os dados;
-* Possíveis melhorias;
-* Utilização de Inteligência Artificial como ferramenta de apoio.
+# Entrega 1 — Modelo Conceitual (DER)
+### Modelagem de um sistema de gestão de informações para uma organização de pequeno porte
 
 ---
 
-# 🏢 Empresa analisada
+## Metadados
 
-**Empresa:** Colossal Foods
-**Segmento:** Alimentação / Hamburgueria
-**Porte:** Pequeno/Médio porte
-
-A Colossal Foods atua com produção e venda de hambúrgueres e outros produtos alimentícios.
-
-Durante o levantamento realizado pelo grupo, foram identificadas algumas características importantes da operação:
-
-* Utilização de um **cardápio digital**;
-* O cardápio digital é fornecido por uma empresa terceirizada;
-* A Colossal Foods realiza um pagamento mensal pelo uso e manutenção do sistema;
-* Os pedidos são recebidos e encaminhados para preparação;
-* A cozinha é responsável pela produção dos pedidos;
-* Existem pedidos para retirada e delivery;
-* A empresa utiliza **motoboy fixo** para realizar as entregas.
+- **Murilo Silva Magalhães — RGM: 47820471**
+- **Kauê de Lima Pereira — RGM: 48477940**
+- **Kauê Gregorio dos Santos — RGM: 47908904**
 
 ---
 
-# 🎯 Objetivo da análise
+## 1. Caracterização da Organização
 
-O objetivo principal foi identificar como as informações percorrem o processo de venda da empresa.
+- **Nome e natureza da organização:** **Colossal Foods**, empresa privada com fins lucrativos do segmento de alimentação, classificada publicamente como hamburgueria.
 
-O fluxo começa quando o cliente acessa o cardápio digital e realiza um pedido e termina quando o pedido é entregue ou retirado.
+- **Contexto e porte:** A Colossal Foods é uma hamburgueria de pequeno/médio porte localizada no Jardim Arantes, em São Paulo. Durante a pesquisa de campo, o grupo identificou **4 funcionários diretamente envolvidos na operação interna**, sendo **2 funcionários na chapa/preparação dos alimentos** e **2 funcionários no atendimento ao público**. A empresa também utiliza **motoboy fixo** para realizar as entregas. A operação envolve atendimento, cardápio digital, recebimento de pedidos, preparação, pagamento, retirada e delivery. O volume médio diário de pedidos não foi informado ao grupo.
 
-Durante esse processo são geradas e utilizadas informações como:
+- **Problemas e necessidades identificados:** Não foi relatada ao grupo uma crise operacional específica. Para o escopo deste projeto, foi identificada a necessidade de representar de forma estruturada os dados essenciais da operação — clientes, produtos, pedidos, pagamentos e entregas — para permitir rastreabilidade e consistência das informações. O uso de um cardápio digital terceirizado também torna importante distinguir os dados da operação da hamburgueria da plataforma externa que presta o serviço.
 
-* Dados do cliente;
-* Produtos selecionados;
-* Quantidade dos produtos;
-* Valor do pedido;
-* Forma de pagamento;
-* Tipo do pedido;
-* Status do pedido;
-* Informações de entrega;
-* Informações relacionadas ao motoboy.
+- **Justificativa da escolha:** A Colossal Foods foi escolhida por ser uma organização real à qual o grupo possui acesso para pesquisa de campo. Sua operação apresenta processos suficientes para a modelagem conceitual, especialmente pedidos, produtos, pagamentos, retirada e delivery, sem possuir complexidade excessiva para esta primeira etapa do curso.
 
-Esses dados podem ser utilizados para controle operacional, histórico de vendas e apoio à tomada de decisão.
+- **Evidências da organização:** A Colossal Foods possui perfil público no Google, onde aparece como hamburgueria na **Rua do Carvalho Brasileiro, Jardim Arantes, São Paulo — SP, CEP 08382-520**, com telefone público **(11) 95950-6213**. Na consulta pública realizada durante o projeto, o perfil apresentava avaliação 5,0 e 228 avaliações. O grupo também realizou pesquisa de campo diretamente na organização. Fotos da visita devem ser mantidas no repositório como evidência de acesso.
+
+**Referência pública:** pesquisar no Google Maps por **“Colossal Foods — Jardim Arantes, São Paulo — SP”**.
 
 ---
 
-# 🔎 Metodologia utilizada
+## 2. Processos de Negócio
 
-Para compreender o funcionamento da empresa, foi realizada uma entrevista com perguntas relacionadas ao processo de atendimento, funcionamento dos pedidos e utilização dos sistemas.
+### Principais processos mapeados
 
-O projeto foi dividido nas seguintes etapas:
+1. **Consulta ao cardápio:** o cliente consulta os produtos disponíveis por meio do cardápio digital terceirizado.
+2. **Realização do pedido:** o cliente seleciona os produtos e realiza o pedido.
+3. **Recebimento e atendimento:** os funcionários do atendimento acompanham o pedido e o encaminham para preparação.
+4. **Preparação:** os funcionários da chapa preparam os itens solicitados.
+5. **Pagamento:** o pagamento é associado ao pedido realizado.
+6. **Retirada:** quando o pedido é para retirada, o cliente recebe o pedido no estabelecimento.
+7. **Delivery:** quando o pedido é para entrega, ele é encaminhado ao motoboy fixo.
+8. **Finalização:** após a retirada ou entrega, o pedido é considerado concluído.
 
-1. Levantamento inicial das informações da empresa;
-2. Preparação das perguntas da entrevista;
-3. Realização da entrevista;
-4. Identificação do fluxo operacional;
-5. Identificação dos dados utilizados;
-6. Identificação das principais entidades;
-7. Construção do fluxo de dados;
-8. Construção do MER;
-9. Construção do DER;
-10. Análise de possíveis melhorias;
-11. Organização da documentação.
-
----
-
-# 🎤 Entrevista
-
-A entrevista foi utilizada para compreender como as informações circulam dentro da empresa.
-
-Algumas perguntas utilizadas durante o levantamento foram:
-
-* Como os clientes realizam os pedidos?
-* Qual sistema é utilizado para apresentar o cardápio?
-* O sistema do cardápio é próprio ou terceirizado?
-* Como os pedidos chegam até a empresa?
-* Como o pedido é encaminhado para a cozinha?
-* Quais informações do pedido ficam armazenadas?
-* Como são registrados os pagamentos?
-* Como funciona o processo de delivery?
-* A empresa utiliza motoboy próprio ou terceirizado?
-* Existe controle de estoque?
-* O sistema gera relatórios?
-* Quem possui acesso ao sistema?
-* Como produtos e preços são atualizados?
-* Existe histórico de pedidos?
-
----
-
-# 🔄 Funcionamento geral da empresa
-
-O processo começa quando o cliente acessa o cardápio digital da Colossal Foods.
-
-O cliente visualiza os produtos disponíveis, escolhe os itens desejados e realiza seu pedido.
-
-As informações do pedido são recebidas pela hamburgueria e utilizadas para iniciar o processo de preparação.
-
-Depois disso, o pedido é encaminhado para a cozinha.
-
-Quando o pedido fica pronto, ele pode seguir dois caminhos principais:
-
-### Retirada
-
-O cliente realiza a retirada do pedido diretamente na hamburgueria.
-
-### Delivery
-
-O pedido é encaminhado para o motoboy fixo utilizado pela empresa.
-
-O motoboy recebe o pedido e realiza a entrega no endereço informado pelo cliente.
-
-Após a retirada ou entrega, o pedido é considerado finalizado.
-
----
-
-# 🔄 Fluxo principal
+### Fluxograma
 
 ```mermaid
 flowchart TD
-
-A[Cliente] --> B[Cardápio Digital]
-
-B --> C[Escolha dos Produtos]
-
-C --> D[Realização do Pedido]
-
-D --> E[Pedido Recebido pela Hamburgueria]
-
-E --> F[Conferência do Pedido]
-
-F --> G[Cozinha]
-
-G --> H[Preparação]
-
-H --> I[Pedido Pronto]
-
-I --> J{Tipo do Pedido}
-
-J -->|Retirada| K[Cliente Retira]
-
-J -->|Delivery| L[Motoboy Fixo]
-
-L --> M[Entrega ao Cliente]
-
-K --> N[Pedido Finalizado]
-
-M --> N
-
-N --> O[Registro / Histórico da Venda]
+    A[Cliente] --> B[Cardápio Digital]
+    B --> C[Escolha dos Produtos]
+    C --> D[Pedido]
+    D --> E[Atendimento]
+    E --> F[Chapa / Preparação]
+    F --> G[Pedido Pronto]
+    G --> H{Tipo do Pedido}
+    H -->|Retirada| I[Retirada pelo Cliente]
+    H -->|Delivery| J[Motoboy Fixo]
+    J --> K[Entrega ao Cliente]
+    I --> L[Pedido Finalizado]
+    K --> L
 ```
 
 ---
 
-# 💻 Sistema de cardápio digital
+## 3. Requisitos do Sistema
 
-A Colossal Foods utiliza um sistema de cardápio digital fornecido por uma empresa terceirizada.
+### 3.1 Requisitos Funcionais
 
-A hamburgueria realiza um pagamento mensal para utilizar o serviço.
+- **RF01 —** O sistema deve permitir registrar clientes.
+- **RF02 —** O sistema deve permitir cadastrar e consultar produtos.
+- **RF03 —** O sistema deve permitir organizar produtos por categorias.
+- **RF04 —** O sistema deve permitir registrar pedidos.
+- **RF05 —** O sistema deve permitir adicionar um ou mais produtos a um pedido.
+- **RF06 —** O sistema deve registrar quantidade e preço de cada item do pedido.
+- **RF07 —** O sistema deve permitir registrar o pagamento relacionado a um pedido.
+- **RF08 —** O sistema deve identificar se o pedido é para retirada ou delivery.
+- **RF09 —** O sistema deve permitir registrar os dados de uma entrega.
+- **RF10 —** O sistema deve permitir associar o motoboy responsável à entrega.
+- **RF11 —** O sistema deve permitir acompanhar o status do pedido e da entrega.
+- **RF12 —** O sistema deve manter histórico dos pedidos realizados.
 
-A manutenção técnica da plataforma é de responsabilidade da empresa fornecedora do sistema.
+### 3.2 Requisitos Não Funcionais
 
-O funcionamento pode ser representado da seguinte maneira:
-
-```mermaid
-flowchart TD
-
-A[Empresa responsável pelo sistema]
-
-A -->|Fornece e mantém| B[Cardápio Digital]
-
-B --> C[Cliente]
-
-C --> D[Pedido]
-
-D --> E[Colossal Foods]
-
-E --> F[Cozinha]
-
-F --> G[Entrega ou Retirada]
-```
-
-Esse modelo permite que a Colossal Foods utilize uma solução pronta sem precisar desenvolver e manter internamente todo o sistema de cardápio.
+- **RNF01 — Usabilidade:** o sistema deve ser simples e adequado à rotina de uma operação de pequeno/médio porte.
+- **RNF02 — Segurança:** o acesso aos dados de clientes e pedidos deve ser controlado.
+- **RNF03 — Disponibilidade:** o sistema deve estar disponível durante o horário de funcionamento da hamburgueria.
+- **RNF04 — Desempenho:** registros e consultas de pedidos devem ocorrer sem atrasos que prejudiquem o atendimento.
+- **RNF05 — Integridade:** os relacionamentos entre pedidos, produtos, pagamentos e entregas devem permanecer consistentes.
+- **RNF06 — Privacidade:** dados pessoais de clientes devem ser usados somente para as finalidades necessárias ao atendimento e à entrega.
 
 ---
 
-# 🛵 Processo de entrega
+## 4. Regras de Negócio
 
-A empresa utiliza **motoboy fixo** para realizar os pedidos de delivery.
+### Regras operacionais
 
-O fluxo da entrega pode ser representado da seguinte forma:
+- **RN01 —** Um cliente pode realizar vários pedidos.
+- **RN02 —** Todo pedido deve possuir pelo menos um item.
+- **RN03 —** Um pedido pode conter vários produtos.
+- **RN04 —** Um mesmo produto pode estar presente em vários pedidos.
+- **RN05 —** Cada produto deve pertencer a uma categoria.
+- **RN06 —** Todo item do pedido deve possuir quantidade maior que zero.
+- **RN07 —** Todo pagamento deve estar associado a um pedido.
+- **RN08 —** Um pedido pode possuir um ou mais registros de pagamento, permitindo representar pagamento dividido.
+- **RN09 —** Um pedido deve ser classificado como retirada ou delivery.
+- **RN10 —** Pedidos para retirada não necessitam de registro de entrega.
+- **RN11 —** Pedidos de delivery devem possuir uma entrega associada.
+- **RN12 —** Cada entrega deve estar relacionada a um motoboy responsável.
+- **RN13 —** Um motoboy pode realizar várias entregas ao longo do tempo.
+- **RN14 —** Uma entrega deve possuir endereço de destino.
+- **RN15 —** Um pedido de delivery somente deve ser considerado entregue após a conclusão da entrega.
 
-```mermaid
-flowchart TD
+### Restrições organizacionais
 
-A[Pedido Recebido]
-
-A --> B[Cozinha]
-
-B --> C[Preparação]
-
-C --> D[Pedido Pronto]
-
-D --> E[Motoboy Fixo]
-
-E --> F[Saída para Entrega]
-
-F --> G[Cliente]
-
-G --> H[Pedido Entregue]
-```
-
-Durante o processo de entrega podem ser utilizados dados como:
-
-* Número do pedido;
-* Nome do cliente;
-* Endereço;
-* Horário de saída;
-* Motoboy responsável;
-* Status da entrega;
-* Horário de conclusão.
+- O cardápio digital utilizado pela Colossal Foods é fornecido por uma **empresa terceirizada**, contratada mediante pagamento mensal.
+- O grupo não possui acesso ao banco de dados interno dessa plataforma.
+- A empresa utiliza **motoboy fixo** para o processo de delivery.
+- A operação interna observada possui **2 funcionários na chapa** e **2 funcionários no atendimento ao público**.
+- A modelagem representa os dados necessários aos processos observados e não pretende reproduzir a implementação interna do sistema terceirizado.
 
 ---
 
-# 🗃️ Principais entidades identificadas
+## 5. Dicionário de Dados Conceitual (Preliminar)
 
-Com base na análise da empresa, foram identificadas as seguintes entidades principais:
+### CLIENTE
 
-* CLIENTE
-* PEDIDO
-* ITEM_PEDIDO
-* PRODUTO
-* CATEGORIA
-* PAGAMENTO
-* FUNCIONARIO
-* MOTOBOY
-* ENTREGA
+| Atributo | Descrição | Regra de negócio associada |
+|---|---|---|
+| id_cliente | Identificador do cliente | Deve ser único |
+| nome | Nome do cliente | Utilizado para identificação |
+| telefone | Telefone para contato | Pode ser utilizado no atendimento e delivery |
+
+### CATEGORIA
+
+| Atributo | Descrição | Regra de negócio associada |
+|---|---|---|
+| id_categoria | Identificador da categoria | Deve ser único |
+| nome | Nome da categoria | Obrigatório |
+| descricao | Descrição da categoria | Opcional |
+
+### PRODUTO
+
+| Atributo | Descrição | Regra de negócio associada |
+|---|---|---|
+| id_produto | Identificador do produto | Deve ser único |
+| nome | Nome apresentado no cardápio | Obrigatório |
+| descricao | Características do produto | Opcional |
+| preco | Valor de venda | Deve ser maior que zero |
+| status | Indica disponibilidade | Ex.: ativo ou indisponível |
+
+### PEDIDO
+
+| Atributo | Descrição | Regra de negócio associada |
+|---|---|---|
+| id_pedido | Identificador do pedido | Deve ser único |
+| data_hora | Momento em que o pedido foi registrado | Obrigatório |
+| tipo_pedido | Forma de recebimento | Retirada ou delivery |
+| status | Situação atual do pedido | Ex.: recebido, em preparação, pronto, finalizado |
+| valor_total | Valor total do pedido | Calculado a partir dos itens |
+
+### ITEM_PEDIDO
+
+| Atributo | Descrição | Regra de negócio associada |
+|---|---|---|
+| id_item | Identificador do item | Deve ser único |
+| quantidade | Quantidade do produto | Deve ser maior que zero |
+| preco_unitario | Preço do produto no momento do pedido | Deve ser maior que zero |
+| observacao | Solicitação específica do cliente | Opcional |
+
+### PAGAMENTO
+
+| Atributo | Descrição | Regra de negócio associada |
+|---|---|---|
+| id_pagamento | Identificador do pagamento | Deve ser único |
+| forma_pagamento | Meio utilizado para pagar | Ex.: PIX, dinheiro ou cartão |
+| valor | Valor registrado no pagamento | Deve ser maior que zero |
+| status | Situação do pagamento | Ex.: pendente ou confirmado |
+
+### MOTOBOY
+
+| Atributo | Descrição | Regra de negócio associada |
+|---|---|---|
+| id_motoboy | Identificador do motoboy | Deve ser único |
+| nome | Nome do responsável pela entrega | Obrigatório |
+| telefone | Telefone para contato | Utilizado quando necessário |
+| status | Situação do motoboy | Ex.: disponível ou em entrega |
+
+### ENTREGA
+
+| Atributo | Descrição | Regra de negócio associada |
+|---|---|---|
+| id_entrega | Identificador da entrega | Deve ser único |
+| endereco_entrega | Local onde o pedido será entregue | Obrigatório para delivery |
+| data_hora_saida | Momento em que o pedido saiu | Registrado ao iniciar a entrega |
+| data_hora_entrega | Momento da conclusão | Registrado após a entrega |
+| status | Situação da entrega | Ex.: aguardando, em rota ou entregue |
+
+> **Privacidade:** os atributos acima representam a estrutura conceitual. Nenhum dado pessoal real de clientes ou funcionários foi utilizado como exemplo.
 
 ---
 
-# 👤 CLIENTE
+## 6. Modelagem Conceitual (Entidades, Atributos, Relacionamentos)
 
-Representa a pessoa que realiza o pedido.
+### Entidades reconhecidas
 
-Possíveis atributos:
+- **CLIENTE:** representa a pessoa que realiza o pedido.
+- **PEDIDO:** representa a compra e concentra as principais informações da operação.
+- **ITEM_PEDIDO:** representa cada produto incluído em determinado pedido.
+- **PRODUTO:** representa os itens comercializados pela hamburgueria.
+- **CATEGORIA:** organiza os produtos disponíveis no cardápio.
+- **PAGAMENTO:** representa os registros financeiros associados a um pedido.
+- **MOTOBOY:** representa o responsável pelo processo de entrega.
+- **ENTREGA:** representa a entrega de um pedido do tipo delivery.
+
+### Atributos e classificações
+
+Os atributos foram definidos no Dicionário de Dados Conceitual da Seção 5. Os identificadores (`id_...`) distinguem cada ocorrência de entidade; os demais atributos descrevem características necessárias aos processos observados.
+
+### Relacionamentos pertinentes
+
+- **CLIENTE 1:N PEDIDO** — um cliente pode realizar vários pedidos.
+- **PEDIDO 1:N ITEM_PEDIDO** — um pedido possui um ou mais itens.
+- **PRODUTO 1:N ITEM_PEDIDO** — um produto pode aparecer em vários itens de pedidos.
+- **CATEGORIA 1:N PRODUTO** — uma categoria pode classificar vários produtos.
+- **PEDIDO 1:N PAGAMENTO** — um pedido pode possuir um ou mais registros de pagamento.
+- **PEDIDO 1:0..1 ENTREGA** — somente pedidos de delivery geram entrega.
+- **MOTOBOY 1:N ENTREGA** — um motoboy pode realizar várias entregas.
+
+O relacionamento muitos-para-muitos entre **PEDIDO** e **PRODUTO** é resolvido pela entidade associativa **ITEM_PEDIDO**.
+
+### Restrições e políticas aplicadas
+
+- Pedidos devem possuir pelo menos um item.
+- Entrega só existe para pedidos do tipo delivery.
+- Toda entrega deve possuir motoboy responsável e endereço de destino.
+- Dados de contato dos clientes devem ser utilizados apenas para atendimento e entrega.
+- A plataforma terceirizada de cardápio não foi modelada como entidade principal, pois é um sistema externo à estrutura conceitual proposta.
+
+---
+
+## 7. Diagrama Entidade-Relacionamento (DER)
+
+O DER está anexado separadamente no repositório em formato de imagem:
 
 ```text
-id_cliente
-nome
-telefone
-endereco
-email
+diagramas/DER-Colossal-Foods.png
 ```
 
----
+![DER da Colossal Foods](diagramas/DER-Colossal-Foods.png)
 
-# 🧾 PEDIDO
+O diagrama representa:
 
-Representa cada compra realizada.
-
-Possíveis atributos:
-
-```text
-id_pedido
-id_cliente
-id_funcionario
-data_hora
-tipo_pedido
-status
-valor_total
-```
+- Entidades;
+- Atributos principais;
+- Relacionamentos;
+- Cardinalidades;
+- Entidade associativa ITEM_PEDIDO.
 
 ---
 
-# 🍔 PRODUTO
+## 8. Justificativa Técnica
 
-Representa os itens disponíveis no cardápio.
+A entidade **PEDIDO** ocupa posição central no modelo porque representa a principal operação analisada na hamburgueria. Ela conecta o cliente, os itens adquiridos, os pagamentos e, quando necessário, a entrega.
 
-Possíveis atributos:
+A relação entre **PEDIDO** e **PRODUTO** é naturalmente muitos-para-muitos: um pedido pode conter vários produtos e o mesmo produto pode aparecer em diversos pedidos. Por isso foi criada a entidade associativa **ITEM_PEDIDO**, que também permite registrar quantidade, preço praticado no momento da compra e observações específicas.
 
-```text
-id_produto
-id_categoria
-nome
-descricao
-preco
-status
-```
+A entidade **CATEGORIA** foi separada de PRODUTO para evitar repetição de classificações e permitir organização do cardápio.
 
----
+A entidade **PAGAMENTO** foi separada de PEDIDO porque possui características próprias e porque um pedido pode, conceitualmente, possuir mais de um registro de pagamento.
 
-# 📦 ITEM_PEDIDO
+As entidades **ENTREGA** e **MOTOBOY** foram utilizadas porque o delivery é um processo real da organização. ENTREGA não foi incorporada diretamente a PEDIDO porque pedidos para retirada não precisam de endereço, horário de saída ou motoboy. Assim, um pedido pode gerar zero ou uma entrega, enquanto um motoboy pode realizar várias entregas.
 
-Representa cada produto adicionado dentro de um pedido.
+O endereço de destino foi associado à **ENTREGA** em vez de ser armazenado como atributo obrigatório do CLIENTE, pois um cliente pode realizar pedidos para locais diferentes e pedidos para retirada não necessitam desse dado.
 
-Possíveis atributos:
+O cardápio digital terceirizado não foi transformado em entidade porque ele representa uma ferramenta externa contratada pela organização, e não um objeto de informação central do modelo conceitual proposto.
 
-```text
-id_item
-id_pedido
-id_produto
-quantidade
-preco_unitario
-observacao
-```
-
-O campo de observação pode armazenar solicitações como:
-
-```text
-Sem cebola
-Sem molho
-Adicionar bacon
-Retirar queijo
-```
+A modelagem busca reduzir redundâncias, representar as regras observadas e permitir evolução posterior para o modelo lógico e implementação de banco de dados relacional.
 
 ---
 
-# 💳 PAGAMENTO
+## 9. Uso de Inteligência Artificial
 
-Representa as informações financeiras relacionadas ao pedido.
+O grupo utilizou **ChatGPT, da OpenAI**, como ferramenta de apoio durante o projeto.
 
-Possíveis atributos:
+### Uso 1 — Preparação da entrevista
 
-```text
-id_pagamento
-id_pedido
-forma_pagamento
-valor
-status
-data_hora
-```
+| Item | Registro |
+|---|---|
+| **Ferramenta e etapa** | ChatGPT — preparação das perguntas de levantamento de requisitos |
+| **Motivação** | Identificar perguntas importantes para compreender como os dados circulam na hamburgueria |
+| **Prompt utilizado** | “Chat, preciso fazer uma entrevista com uma empresa e entender como funciona o sistema deles de dados e montar um fluxo e fazer um MER e DER.” |
+| **Resposta recebida** | Sugestões de perguntas sobre pedidos, produtos, clientes, pagamentos, sistemas, estoque e delivery |
+| **Fontes consultadas e verificadas** | As sugestões foram confrontadas com a pesquisa de campo e com o funcionamento observado na Colossal Foods |
+| **Trechos rejeitados ou corrigidos** | Hipóteses não confirmadas, como integração automática de estoque e uso obrigatório de determinadas plataformas, foram retiradas |
+| **Justificativa da escolha final** | Foram mantidas apenas questões úteis para compreender os processos realmente acessíveis ao grupo |
+| **Reflexão crítica** | A IA tende a sugerir práticas comuns do setor como se pudessem fazer parte da empresa analisada; por isso a validação em campo foi indispensável |
 
-Exemplos de formas de pagamento:
+### Uso 2 — Estruturação do modelo
 
-* PIX;
-* Dinheiro;
-* Cartão de débito;
-* Cartão de crédito.
+| Item | Registro |
+|---|---|
+| **Ferramenta e etapa** | ChatGPT — organização dos requisitos, entidades, relacionamentos e cardinalidades |
+| **Motivação** | Transformar as informações coletadas em uma estrutura inicial de modelagem conceitual |
+| **Prompt utilizado** | “A empresa que vou é uma hamburgueria de baixo/médio porte, é possível adiantar algo?” |
+| **Resposta recebida** | Sugestões iniciais de entidades como Cliente, Pedido, Produto, Item do Pedido, Pagamento, Entrega e Motoboy |
+| **Fontes consultadas e verificadas** | Entrevista, observação da operação e informações públicas da organização |
+| **Trechos rejeitados ou corrigidos** | Foram removidas entidades e funcionalidades sem confirmação ou fora do escopo, como estoque automático de ingredientes |
+| **Justificativa da escolha final** | O grupo manteve apenas elementos coerentes com os processos observados e com o objetivo da Entrega 1 |
+| **Reflexão crítica** | As sugestões da IA foram tratadas como hipóteses e não como evidências sobre o funcionamento real da organização |
 
----
+### Uso 3 — Documentação no GitHub
 
-# 👨‍💼 FUNCIONARIO
-
-Representa os colaboradores responsáveis pelo atendimento e operação.
-
-Possíveis atributos:
-
-```text
-id_funcionario
-nome
-cargo
-status
-```
-
----
-
-# 🛵 MOTOBOY
-
-Representa o responsável pelas entregas.
-
-Possíveis atributos:
-
-```text
-id_motoboy
-nome
-telefone
-status
-```
-
-Possíveis status:
-
-```text
-Disponível
-Em entrega
-Indisponível
-```
+| Item | Registro |
+|---|---|
+| **Ferramenta e etapa** | ChatGPT — estruturação e revisão do README |
+| **Motivação** | Adaptar as informações do projeto ao modelo de entrega fornecido pelo professor |
+| **Prompt utilizado** | “Mude o arquivo para esse formato: Entrega 1 — Modelo Conceitual (DER).” |
+| **Resposta recebida** | Organização do conteúdo nas seções de caracterização, processos, requisitos, regras, dicionário, modelagem e justificativa |
+| **Fontes consultadas e verificadas** | Modelo oficial da atividade, pesquisa de campo e perfil público da Colossal Foods |
+| **Trechos rejeitados ou corrigidos** | Foram removidos conteúdos fora do modelo solicitado e afirmações que não haviam sido confirmadas |
+| **Justificativa da escolha final** | A versão final preserva os títulos e critérios definidos na atividade e utiliza a IA apenas como apoio à organização |
+| **Reflexão crítica** | O conteúdo gerado precisou de revisão humana para manter fidelidade ao levantamento de campo e evitar generalizações |
 
 ---
 
-# 🚚 ENTREGA
+## Critérios Atitudinais (20%)
 
-Representa o processo de entrega de um pedido.
+Os critérios atitudinais serão demonstrados por meio da participação dos integrantes, do cumprimento das responsabilidades, da colaboração no projeto e do histórico de commits no GitHub.
 
-Possíveis atributos:
-
-```text
-id_entrega
-id_pedido
-id_motoboy
-endereco_entrega
-data_hora_saida
-data_hora_entrega
-status
-```
-
-Possíveis status:
-
-```text
-Aguardando
-Em rota
-Entregue
-Cancelada
-```
+Para demonstrar colaboração equilibrada, cada integrante deve realizar contribuições reais no repositório utilizando sua própria conta.
 
 ---
 
-# 🗂️ CATEGORIA
-
-Representa a categoria de cada produto.
-
-Exemplos:
-
-```text
-Hambúrguer
-Bebida
-Porção
-Sobremesa
-Combo
-```
-
-Possíveis atributos:
-
-```text
-id_categoria
-nome
-descricao
-```
-
----
-
-# 🔗 MER — Modelo Entidade-Relacionamento
-
-```mermaid
-erDiagram
-
-CLIENTE ||--o{ PEDIDO : realiza
-
-FUNCIONARIO ||--o{ PEDIDO : registra
-
-PEDIDO ||--|{ ITEM_PEDIDO : possui
-
-PRODUTO ||--o{ ITEM_PEDIDO : aparece_em
-
-CATEGORIA ||--o{ PRODUTO : possui
-
-PEDIDO ||--o{ PAGAMENTO : possui
-
-PEDIDO ||--o| ENTREGA : gera
-
-MOTOBOY ||--o{ ENTREGA : realiza
-```
-
----
-
-# 🧩 DER — Estrutura lógica
-
-```text
-CLIENTE
------------------------------
-PK id_cliente
-nome
-telefone
-endereco
-email
-
-
-FUNCIONARIO
------------------------------
-PK id_funcionario
-nome
-cargo
-status
-
-
-CATEGORIA
------------------------------
-PK id_categoria
-nome
-descricao
-
-
-PRODUTO
------------------------------
-PK id_produto
-FK id_categoria
-nome
-descricao
-preco
-status
-
-
-PEDIDO
------------------------------
-PK id_pedido
-FK id_cliente
-FK id_funcionario
-data_hora
-tipo_pedido
-status
-valor_total
-
-
-ITEM_PEDIDO
------------------------------
-PK id_item
-FK id_pedido
-FK id_produto
-quantidade
-preco_unitario
-observacao
-
-
-PAGAMENTO
------------------------------
-PK id_pagamento
-FK id_pedido
-forma_pagamento
-valor
-status
-data_hora
-
-
-MOTOBOY
------------------------------
-PK id_motoboy
-nome
-telefone
-status
-
-
-ENTREGA
------------------------------
-PK id_entrega
-FK id_pedido
-FK id_motoboy
-endereco_entrega
-data_hora_saida
-data_hora_entrega
-status
-```
-
----
-
-# 📊 Cardinalidades
-
-## Cliente e Pedido
-
-```text
-CLIENTE 1 ───── N PEDIDO
-```
-
-Um cliente pode realizar vários pedidos.
-
----
-
-## Funcionário e Pedido
-
-```text
-FUNCIONARIO 1 ───── N PEDIDO
-```
-
-Um funcionário pode registrar diversos pedidos.
-
----
-
-## Pedido e Item do Pedido
-
-```text
-PEDIDO 1 ───── N ITEM_PEDIDO
-```
-
-Um pedido pode possuir vários produtos.
-
----
-
-## Produto e Item do Pedido
-
-```text
-PRODUTO 1 ───── N ITEM_PEDIDO
-```
-
-Um mesmo produto pode aparecer em diversos pedidos.
-
----
-
-## Categoria e Produto
-
-```text
-CATEGORIA 1 ───── N PRODUTO
-```
-
-Uma categoria pode conter vários produtos.
-
----
-
-## Pedido e Pagamento
-
-```text
-PEDIDO 1 ───── N PAGAMENTO
-```
-
-Essa estrutura permite que um pedido possa possuir mais de um registro de pagamento, caso exista pagamento dividido.
-
----
-
-## Pedido e Entrega
-
-```text
-PEDIDO 1 ───── 0..1 ENTREGA
-```
-
-Nem todo pedido possui entrega.
-
-Pedidos retirados diretamente pelo cliente não precisam gerar um registro de entrega.
-
----
-
-## Motoboy e Entrega
-
-```text
-MOTOBOY 1 ───── N ENTREGA
-```
-
-Um motoboy pode realizar várias entregas ao longo do tempo.
-
----
-
-# 📈 Possíveis informações geradas
-
-A partir da estrutura proposta, seria possível gerar indicadores como:
-
-* Quantidade de pedidos;
-* Faturamento diário;
-* Faturamento mensal;
-* Ticket médio;
-* Produtos mais vendidos;
-* Categorias mais vendidas;
-* Formas de pagamento mais utilizadas;
-* Quantidade de pedidos de delivery;
-* Quantidade de pedidos para retirada;
-* Horários de maior movimento;
-* Histórico de pedidos;
-* Quantidade de entregas realizadas;
-* Tempo médio de entrega.
-
----
-
-# 🚀 Possíveis melhorias
-
-Durante a análise, também foram identificadas possíveis oportunidades de melhoria.
-
-## Centralização das informações
-
-Uma possível melhoria seria concentrar informações de pedidos, pagamentos e entregas em um único ambiente.
-
-Isso poderia facilitar o acompanhamento da operação e reduzir retrabalho.
-
----
-
-## Dashboard gerencial
-
-Também poderia ser criado um painel para acompanhamento de indicadores.
-
-Exemplo:
-
-```text
-Faturamento
-Quantidade de pedidos
-Ticket médio
-Produtos mais vendidos
-Horários de maior movimento
-Pedidos por canal
-Quantidade de deliveries
-```
-
----
-
-## Histórico de entregas
-
-O registro estruturado das entregas poderia permitir análises como:
-
-```text
-Quantidade de entregas
-Tempo médio de entrega
-Pedidos por região
-Histórico do motoboy
-```
-
----
-
-# 🤖 Utilização de Inteligência Artificial
-
-Durante o desenvolvimento deste projeto foi utilizada **Inteligência Artificial por meio do ChatGPT, da OpenAI**, como ferramenta de apoio.
-
-A IA foi utilizada principalmente para:
-
-* Auxiliar na elaboração das perguntas utilizadas na entrevista;
-* Organizar as informações coletadas pelo grupo;
-* Apoiar na identificação das possíveis entidades;
-* Auxiliar na definição dos relacionamentos;
-* Estruturar o fluxo de dados;
-* Auxiliar na construção do MER;
-* Auxiliar na construção do DER;
-* Organizar a documentação;
-* Melhorar a apresentação das informações no GitHub.
-
-A Inteligência Artificial foi utilizada como uma ferramenta de suporte ao desenvolvimento do projeto.
-
-As informações referentes ao funcionamento da Colossal Foods foram obtidas por meio do levantamento e da entrevista realizada pelo grupo.
-
-O ChatGPT auxiliou principalmente na **organização, estruturação e representação das informações coletadas**.
-
----
-
-# 🧠 IA no processo de desenvolvimento
-
-```mermaid
-flowchart LR
-
-A[Entrevista com a empresa]
-
-A --> B[Informações coletadas]
-
-B --> C[Análise do grupo]
-
-C --> D[ChatGPT]
-
-D --> E[Apoio na estruturação]
-
-E --> F[Fluxo de Dados]
-
-E --> G[MER]
-
-E --> H[DER]
-
-E --> I[Documentação]
-
-F --> J[Projeto Final]
-
-G --> J
-
-H --> J
-
-I --> J
-```
-
----
-
-# ⚠️ Observação sobre a modelagem
-
-Parte das informações apresentadas no MER e no DER representa uma **modelagem proposta pelo grupo com base nas informações levantadas durante a entrevista e no funcionamento observado da empresa**.
-
-Alguns atributos e relacionamentos representam como os dados poderiam ser organizados em um banco de dados estruturado.
-
-Isso não significa necessariamente que o sistema terceirizado atualmente utilizado pela Colossal Foods possua exatamente essa estrutura interna.
-
-O objetivo é representar de maneira lógica o funcionamento da operação e os principais dados envolvidos.
-
----
-
-# 🛠️ Ferramentas e conceitos utilizados
-
-Durante o desenvolvimento foram utilizados:
-
-* GitHub;
-* Markdown;
-* Mermaid;
-* ChatGPT;
-* Modelagem de Banco de Dados;
-* MER;
-* DER;
-* Levantamento de Requisitos;
-* Entrevista;
-* Análise de Sistemas.
-
----
-
-# 📚 Conhecimentos aplicados
-
-O projeto envolveu conhecimentos relacionados a:
-
-* Banco de Dados;
-* Engenharia de Requisitos;
-* Análise e Desenvolvimento de Sistemas;
-* Modelagem de Dados;
-* Modelo Entidade-Relacionamento;
-* Diagrama Entidade-Relacionamento;
-* Fluxo de Dados;
-* Inteligência Artificial aplicada ao desenvolvimento de projetos.
-
----
-
-# 👥 Integrantes do projeto
-
-Este projeto foi desenvolvido em grupo como parte de uma atividade acadêmica do curso de **Análise e Desenvolvimento de Sistemas**.
-
-Integrantes:
-
-* **Murilo Silva Magalhães**
-* **Kauê de Lima Pereira**
-* **Kauê Gregorio dos Santos**
-
-O trabalho foi desenvolvido de forma colaborativa, envolvendo entrevista, levantamento de informações, análise do funcionamento da empresa, discussão das entidades, construção dos modelos e organização da documentação.
-
----
-
-# ✅ Conclusão
-
-A análise da Colossal Foods permitiu compreender como diferentes informações participam do processo de funcionamento de uma hamburgueria.
-
-O pedido funciona como um dos principais elementos do processo, relacionando informações sobre clientes, produtos, pagamentos e entregas.
-
-A utilização do MER e do DER permitiu representar de forma estruturada como essas informações podem ser organizadas em um banco de dados.
-
-O projeto também demonstrou a importância do levantamento de requisitos antes da construção de uma solução.
-
-Além disso, a utilização de Inteligência Artificial mostrou como ferramentas como o ChatGPT podem apoiar atividades de organização, análise, documentação e modelagem, enquanto as decisões e informações principais permanecem baseadas na análise realizada pelo grupo e na entrevista com a empresa.
+## Resumo dos Pesos
+
+| Dimensão | Peso total |
+|----------|-----------|
+| Conceitual (contexto, requisitos/regras, modelagem, justificativa técnica) | 30% |
+| Procedimental (requisitos, fluxogramas, dicionário de dados, DER) | 50% |
+| Atitudinal (participação, comprometimento, colaboração, autonomia) | 20% |
+
+**Entrega final:** `README.md` completo + DER em imagem + Dicionário de Dados em HTML anexados ao repositório GitHub do grupo.
