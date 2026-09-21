@@ -120,15 +120,9 @@ flowchart TD
 
 ## 5. Dicionário de Dados Conceitual (Preliminar)
 
-### CLIENTE
+O dicionário de dados completo está disponível no arquivo abaixo:
 
-| Atributo | Descrição | Regra de negócio associada |
-|---|---|---|
-| id_cliente | Identificador do cliente | Deve ser único |
-| nome | Nome do cliente | Utilizado para identificação |
-| telefone | Telefone para contato | Pode ser utilizado no atendimento e delivery |
-
-### CATEGORIA
+[Dicionário de Dados em HTML](dicionario-dados.html)
 
 | Atributo | Descrição | Regra de negócio associada |
 |---|---|---|
@@ -156,14 +150,6 @@ flowchart TD
 | status | Situação atual do pedido | Ex.: recebido, em preparação, pronto, finalizado |
 | valor_total | Valor total do pedido | Calculado a partir dos itens |
 
-### ITEM_PEDIDO
-
-| Atributo | Descrição | Regra de negócio associada |
-|---|---|---|
-| id_item | Identificador do item | Deve ser único |
-| quantidade | Quantidade do produto | Deve ser maior que zero |
-| preco_unitario | Preço do produto no momento do pedido | Deve ser maior que zero |
-| observacao | Solicitação específica do cliente | Opcional |
 
 ### PAGAMENTO
 
@@ -238,14 +224,9 @@ O relacionamento muitos-para-muitos entre **PEDIDO** e **PRODUTO** é resolvido 
 
 ## 7. Diagrama Entidade-Relacionamento (DER)
 
-O DER está anexado separadamente no repositório em formato de imagem:
+O DER conceitual está anexado no repositório:
 
-```text
-diagramas/DER-Colossal-Foods.png
-```
-
-![DER da Colossal Foods](diagramas/DER-Colossal-Foods.png)
-
+![DER da Colossal Foods](diagramas/DER-Colossal-Foods-Corrigido.png)
 O diagrama representa:
 
 - Entidades;
