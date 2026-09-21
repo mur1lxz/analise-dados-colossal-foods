@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dicionário de Dados Conceitual — Colossal Foods</title>
+<style>
+body{font-family:Arial,Helvetica,sans-serif;max-width:1100px;margin:40px auto;padding:0 24px;line-height:1.5}
+h1{margin-bottom:4px} h2{margin-top:34px}
+table{width:100%;border-collapse:collapse;margin:12px 0 28px}
+th,td{border:1px solid #777;padding:9px;text-align:left;vertical-align:top}
+th{font-weight:700}
+.aviso{border:1px solid #999;padding:12px;margin:20px 0}
+</style>
+</head>
+<body>
+<h1>Dicionário de Dados Conceitual — Colossal Foods</h1>
+<p><strong>Entrega 1 — Modelo Conceitual (DER)</strong></p>
+<div class="aviso"><strong>Privacidade:</strong> este documento descreve somente a estrutura conceitual. Não contém dados pessoais reais de clientes, funcionários, motoboys ou fornecedores.</div>
+
+<h2>CLIENTE</h2>
+<table><thead><tr><th>Atributo</th><th>Descrição</th><th>Regra de negócio associada</th></tr></thead><tbody>
+<tr><td>id_cliente</td><td>Identificador único do cliente</td><td>Obrigatório e único</td></tr>
+<tr><td>nome</td><td>Nome do cliente</td><td>Obrigatório para identificação</td></tr>
+<tr><td>telefone</td><td>Telefone para contato</td><td>Utilizado quando necessário no atendimento</td></tr>
+</tbody></table>
+<h2>PEDIDO</h2>
+<table><thead><tr><th>Atributo</th><th>Descrição</th><th>Regra de negócio associada</th></tr></thead><tbody>
+<tr><td>id_pedido</td><td>Identificador único do pedido</td><td>Obrigatório e único</td></tr>
+<tr><td>data_hora</td><td>Data e hora de realização do pedido</td><td>Obrigatório</td></tr>
+<tr><td>tipo_pedido</td><td>Forma de recebimento do pedido</td><td>Retirada ou delivery</td></tr>
+<tr><td>status</td><td>Situação atual do pedido</td><td>Ex.: recebido, em preparação, pronto, finalizado</td></tr>
+<tr><td>valor_total</td><td>Valor total do pedido</td><td>Deve ser igual ou maior que zero</td></tr>
+</tbody></table>
+<h2>PAGAMENTO</h2>
+<table><thead><tr><th>Atributo</th><th>Descrição</th><th>Regra de negócio associada</th></tr></thead><tbody>
+<tr><td>id_pagamento</td><td>Identificador único do pagamento</td><td>Obrigatório e único</td></tr>
+<tr><td>forma_pagamento</td><td>Meio utilizado para pagamento</td><td>Ex.: PIX, dinheiro ou cartão</td></tr>
+<tr><td>valor</td><td>Valor pago</td><td>Deve ser maior que zero</td></tr>
+<tr><td>status</td><td>Situação do pagamento</td><td>Ex.: pendente ou confirmado</td></tr>
+<tr><td>data_hora</td><td>Momento do pagamento</td><td>Obrigatório quando confirmado</td></tr>
+</tbody></table>
+<h2>INGREDIENTE</h2>
+<table><thead><tr><th>Atributo</th><th>Descrição</th><th>Regra de negócio associada</th></tr></thead><tbody>
+<tr><td>id_ingrediente</td><td>Identificador único do ingrediente</td><td>Obrigatório e único</td></tr>
+<tr><td>nome</td><td>Nome do ingrediente</td><td>Obrigatório</td></tr>
+<tr><td>unidade_medida</td><td>Unidade usada para controle</td><td>Ex.: kg, g, unidade, litro</td></tr>
+<tr><td>quantidade_estoque</td><td>Quantidade disponível</td><td>Não deve ser negativa</td></tr>
+</tbody></table>
+<h2>FORNECEDOR</h2>
+<table><thead><tr><th>Atributo</th><th>Descrição</th><th>Regra de negócio associada</th></tr></thead><tbody>
+<tr><td>id_fornecedor</td><td>Identificador único do fornecedor</td><td>Obrigatório e único</td></tr>
+<tr><td>nome</td><td>Nome ou razão social do fornecedor</td><td>Obrigatório</td></tr>
+<tr><td>telefone</td><td>Telefone para contato</td><td>Opcional</td></tr>
+<tr><td>email</td><td>E-mail para contato</td><td>Opcional</td></tr>
+</tbody></table>
+<h2>MOTOBOY</h2>
+<table><thead><tr><th>Atributo</th><th>Descrição</th><th>Regra de negócio associada</th></tr></thead><tbody>
+<tr><td>id_motoboy</td><td>Identificador único do motoboy</td><td>Obrigatório e único</td></tr>
+<tr><td>nome</td><td>Nome do motoboy</td><td>Obrigatório</td></tr>
+<tr><td>telefone</td><td>Telefone para contato</td><td>Utilizado quando necessário</td></tr>
+<tr><td>status</td><td>Situação atual</td><td>Ex.: disponível ou em entrega</td></tr>
+</tbody></table>
+<h2>ENTREGA</h2>
+<table><thead><tr><th>Atributo</th><th>Descrição</th><th>Regra de negócio associada</th></tr></thead><tbody>
+<tr><td>id_entrega</td><td>Identificador único da entrega</td><td>Obrigatório e único</td></tr>
+<tr><td>endereco_entrega</td><td>Destino da entrega</td><td>Obrigatório para delivery</td></tr>
+<tr><td>data_hora_saida</td><td>Momento em que a entrega foi iniciada</td><td>Registrado ao sair</td></tr>
+<tr><td>data_hora_entrega</td><td>Momento em que a entrega foi concluída</td><td>Registrado ao concluir</td></tr>
+<tr><td>status</td><td>Situação da entrega</td><td>Ex.: aguardando, em rota, entregue</td></tr>
+</tbody></table>
+</body></html>
