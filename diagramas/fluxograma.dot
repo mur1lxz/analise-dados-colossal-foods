@@ -1,0 +1,34 @@
+digraph Fluxo {
+  graph [rankdir=TB, fontname="DejaVu Sans", fontsize=20, labelloc=t, label="Fluxograma do processo de pedido — Colossal Foods\n\n", nodesep=0.5, ranksep=0.45, bgcolor=white, pad=0.4];
+  node  [fontname="DejaVu Sans", fontsize=12, shape=box, style="rounded,filled", fillcolor="#e8f0fb", color="#1f2933", penwidth=1.4, margin="0.25,0.12"];
+  edge  [fontname="DejaVu Sans", fontsize=11, color="#1f2933", penwidth=1.2];
+
+  inicio [label="Início", shape=ellipse, fillcolor="#d9eadf"];
+  fim    [label="Fim",    shape=ellipse, fillcolor="#d9eadf"];
+
+  a [label="Cliente consulta o\ncardápio digital (terceirizado)"];
+  b [label="Cliente escolhe os produtos\ne envia o pedido"];
+  c [label="Atendimento recebe, confere\ne registra o pedido"];
+  d [label="Chapa prepara os produtos\ncom os ingredientes"];
+  e [label="Pedido pronto"];
+  f [label="Registro do pagamento"];
+  g [label="Tipo do pedido?", shape=diamond, fillcolor="#fdf3e1", style="filled"];
+  r [label="Cliente retira\nno estabelecimento"];
+  m [label="Pedido entregue ao\nmotoboy fixo"];
+  n [label="Motoboy entrega no\nendereço do cliente"];
+  z [label="Pedido finalizado"];
+
+  subgraph cluster_abastecimento {
+    label="Processo de apoio: abastecimento"; fontsize=12; style="rounded,dashed"; color="#9aa5b1";
+    s1 [label="Fornecedores entregam\nos ingredientes", fillcolor="#f7f9fb"];
+    s2 [label="Ingredientes disponíveis\nna cozinha", fillcolor="#f7f9fb"];
+    s1 -> s2;
+  }
+
+  inicio -> a -> b -> c -> d -> e -> f -> g;
+  g -> r [label=" Retirada"];
+  g -> m [label=" Delivery"];
+  m -> n;
+  r -> z; n -> z; z -> fim;
+  s2 -> d [style=dashed, label=" insumos"];
+}
