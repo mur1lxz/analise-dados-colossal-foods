@@ -18,7 +18,7 @@
 | `diagramas/DER-Colossal-Foods.png` | Diagrama Entidade-Relacionamento conceitual |
 | `diagramas/fluxograma-Colossal-Foods.png` | Fluxograma do processo de pedido |
 | `diagramas/gerar_der.py` e `diagramas/fluxograma.dot` | Arquivos-fonte usados para gerar os diagramas |
-| `evidencias/` | Fotos da pesquisa de campo |
+
 
 ---
 
@@ -32,7 +32,20 @@
 
 - **Justificativa da escolha:** a Colossal Foods foi escolhida por ser uma organização real à qual o grupo tem acesso para pesquisa de campo. Sua operação apresenta processos suficientes para a modelagem conceitual (pedido, produção, pagamento, retirada, delivery e abastecimento) sem complexidade excessiva para esta primeira etapa.
 
-- **Evidências da organização:** a Colossal Foods possui perfil público no Google, onde aparece como hamburgueria na **Rua do Carvalho Brasileiro, Jardim Arantes, São Paulo — SP, CEP 08382-520**, com telefone público **(11) 95950-6213**. Na consulta pública feita durante o projeto, o perfil apresentava avaliação 5,0 com 228 avaliações. O grupo realizou pesquisa de campo diretamente na organização; as fotos da visita estão na pasta [`evidencias/`](evidencias/).
+- - **Evidências da organização:** o grupo realizou pesquisa de campo diretamente na organização, por meio de entrevista com a equipe. Não foram registradas fotos durante a visita; a existência da organização pode ser verificada pelos dados públicos abaixo, obtidos no perfil da empresa no Google Maps.
+
+| Dado | Informação |
+|---|---|
+| **Nome** | Colossal Foods |
+| **Segmento** | Hamburgueria (alimentação) |
+| **Natureza** | Empresa privada com fins lucrativos |
+| **Endereço** | Rua do Carvalho Brasileiro, Jardim Arantes — São Paulo/SP |
+| **CEP** | 08382-520 |
+| **Telefone** | (11) 95950-6213 |
+| **Avaliação no Google** | 5,0 (228 avaliações, na consulta feita durante o projeto) |
+| **Equipe observada** | 2 funcionários na chapa, 2 no atendimento e 1 motoboy fixo |
+| **Cardápio** | Digital, fornecido por empresa terceirizada |
+| **Referência pública** | Pesquisar no Google Maps por “Colossal Foods — Jardim Arantes, São Paulo — SP” |
 
 **Referência pública:** pesquisar no Google Maps por **“Colossal Foods — Jardim Arantes, São Paulo — SP”**.
 
