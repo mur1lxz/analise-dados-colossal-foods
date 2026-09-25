@@ -32,7 +32,7 @@
 
 - **Justificativa da escolha:** a Colossal Foods foi escolhida por ser uma organização real à qual o grupo tem acesso para pesquisa de campo. Sua operação apresenta processos suficientes para a modelagem conceitual (pedido, produção, pagamento, retirada, delivery e abastecimento) sem complexidade excessiva para esta primeira etapa.
 
-- - **Evidências da organização:** o grupo realizou pesquisa de campo diretamente na organização, por meio de entrevista com a equipe. Não foram registradas fotos durante a visita; a existência da organização pode ser verificada pelos dados públicos abaixo, obtidos no perfil da empresa no Google Maps.
+-  **Evidências da organização:** o grupo realizou pesquisa de campo diretamente na organização, por meio de entrevista com a equipe. Não foram registradas fotos durante a visita; a existência da organização pode ser verificada pelos dados públicos abaixo, obtidos no perfil da empresa no Google Maps.
 
 | Dado | Informação |
 |---|---|
@@ -46,8 +46,6 @@
 | **Equipe observada** | 2 funcionários na chapa, 2 no atendimento e 1 motoboy fixo |
 | **Cardápio** | Digital, fornecido por empresa terceirizada |
 | **Referência pública** | Pesquisar no Google Maps por “Colossal Foods — Jardim Arantes, São Paulo — SP” |
-
-**Referência pública:** pesquisar no Google Maps por **“Colossal Foods — Jardim Arantes, São Paulo — SP”**.
 
 ---
 
