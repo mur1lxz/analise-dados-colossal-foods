@@ -339,7 +339,7 @@ A modelagem busca reduzir redundâncias, representar as regras observadas e perm
 
 ## 9. Uso de Inteligência Artificial
 
-O grupo utilizou **ChatGPT (OpenAI)** e **Claude (Anthropic)** como ferramentas de apoio.
+O grupo rejeitou a sugestão da IA de transformar os relacionamentos N:N diretamente em entidades associativas com chaves estrangeiras nesta etapa, mantendo os atributos nos relacionamentos (CONTÉM e COMPÕE) conforme a notação conceitual exigida. Além disso, foram ajustadas manualmente as descrições dos processos para refletir o uso do motoboy fixo da empresa.
 
 ### Uso 1 — Preparação da entrevista
 
