@@ -19,19 +19,24 @@
 | `diagramas/fluxograma-Colossal-Foods.png` | Fluxograma do processo de pedido |
 | `diagramas/gerar_der.py` e `diagramas/fluxograma.dot` | Arquivos-fonte usados para gerar os diagramas |
 
+
 ---
 
 ## 1. Caracterização da Organização
 
-- **Nome e natureza da organização:** **Colossal Foods**, empresa privada com fins lucrativos do segmento de alimentação, classificada publicamente como hamburgueria.
+- - **Nome e natureza da organização:** **Colossal Foods**, empresa privada com fins lucrativos do segmento de alimentação, classificada publicamente como hamburgueria.
 
-- **Contexto, porte e volume:** hamburgueria de pequeno/médio porte localizada no Jardim Arantes, em São Paulo. Durante a pesquisa de campo, o grupo identificou **4 funcionários diretamente envolvidos na operação interna**: **2 na chapa/preparação dos alimentos** e **2 no atendimento ao público**, além de **motoboy fixo** para as entregas. A operação envolve cardápio digital, recebimento de pedidos, preparação, pagamento, retirada, delivery e o abastecimento de ingredientes junto a fornecedores. A hamburgueria atende a uma **média estimada de 30 a 50 pedidos diários nos dias de semana e de 60 a 90 pedidos por dia aos finais de semana**.
+- **Contexto, porte e volume:** hamburgueria de pequeno/médio porte localizada no Jardim Arantes, em São Paulo. Durante a pesquisa de campo, o grupo identificou **4 funcionários diretamente envolvidos na operação interna**: **2 na chapa/preparação dos alimentos** e **2 no atendimento ao público**, além de **motoboy fixo** para as entregas. A hamburgueria atende a uma **média estimada de 30 a 50 pedidos diários nos dias de semana e de 60 a 90 pedidos por dia aos finais de semana**.
 
 - **Problemas e necessidades identificados:** a necessidade concreta da organização é padronizar e estruturar os dados da operação para **erradicar falhas no tempo de expedição dos pedidos de delivery** e **controlar a precificação histórica dos produtos** frente à variação de custo dos ingredientes. Como o cardápio digital é terceirizado, a modelagem visa separar a operação interna da plataforma externa, garantindo consistência e rastreabilidade entre clientes, pedidos, entregas e fornecedores.
 
 - **Justificativa da escolha:** a Colossal Foods foi escolhida por ser uma organização real à qual o grupo tem acesso para pesquisa de campo. Sua operação apresenta processos suficientes para a modelagem conceitual (pedido, produção, pagamento, retirada, delivery e abastecimento) sem complexidade excessiva para esta primeira etapa.
 
 - **Evidências da organização:** o grupo realizou pesquisa de campo diretamente na organização, por meio de entrevista com a equipe. Não foram registradas fotos durante a visita; a existência da organização pode ser verificada pelos dados públicos abaixo, obtidos no perfil da empresa no Google Maps.
+  
+- **Contexto, porte e volume:** hamburgueria de pequeno/médio porte localizada no Jardim Arantes, em São Paulo. Durante a pesquisa de campo, o grupo identificou **4 funcionários diretamente envolvidos na operação interna**: **2 na chapa/preparação dos alimentos** e **2 no atendimento ao público**, além de **motoboy fixo** para as entregas. A hamburgueria atende a uma **média estimada de 30 a 50 pedidos diários nos dias de semana e de 60 a 90 pedidos por dia aos finais de semana**.
+
+- **Problemas e necessidades identificados:** a necessidade concreta da organização é padronizar e estruturar os dados da operação para **erradicar falhas no tempo de expedição dos pedidos de delivery** e **controlar a precificação histórica dos produtos** frente à variação de custo dos ingredientes. Como o cardápio digital é terceirizado, a modelagem visa separar a operação interna da plataforma externa, garantindo consistência e rastreabilidade entre clientes, pedidos, entregas e fornecedores.
 
 | Dado | Informação |
 |---|---|
@@ -92,8 +97,8 @@ flowchart TD
         S1[Fornecedores entregam os ingredientes] --> S2[Ingredientes disponíveis na cozinha]
     end
     S2 -.->|insumos| D
-
 ```
+</details>
 
 ---
 
@@ -101,28 +106,28 @@ flowchart TD
 
 ### 3.1 Requisitos Funcionais
 
-* **RF01 —** O sistema deve permitir registrar clientes.
-* **RF02 —** O sistema deve permitir cadastrar, consultar e marcar como indisponíveis os produtos do cardápio.
-* **RF03 —** O sistema deve permitir organizar os produtos por categorias.
-* **RF04 —** O sistema deve permitir registrar pedidos.
-* **RF05 —** O sistema deve permitir incluir um ou mais produtos em um pedido, com quantidade, preço praticado e observação.
-* **RF06 —** O sistema deve calcular o valor total do pedido a partir dos produtos incluídos.
-* **RF07 —** O sistema deve permitir registrar o pagamento de um pedido.
-* **RF08 —** O sistema deve identificar se o pedido é para retirada ou delivery.
-* **RF09 —** O sistema deve permitir registrar os dados de uma entrega e associar o motoboy responsável.
-* **RF10 —** O sistema deve permitir acompanhar o status do pedido e da entrega.
-* **RF11 —** O sistema deve permitir cadastrar ingredientes e registrar quais ingredientes compõem cada produto.
-* **RF12 —** O sistema deve permitir cadastrar fornecedores e relacioná-los aos ingredientes que fornecem.
-* **RF13 —** O sistema deve manter o histórico dos pedidos realizados.
+- **RF01 —** O sistema deve permitir registrar clientes.
+- **RF02 —** O sistema deve permitir cadastrar, consultar e marcar como indisponíveis os produtos do cardápio.
+- **RF03 —** O sistema deve permitir organizar os produtos por categorias.
+- **RF04 —** O sistema deve permitir registrar pedidos.
+- **RF05 —** O sistema deve permitir incluir um ou mais produtos em um pedido, com quantidade, preço praticado e observação.
+- **RF06 —** O sistema deve calcular o valor total do pedido a partir dos produtos incluídos.
+- **RF07 —** O sistema deve permitir registrar o pagamento de um pedido.
+- **RF08 —** O sistema deve identificar se o pedido é para retirada ou delivery.
+- **RF09 —** O sistema deve permitir registrar os dados de uma entrega e associar o motoboy responsável.
+- **RF10 —** O sistema deve permitir acompanhar o status do pedido e da entrega.
+- **RF11 —** O sistema deve permitir cadastrar ingredientes e registrar quais ingredientes compõem cada produto.
+- **RF12 —** O sistema deve permitir cadastrar fornecedores e relacioná-los aos ingredientes que fornecem.
+- **RF13 —** O sistema deve manter o histórico dos pedidos realizados.
 
 ### 3.2 Requisitos Não Funcionais
 
-* **RNF01 — Usabilidade:** o sistema deve ser simples e adequado à rotina de uma operação de pequeno/médio porte.
-* **RNF02 — Segurança:** o acesso aos dados de clientes, pedidos e pagamentos deve ser controlado.
-* **RNF03 — Disponibilidade:** o sistema deve estar disponível durante todo o horário de funcionamento da hamburgueria.
-* **RNF04 — Desempenho:** o registro e a consulta de pedidos devem ocorrer sem atrasos que prejudiquem o atendimento.
-* **RNF05 — Integridade:** os relacionamentos entre pedidos, produtos, ingredientes, pagamentos e entregas devem permanecer consistentes.
-* **RNF06 — Privacidade:** dados pessoais de clientes devem ser usados somente para atendimento e entrega, em conformidade com a LGPD.
+- **RNF01 — Usabilidade:** o sistema deve ser simples e adequado à rotina de uma operação de pequeno/médio porte.
+- **RNF02 — Segurança:** o acesso aos dados de clientes, pedidos e pagamentos deve ser controlado.
+- **RNF03 — Disponibilidade:** o sistema deve estar disponível durante todo o horário de funcionamento da hamburgueria.
+- **RNF04 — Desempenho:** o registro e a consulta de pedidos devem ocorrer sem atrasos que prejudiquem o atendimento.
+- **RNF05 — Integridade:** os relacionamentos entre pedidos, produtos, ingredientes, pagamentos e entregas devem permanecer consistentes.
+- **RNF06 — Privacidade:** dados pessoais de clientes devem ser usados somente para atendimento e entrega, em conformidade com a LGPD.
 
 ---
 
@@ -130,35 +135,35 @@ flowchart TD
 
 ### Regras operacionais
 
-* **RN01 —** Um cliente pode realizar vários pedidos; cada pedido pertence a um único cliente.
-* **RN02 —** Todo pedido deve conter pelo menos um produto.
-* **RN03 —** Um mesmo produto pode estar presente em vários pedidos.
-* **RN04 —** Cada produto pertence a exatamente uma categoria.
-* **RN05 —** Um produto indisponível não pode ser incluído em novos pedidos.
-* **RN06 —** A quantidade de cada produto no pedido deve ser maior que zero.
-* **RN07 —** O preço registrado no pedido é o praticado no momento da venda, mesmo que o preço do produto mude depois.
-* **RN08 —** Cada pedido possui no máximo um pagamento, e cada pagamento se refere a um único pedido; o valor pago deve ser igual ao valor total do pedido.
-* **RN09 —** Todo pedido deve ser classificado como retirada ou delivery.
-* **RN10 —** Pedidos para retirada não possuem registro de entrega.
-* **RN11 —** Pedidos de delivery devem possuir exatamente uma entrega associada.
-* **RN12 —** Cada entrega deve ter um motoboy responsável; um motoboy pode realizar várias entregas.
-* **RN13 —** Toda entrega deve possuir endereço de destino.
-* **RN14 —** Um pedido de delivery só é considerado finalizado após a conclusão da entrega.
-* **RN15 —** Um produto preparado é composto por um ou mais ingredientes; produtos industrializados (ex.: refrigerante em lata) podem não ter composição cadastrada.
-* **RN16 —** Um ingrediente pode ser fornecido por um ou mais fornecedores, e um fornecedor pode fornecer vários ingredientes.
-* **RN17 —** Um pedido só pode ser cancelado se estiver no status "Recebido". Pedidos nos status "Em preparação" ou "Pronto" não podem ser cancelados sem autorização do atendimento/gerência.
-* **RN18 —** As formas de pagamento aceitas são exclusivamente PIX, dinheiro, cartão de débito e cartão de crédito, e o valor total acumulado no dia deve bater com o relatório de fechamento de caixa.
-* **RN19 —** Pedidos da modalidade delivery são restritos aos bairros contidos no raio de atendimento cadastrado (Jardim Arantes e proximidades), estando sujeitos à aplicação de taxa fixa de entrega.
-* **RN20 —** Todo recebimento de ingredientes de fornecedores exige conferência com nota fiscal e deve cumprir rigorosamente as normas da Vigilância Sanitária municipal para armazenamento e conservação.
+- **RN01 —** Um cliente pode realizar vários pedidos; cada pedido pertence a um único cliente.
+- **RN02 —** Todo pedido deve conter pelo menos um produto.
+- **RN03 —** Um mesmo produto pode estar presente em vários pedidos.
+- **RN04 —** Cada produto pertence a exatamente uma categoria.
+- **RN05 —** Um produto indisponível não pode ser incluído em novos pedidos.
+- **RN06 —** A quantidade de cada produto no pedido deve ser maior que zero.
+- **RN07 —** O preço registrado no pedido é o praticado no momento da venda, mesmo que o preço do produto mude depois.
+- **RN08 —** Cada pedido possui no máximo um pagamento, e cada pagamento se refere a um único pedido; o valor pago deve ser igual ao valor total do pedido.
+- **RN09 —** Todo pedido deve ser classificado como retirada ou delivery.
+- **RN10 —** Pedidos para retirada não possuem registro de entrega.
+- **RN11 —** Pedidos de delivery devem possuir exatamente uma entrega associada.
+- **RN12 —** Cada entrega deve ter um motoboy responsável; um motoboy pode realizar várias entregas.
+- **RN13 —** Toda entrega deve possuir endereço de destino.
+- **RN14 —** Um pedido de delivery só é considerado finalizado após a conclusão da entrega.
+- **RN15 —** Um produto preparado é composto por um ou mais ingredientes; produtos industrializados (ex.: refrigerante em lata) podem não ter composição cadastrada.
+- **RN16 —** Um ingrediente pode ser fornecido por um ou mais fornecedores, e um fornecedor pode fornecer vários ingredientes.
+- **RN17 —** Um pedido só pode ser cancelado se estiver no status "Recebido". Pedidos nos status "Em preparação" ou "Pronto" não podem ser cancelados sem autorização do atendimento/gerência.
+- **RN18 —** As formas de pagamento aceitas são exclusivamente PIX, dinheiro, cartão de débito e cartão de crédito, e o valor total acumulado no dia deve bater com o relatório de fechamento de caixa.
+- **RN19 —** Pedidos da modalidade delivery são restritos aos bairros contidos no raio de atendimento cadastrado (Jardim Arantes e proximidades), estando sujeitos à aplicação de taxa fixa de entrega.
+- **RN20 —** Todo recebimento de ingredientes de fornecedores exige conferência com nota fiscal e deve cumprir rigorosamente as normas da Vigilância Sanitária municipal para armazenamento e conservação.
 
 ### Restrições organizacionais
 
-* O cardápio digital é fornecido por uma **empresa terceirizada**, contratada mediante pagamento mensal.
-* O grupo não possui acesso ao banco de dados interno dessa plataforma.
-* A empresa utiliza **motoboy fixo** para o delivery.
-* A operação interna observada possui **2 funcionários na chapa** e **2 funcionários no atendimento**.
-* A modelagem representa os dados necessários aos processos observados e não pretende reproduzir a implementação interna do sistema terceirizado.
-* O controle automático de estoque não faz parte do escopo conceitual, pois não foi confirmado como processo automatizado em campo.
+- O cardápio digital é fornecido por uma **empresa terceirizada**, contratada mediante pagamento mensal.
+- O grupo não possui acesso ao banco de dados interno dessa plataforma.
+- A empresa utiliza **motoboy fixo** para o delivery.
+- A operação interna observada possui **2 funcionários na chapa** e **2 funcionários no atendimento**.
+- A modelagem representa os dados necessários aos processos observados e não pretende reproduzir a implementação interna do sistema terceirizado.
+- O controle automático de estoque não faz parte do escopo, pois não foi confirmado durante a pesquisa de campo.
 
 ---
 
@@ -166,22 +171,20 @@ flowchart TD
 
 O dicionário completo, com tipo de atributo, domínio, obrigatoriedade e regras associadas, está em:
 
-**[📄 dicionario-dados.html](https://www.google.com/search?q=dicionario-dados.html)**
+**[📄 dicionario-dados.html](dicionario-dados.html)**
 
 Resumo por entidade (🔑 = identificador):
 
 ### CLIENTE
-
 | Atributo | Descrição | Regra de negócio associada |
-| --- | --- | --- |
+|---|---|---|
 | 🔑 id_cliente | Identificador do cliente | Único |
 | nome | Nome do cliente | Obrigatório |
 | telefone | Telefone para contato | Uso restrito a atendimento e entrega (RNF06) |
 
 ### PEDIDO
-
 | Atributo | Descrição | Regra de negócio associada |
-| --- | --- | --- |
+|---|---|---|
 | 🔑 id_pedido | Identificador do pedido | Único |
 | data_hora | Momento em que o pedido foi registrado | Obrigatório |
 | tipo_pedido | Forma de recebimento | Retirada ou delivery (RN09) |
@@ -189,9 +192,8 @@ Resumo por entidade (🔑 = identificador):
 | valor_total *(derivado)* | Valor total do pedido | Soma de quantidade × preco_unitario dos produtos |
 
 ### PRODUTO
-
 | Atributo | Descrição | Regra de negócio associada |
-| --- | --- | --- |
+|---|---|---|
 | 🔑 id_produto | Identificador do produto | Único |
 | nome | Nome exibido no cardápio | Obrigatório |
 | descricao | Descrição do produto | Opcional |
@@ -199,43 +201,38 @@ Resumo por entidade (🔑 = identificador):
 | disponivel | Indica se pode ser pedido | Indisponível não entra em novos pedidos (RN05) |
 
 ### CATEGORIA
-
 | Atributo | Descrição | Regra de negócio associada |
-| --- | --- | --- |
+|---|---|---|
 | 🔑 id_categoria | Identificador da categoria | Único |
 | nome | Nome da categoria | Obrigatório, sem repetição |
 | descricao | Descrição da categoria | Opcional |
 
 ### INGREDIENTE
-
 | Atributo | Descrição | Regra de negócio associada |
-| --- | --- | --- |
+|---|---|---|
 | 🔑 id_ingrediente | Identificador do ingrediente | Único |
 | nome | Nome do ingrediente | Obrigatório |
 | unidade_medida | Unidade de medida | Ex.: g, kg, unidade, litro |
 
 ### FORNECEDOR
-
 | Atributo | Descrição | Regra de negócio associada |
-| --- | --- | --- |
+|---|---|---|
 | 🔑 id_fornecedor | Identificador do fornecedor | Único |
 | nome | Nome ou razão social | Obrigatório |
 | telefone | Telefone para contato | Opcional |
 | email | E-mail para contato | Opcional |
 
 ### PAGAMENTO
-
 | Atributo | Descrição | Regra de negócio associada |
-| --- | --- | --- |
+|---|---|---|
 | 🔑 id_pagamento | Identificador do pagamento | Único |
 | forma_pagamento | Meio utilizado | PIX, dinheiro, débito ou crédito |
 | valor | Valor pago | Igual ao valor total do pedido (RN08) |
 | data_hora | Momento do pagamento | Obrigatório |
 
 ### ENTREGA
-
 | Atributo | Descrição | Regra de negócio associada |
-| --- | --- | --- |
+|---|---|---|
 | 🔑 id_entrega | Identificador da entrega | Único |
 | endereco_entrega *(composto)* | Destino: logradouro, numero, bairro, complemento | Obrigatório (RN13) |
 | data_hora_saida | Momento da saída do motoboy | Preenchido ao iniciar a entrega |
@@ -243,17 +240,15 @@ Resumo por entidade (🔑 = identificador):
 | status | Situação da entrega | Aguardando, em rota ou entregue |
 
 ### MOTOBOY
-
 | Atributo | Descrição | Regra de negócio associada |
-| --- | --- | --- |
+|---|---|---|
 | 🔑 id_motoboy | Identificador do motoboy | Único |
 | nome | Nome do motoboy | Obrigatório |
 | telefone | Telefone para contato | Obrigatório |
 
 ### Atributos de relacionamento
-
 | Relacionamento | Atributo | Descrição | Regra |
-| --- | --- | --- | --- |
+|---|---|---|---|
 | CONTÉM | quantidade | Quantidade do produto no pedido | Maior que zero (RN06) |
 | CONTÉM | preco_unitario | Preço praticado na venda | Preço no momento do pedido (RN07) |
 | CONTÉM | observacao | Pedido especial (ex.: sem cebola) | Opcional |
@@ -267,32 +262,32 @@ Resumo por entidade (🔑 = identificador):
 
 ### Entidades reconhecidas
 
-* **CLIENTE:** pessoa que realiza pedidos.
-* **PEDIDO:** solicitação de compra; entidade central do modelo.
-* **PRODUTO:** item vendido no cardápio.
-* **CATEGORIA:** agrupamento dos produtos no cardápio.
-* **INGREDIENTE:** insumo utilizado na preparação dos produtos.
-* **FORNECEDOR:** quem fornece ingredientes à hamburgueria.
-* **PAGAMENTO:** registro financeiro da quitação de um pedido.
-* **ENTREGA:** deslocamento de um pedido de delivery até o cliente.
-* **MOTOBOY:** entregador fixo responsável pelas entregas.
+- **CLIENTE:** pessoa que realiza pedidos.
+- **PEDIDO:** solicitação de compra; entidade central do modelo.
+- **PRODUTO:** item vendido no cardápio.
+- **CATEGORIA:** agrupamento dos produtos no cardápio.
+- **INGREDIENTE:** insumo utilizado na preparação dos produtos.
+- **FORNECEDOR:** quem fornece ingredientes à hamburgueria.
+- **PAGAMENTO:** registro financeiro da quitação de um pedido.
+- **ENTREGA:** deslocamento de um pedido de delivery até o cliente.
+- **MOTOBOY:** entregador fixo responsável pelas entregas.
 
 ### Atributos e classificações
 
 Os atributos estão detalhados na Seção 5 e no dicionário HTML. O modelo utiliza:
 
-* **Identificadores** (`id_...`), que distinguem cada ocorrência das entidades;
-* **Atributos simples**, como `nome`, `preco` e `status`;
-* **Atributo composto:** `endereco_entrega` (logradouro, número, bairro, complemento);
-* **Atributo derivado:** `valor_total`, calculado a partir dos produtos do pedido;
-* **Atributos de relacionamento:** `quantidade`, `preco_unitario` e `observacao` em CONTÉM, e `quantidade_utilizada` em COMPÕE.
+- **Identificadores** (`id_...`), que distinguem cada ocorrência das entidades;
+- **Atributos simples**, como `nome`, `preco` e `status`;
+- **Atributo composto:** `endereco_entrega` (logradouro, número, bairro, complemento);
+- **Atributo derivado:** `valor_total`, calculado a partir dos produtos do pedido;
+- **Atributos de relacionamento:** `quantidade`, `preco_unitario` e `observacao` em CONTÉM, e `quantidade_utilizada` em COMPÕE.
 
 ### Relacionamentos pertinentes
 
 Cardinalidade no formato **(mín, máx)**: o par ao lado de uma entidade indica quantas ocorrências dela se associam a **uma** ocorrência da entidade do outro lado.
 
 | Relacionamento | Entidades e cardinalidades | Tipo |
-| --- | --- | --- |
+|---|---|---|
 | **REALIZA** | CLIENTE (1,1) — PEDIDO (0,N) | 1:N |
 | **CONTÉM** | PEDIDO (0,N) — PRODUTO (1,N) | N:N |
 | **CLASSIFICA** | CATEGORIA (1,1) — PRODUTO (0,N) | 1:N |
@@ -306,22 +301,24 @@ Os relacionamentos muitos-para-muitos (CONTÉM, COMPÕE e FORNECE) são mantidos
 
 ### Restrições e políticas aplicadas
 
-* Todo pedido deve conter pelo menos um produto.
-* Entrega só existe para pedidos do tipo delivery.
-* Toda entrega deve ter motoboy responsável e endereço de destino.
-* Dados de contato dos clientes são usados apenas para atendimento e entrega.
-* A plataforma terceirizada de cardápio não foi modelada como entidade, pois é um sistema externo.
+- Todo pedido deve conter pelo menos um produto.
+- Entrega só existe para pedidos do tipo delivery.
+- Toda entrega deve ter motoboy responsável e endereço de destino.
+- Dados de contato dos clientes são usados apenas para atendimento e entrega.
+- A plataforma terceirizada de cardápio não foi modelada como entidade, pois é um sistema externo.
 
 ---
 
 ## 7. Diagrama Entidade-Relacionamento (DER)
 
+![DER da Colossal Foods](diagramas/DER-Colossal-Foods.png)
+
 O diagrama utiliza a notação de Peter Chen com atributos (estilo brModelo) e representa:
 
-* entidades (retângulos) e relacionamentos (losangos);
-* atributos, com identificadores em destaque (círculo preenchido), atributo composto e atributo derivado (círculo tracejado);
-* atributos de relacionamento em CONTÉM e COMPÕE;
-* cardinalidades mínimas e máximas em todos os relacionamentos.
+- entidades (retângulos) e relacionamentos (losangos);
+- atributos, com identificadores em destaque (círculo preenchido), atributo composto e atributo derivado (círculo tracejado);
+- atributos de relacionamento em CONTÉM e COMPÕE;
+- cardinalidades mínimas e máximas em todos os relacionamentos.
 
 ---
 
@@ -353,14 +350,12 @@ A modelagem busca reduzir redundâncias, representar as regras observadas e perm
 
 ## 9. Uso de Inteligência Artificial
 
-O grupo utilizou **ChatGPT (OpenAI)** e **Claude (Anthropic)** como ferramentas de apoio.
-
-O grupo rejeitou a sugestão da IA de transformar os relacionamentos N:N diretamente em entidades associativas com chaves estrangeiras nesta etapa, mantendo os atributos nos relacionamentos (CONTÉM e COMPÕE) conforme a notação conceitual exigida. Além disso, foram ajustadas manualmente as descrições dos processos para refletir o uso do motoboy fixo da empresa.
+| **Trechos rejeitados ou corrigidos** | Foi rejeitada a criação de entidades associativas na notação conceitual e ajustadas as descrições dos processos de delivery com motoboy fixo. |
 
 ### Uso 1 — Preparação da entrevista
 
 | Item | Registro |
-| --- | --- |
+|---|---|
 | **Ferramenta e etapa** | ChatGPT — preparação das perguntas de levantamento de requisitos |
 | **Motivação** | Identificar perguntas importantes para entender como os dados circulam na hamburgueria |
 | **Prompt utilizado** | “Chat, preciso fazer uma entrevista com uma empresa e entender como funciona o sistema deles de dados e montar um fluxo e fazer um MER e DER.” |
@@ -373,7 +368,7 @@ O grupo rejeitou a sugestão da IA de transformar os relacionamentos N:N diretam
 ### Uso 2 — Estruturação inicial do modelo
 
 | Item | Registro |
-| --- | --- |
+|---|---|
 | **Ferramenta e etapa** | ChatGPT — organização de requisitos, entidades, relacionamentos e cardinalidades |
 | **Motivação** | Transformar as informações coletadas em uma estrutura inicial de modelagem |
 | **Prompt utilizado** | “A empresa que vou é uma hamburgueria de baixo/médio porte, é possível adiantar algo?” |
@@ -386,7 +381,7 @@ O grupo rejeitou a sugestão da IA de transformar os relacionamentos N:N diretam
 ### Uso 3 — Documentação no GitHub
 
 | Item | Registro |
-| --- | --- |
+|---|---|
 | **Ferramenta e etapa** | ChatGPT — estruturação do README |
 | **Motivação** | Adaptar o conteúdo ao modelo de entrega fornecido pelo professor |
 | **Prompt utilizado** | “Mude o arquivo para esse formato: Entrega 1 — Modelo Conceitual (DER).” |
@@ -399,13 +394,13 @@ O grupo rejeitou a sugestão da IA de transformar os relacionamentos N:N diretam
 ### Uso 4 — Revisão e correção do modelo
 
 | Item | Registro |
-| --- | --- |
+|---|---|
 | **Ferramenta e etapa** | Claude (Anthropic) — revisão do repositório e reestruturação da entrega |
 | **Motivação** | Verificar a consistência entre README, DER e dicionário de dados após as correções |
 | **Prompts utilizados** | “Analise esse projeto e verifique se está correto.”; “Monte o projeto inteiro de forma atualizada e correta com dicionário em HTML, o DER e o fluxograma.” |
 | **Resposta recebida** | Apontou que o README descrevia um modelo diferente do DER e do dicionário, que a entidade PRODUTO havia sido removida, que faltavam atributos nos relacionamentos N:N e cardinalidades mínimas, e gerou nova versão do README, do DER, do fluxograma e do dicionário |
 | **Fontes consultadas e verificadas** | Versões anteriores do próprio repositório, pesquisa de campo e orientações recebidas em aula |
-| **Trechos rejeitados ou corrigidos** | Foi rejeitada a criação de entidades associativas na notação conceitual e ajustadas as descrições dos processos de delivery com motoboy fixo. |
+| **Trechos rejeitados ou corrigidos** | *(o grupo deve preencher com o que alterou na versão sugerida)* |
 | **Justificativa da escolha final** | PRODUTO foi reintroduzido e ligado a INGREDIENTE, mantendo os relacionamentos N:N no nível conceitual, conforme a orientação de não usar entidade associativa |
 | **Reflexão crítica** | A revisão por IA ajudou a encontrar inconsistências entre os arquivos, mas as informações sobre a operação real continuam dependendo da validação em campo feita pelo grupo |
 
@@ -420,11 +415,9 @@ Os critérios atitudinais são demonstrados pela participação dos integrantes,
 ## Resumo dos Pesos
 
 | Dimensão | Peso total |
-| --- | --- |
+|----------|-----------|
 | Conceitual (contexto, requisitos/regras, modelagem, justificativa técnica) | 30% |
 | Procedimental (requisitos, fluxogramas, dicionário de dados, DER) | 50% |
 | Atitudinal (participação, comprometimento, colaboração, autonomia) | 20% |
 
-Prontinho! Pode salvar no seu repositório sem medo. Se o arquivo `.html` do Dicionário de Dados já estiver atualizado como fizemos antes, a Entrega 1 está 100% pronta!
-
-```
+**Entrega final:** `README.md` completo + DER em imagem + Dicionário de Dados em HTML anexados ao repositório GitHub do grupo.
