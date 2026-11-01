@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Dicionário de Dados Conceitual — Colossal Foods</title>
+<title>Dicionário de Dados Conceitual e Normativo — Colossal Foods</title>
 <style>
-:root{--ink:#1f2933;--muted:#52606d;--line:#cbd2d9;--blue:#2f5d8a;--ent:#e8f0fb;--rel:#fdf3e1;--bg:#ffffff;--soft:#f5f7fa}
+:root{--ink:#1f2933;--muted:#52606d;--line:#cbd2d9;--blue:#2f5d8a;--ent:#e8f0fb;--rel:#fdf3e1;--bg:#ffffff;--soft:#f5f7fa;--alert:#fff4e5;--border-alert:#ffe0b2}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;line-height:1.55}
 header{background:var(--ink);color:#fff;padding:40px 24px 28px}
@@ -14,16 +14,17 @@ header h1{margin:0 0 6px;font-size:1.9rem;font-weight:700}
 header p{margin:0;color:#cbd2d9}
 nav{position:sticky;top:0;background:#fff;border-bottom:1px solid var(--line);z-index:2}
 nav .wrap{display:flex;flex-wrap:wrap;gap:6px;padding:10px 24px}
-nav a{color:var(--blue);text-decoration:none;font-size:.9rem;padding:4px 10px;border:1px solid var(--line);border-radius:4px}
+nav a{color:var(--blue);text-decoration:none;font-size:.85rem;padding:4px 10px;border:1px solid var(--line);border-radius:4px}
 nav a:hover,nav a:focus-visible{background:var(--ent);outline:none}
 main{padding:8px 24px 60px}
 .aviso{background:var(--soft);border-left:4px solid var(--blue);padding:12px 16px;margin:24px 0;border-radius:0 4px 4px 0}
+.alert-box{background:var(--alert);border:1px solid var(--border-alert);border-left:4px solid #f57c00;padding:12px 16px;margin:16px 0;border-radius:0 4px 4px 0;font-size:.92rem}
 section{scroll-margin-top:64px}
-h2{margin:40px 0 4px;font-size:1.35rem;display:inline-block;background:var(--ent);border:2px solid var(--ink);padding:4px 16px}
-h3{margin:28px 0 4px;font-size:1.1rem}
+h2{margin:40px 0 8px;font-size:1.35rem;display:inline-block;background:var(--ent);border:2px solid var(--ink);padding:4px 16px}
+h3{margin:28px 0 8px;font-size:1.1rem;color:var(--blue)}
 .lead{margin:8px 0 12px;color:var(--muted)}
 .scroll{overflow-x:auto}
-table{width:100%;border-collapse:collapse;font-size:.93rem;min-width:760px}
+table{width:100%;border-collapse:collapse;font-size:.93rem;min-width:760px;margin-bottom:16px}
 th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
 th{background:var(--soft);font-weight:600}
 tr.id td:first-child code{font-weight:700}
@@ -33,101 +34,98 @@ code{font-family:Consolas,"DejaVu Sans Mono",monospace;font-size:.9em}
 .t-identificador{background:var(--ink);color:#fff;border-color:var(--ink)}
 .t-derivado{border-style:dashed}
 .t-composto{background:var(--rel)}
+.t-componente{background:#f0f0f0}
 .legenda{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:8px 24px;margin:12px 0 0;padding:0;list-style:none;font-size:.93rem}
 footer{color:var(--muted);font-size:.85rem;border-top:1px solid var(--line);padding-top:16px;margin-top:48px}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media (max-width:768px){.grid-2{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 <header><div class="wrap">
-<h1>Dicionário de Dados Conceitual — Colossal Foods</h1>
-<p>Entrega 1 — Modelo Conceitual (DER) · Modelagem de um sistema de gestão de informações para uma hamburgueria de pequeno/médio porte</p>
+<h1>Dicionário de Dados Conceitual & Normativo — Colossal Foods</h1>
+<p>Entrega 1 (Versão Revisada) — Especificação Técnica, Governança, LGPD e Convenções de Banco de Dados</p>
 </div></header>
-<nav aria-label="Entidades"><div class="wrap"><a href="#cliente">CLIENTE</a> <a href="#pedido">PEDIDO</a> <a href="#produto">PRODUTO</a> <a href="#categoria">CATEGORIA</a> <a href="#ingrediente">INGREDIENTE</a> <a href="#fornecedor">FORNECEDOR</a> <a href="#pagamento">PAGAMENTO</a> <a href="#entrega">ENTREGA</a> <a href="#motoboy">MOTOBOY</a> <a href="#relacionamentos">Relacionamentos</a></div></nav>
+
+<nav aria-label="Navegação"><div class="wrap">
+<a href="#convencoes">Convenções & Arquitetura</a>
+<a href="#fluxos">Fluxo de Dados</a>
+<a href="#cliente">CLIENTE</a>
+<a href="#pedido">PEDIDO</a>
+<a href="#produto">PRODUTO</a>
+<a href="#categoria">CATEGORIA</a>
+<a href="#ingrediente">INGREDIENTE</a>
+<a href="#fornecedor">FORNECEDOR</a>
+<a href="#pagamento">PAGAMENTO</a>
+<a href="#entrega">ENTREGA</a>
+<a href="#motoboy">MOTOBOY</a>
+<a href="#relacionamentos">Relacionamentos</a>
+<a href="#governanca">Governança & LGPD</a>
+</div></nav>
+
 <main>
-<div class="aviso"><strong>Privacidade:</strong> este documento descreve somente a estrutura conceitual dos dados. Não contém dados pessoais reais de clientes, funcionários, motoboys ou fornecedores.</div>
+<div class="aviso">
+<strong>Privacidade & Segurança:</strong> Este documento descreve a estrutura normativa dos dados. Nenhuns dados pessoais reais de clientes, funcionários ou parceiros foram utilizados.
+</div>
 
-<h3>Como ler este dicionário</h3>
-<ul class="legenda">
-<li><span class="tag t-identificador">Identificador</span> distingue cada ocorrência da entidade</li>
-<li><span class="tag">Simples</span> atributo com um único valor</li>
-<li><span class="tag t-composto">Composto</span> formado por componentes</li>
-<li><span class="tag t-derivado">Derivado</span> calculado a partir de outros dados</li>
+<section id="convencoes">
+<h2>1. Convenções do Sistema e Arquitetura</h2>
+<p class="lead">Diretrizes de padronização técnica para transição do Modelo Conceitual ao Modelo Lógico/Físico.</p>
+
+<div class="grid-2">
+<div>
+<h3>Padronização & Collation</h3>
+<ul>
+<li><strong>SGBD Alvo:</strong> PostgreSQL 15+ (ou MySQL 8.0+ InnoDB).</li>
+<li><strong>Encoding / Collation:</strong> <code>UTF-8</code> (<code>utf8mb4_unicode_ci</code>).</li>
+<li><strong>Notação de Nomes:</strong> <code>snake_case</code> em minúsculas (ex: <code>id_cliente</code>, <code>data_hora_saida</code>).</li>
+<li><strong>Prefixos de Chave:</strong> <code>id_</code> para chaves primárias. Chaves estrangeiras no modelo lógico manterão o exato nome da PK de origem.</li>
+<li><strong>Versão do Documento:</strong> <code>v1.2 (Revisão Normativa Acadêmica)</code>.</li>
 </ul>
-<p class="lead">O domínio indica o tipo de informação em nível conceitual. Os tipos físicos (VARCHAR, DECIMAL etc.) serão definidos no modelo lógico. Os códigos RN e RNF remetem às regras e requisitos do README.</p>
-
-<section id="cliente"><h2>CLIENTE</h2><p class="lead">Pessoa que realiza pedidos na hamburgueria.</p><div class="scroll"><table><thead><tr><th>Atributo</th><th>Tipo</th><th>Domínio</th><th>Descrição</th><th>Obrigatório</th><th>Regra de negócio associada</th></tr></thead><tbody>
-<tr class="id"><td><code>id_cliente</code></td><td><span class="tag t-identificador">Identificador</span></td><td>Número inteiro</td><td>Identifica cada cliente</td><td>Sim</td><td>Único</td></tr>
-<tr><td><code>nome</code></td><td><span class="tag t-simples">Simples</span></td><td>Texto</td><td>Nome do cliente</td><td>Sim</td><td>—</td></tr>
-<tr><td><code>telefone</code></td><td><span class="tag t-simples">Simples</span></td><td>Texto</td><td>Telefone para contato</td><td>Não</td><td>Usado apenas para atendimento e entrega (RNF06)</td></tr>
-</tbody></table></div></section><section id="pedido"><h2>PEDIDO</h2><p class="lead">Solicitação de compra feita por um cliente; entidade central do modelo.</p><div class="scroll"><table><thead><tr><th>Atributo</th><th>Tipo</th><th>Domínio</th><th>Descrição</th><th>Obrigatório</th><th>Regra de negócio associada</th></tr></thead><tbody>
-<tr class="id"><td><code>id_pedido</code></td><td><span class="tag t-identificador">Identificador</span></td><td>Número inteiro</td><td>Identifica cada pedido</td><td>Sim</td><td>Único</td></tr>
-<tr><td><code>data_hora</code></td><td><span class="tag t-simples">Simples</span></td><td>Data e hora</td><td>Momento em que o pedido foi registrado</td><td>Sim</td><td>—</td></tr>
-<tr><td><code>tipo_pedido</code></td><td><span class="tag t-simples">Simples</span></td><td>Lista de valores</td><td>Forma de recebimento</td><td>Sim</td><td>Retirada ou delivery (RN09)</td></tr>
-<tr><td><code>status</code></td><td><span class="tag t-simples">Simples</span></td><td>Lista de valores</td><td>Situação atual do pedido</td><td>Sim</td><td>Recebido, em preparação, pronto ou finalizado</td></tr>
-<tr><td><code>valor_total</code></td><td><span class="tag t-derivado">Derivado</span></td><td>Número decimal</td><td>Valor total do pedido</td><td>Sim</td><td>Calculado pela soma de quantidade × preco_unitario dos produtos (relacionamento CONTÉM)</td></tr>
-</tbody></table></div></section><section id="produto"><h2>PRODUTO</h2><p class="lead">Item vendido no cardápio (lanches, porções, bebidas).</p><div class="scroll"><table><thead><tr><th>Atributo</th><th>Tipo</th><th>Domínio</th><th>Descrição</th><th>Obrigatório</th><th>Regra de negócio associada</th></tr></thead><tbody>
-<tr class="id"><td><code>id_produto</code></td><td><span class="tag t-identificador">Identificador</span></td><td>Número inteiro</td><td>Identifica cada produto</td><td>Sim</td><td>Único</td></tr>
-<tr><td><code>nome</code></td><td><span class="tag t-simples">Simples</span></td><td>Texto</td><td>Nome exibido no cardápio</td><td>Sim</td><td>—</td></tr>
-<tr><td><code>descricao</code></td><td><span class="tag t-simples">Simples</span></td><td>Texto</td><td>Descrição do produto</td><td>Não</td><td>—</td></tr>
-<tr><td><code>preco</code></td><td><span class="tag t-simples">Simples</span></td><td>Número decimal</td><td>Preço de venda atual</td><td>Sim</td><td>Maior que zero</td></tr>
-<tr><td><code>disponivel</code></td><td><span class="tag t-simples">Simples</span></td><td>Sim/Não</td><td>Indica se o produto pode ser pedido</td><td>Sim</td><td>Produto indisponível não pode ser incluído em novos pedidos</td></tr>
-</tbody></table></div></section><section id="categoria"><h2>CATEGORIA</h2><p class="lead">Agrupamento dos produtos no cardápio.</p><div class="scroll"><table><thead><tr><th>Atributo</th><th>Tipo</th><th>Domínio</th><th>Descrição</th><th>Obrigatório</th><th>Regra de negócio associada</th></tr></thead><tbody>
-<tr class="id"><td><code>id_categoria</code></td><td><span class="tag t-identificador">Identificador</span></td><td>Número inteiro</td><td>Identifica cada categoria</td><td>Sim</td><td>Único</td></tr>
-<tr><td><code>nome</code></td><td><span class="tag t-simples">Simples</span></td><td>Texto</td><td>Nome da categoria (ex.: lanches, bebidas)</td><td>Sim</td><td>Não pode se repetir</td></tr>
-<tr><td><code>descricao</code></td><td><span class="tag t-simples">Simples</span></td><td>Texto</td><td>Descrição da categoria</td><td>Não</td><td>—</td></tr>
-</tbody></table></div></section><section id="ingrediente"><h2>INGREDIENTE</h2><p class="lead">Insumo utilizado na preparação dos produtos.</p><div class="scroll"><table><thead><tr><th>Atributo</th><th>Tipo</th><th>Domínio</th><th>Descrição</th><th>Obrigatório</th><th>Regra de negócio associada</th></tr></thead><tbody>
-<tr class="id"><td><code>id_ingrediente</code></td><td><span class="tag t-identificador">Identificador</span></td><td>Número inteiro</td><td>Identifica cada ingrediente</td><td>Sim</td><td>Único</td></tr>
-<tr><td><code>nome</code></td><td><span class="tag t-simples">Simples</span></td><td>Texto</td><td>Nome do ingrediente</td><td>Sim</td><td>—</td></tr>
-<tr><td><code>unidade_medida</code></td><td><span class="tag t-simples">Simples</span></td><td>Lista de valores</td><td>Unidade usada para medir o ingrediente</td><td>Sim</td><td>Ex.: g, kg, unidade, litro</td></tr>
-</tbody></table></div></section><section id="fornecedor"><h2>FORNECEDOR</h2><p class="lead">Empresa ou pessoa que fornece ingredientes à hamburgueria.</p><div class="scroll"><table><thead><tr><th>Atributo</th><th>Tipo</th><th>Domínio</th><th>Descrição</th><th>Obrigatório</th><th>Regra de negócio associada</th></tr></thead><tbody>
-<tr class="id"><td><code>id_fornecedor</code></td><td><span class="tag t-identificador">Identificador</span></td><td>Número inteiro</td><td>Identifica cada fornecedor</td><td>Sim</td><td>Único</td></tr>
-<tr><td><code>nome</code></td><td><span class="tag t-simples">Simples</span></td><td>Texto</td><td>Nome ou razão social</td><td>Sim</td><td>—</td></tr>
-<tr><td><code>telefone</code></td><td><span class="tag t-simples">Simples</span></td><td>Texto</td><td>Telefone para contato</td><td>Não</td><td>—</td></tr>
-<tr><td><code>email</code></td><td><span class="tag t-simples">Simples</span></td><td>Texto</td><td>E-mail para contato</td><td>Não</td><td>—</td></tr>
-</tbody></table></div></section><section id="pagamento"><h2>PAGAMENTO</h2><p class="lead">Registro financeiro da quitação de um pedido.</p><div class="scroll"><table><thead><tr><th>Atributo</th><th>Tipo</th><th>Domínio</th><th>Descrição</th><th>Obrigatório</th><th>Regra de negócio associada</th></tr></thead><tbody>
-<tr class="id"><td><code>id_pagamento</code></td><td><span class="tag t-identificador">Identificador</span></td><td>Número inteiro</td><td>Identifica cada pagamento</td><td>Sim</td><td>Único</td></tr>
-<tr><td><code>forma_pagamento</code></td><td><span class="tag t-simples">Simples</span></td><td>Lista de valores</td><td>Meio utilizado</td><td>Sim</td><td>PIX, dinheiro, cartão de débito ou cartão de crédito</td></tr>
-<tr><td><code>valor</code></td><td><span class="tag t-simples">Simples</span></td><td>Número decimal</td><td>Valor pago</td><td>Sim</td><td>Igual ao valor_total do pedido (RN08)</td></tr>
-<tr><td><code>data_hora</code></td><td><span class="tag t-simples">Simples</span></td><td>Data e hora</td><td>Momento do pagamento</td><td>Sim</td><td>—</td></tr>
-</tbody></table></div></section><section id="entrega"><h2>ENTREGA</h2><p class="lead">Deslocamento de um pedido do tipo delivery até o cliente.</p><div class="scroll"><table><thead><tr><th>Atributo</th><th>Tipo</th><th>Domínio</th><th>Descrição</th><th>Obrigatório</th><th>Regra de negócio associada</th></tr></thead><tbody>
-<tr class="id"><td><code>id_entrega</code></td><td><span class="tag t-identificador">Identificador</span></td><td>Número inteiro</td><td>Identifica cada entrega</td><td>Sim</td><td>Único</td></tr>
-<tr><td><code>endereco_entrega</code></td><td><span class="tag t-composto">Composto</span></td><td>—</td><td>Destino da entrega</td><td>Sim</td><td>Formado por logradouro, numero, bairro e complemento (RN14)</td></tr>
-<tr class="sub"><td><code>&nbsp;&nbsp;↳ logradouro</code></td><td><span class="tag t-componente">Componente</span></td><td>Texto</td><td>Rua ou avenida</td><td>Sim</td><td>—</td></tr>
-<tr class="sub"><td><code>&nbsp;&nbsp;↳ numero</code></td><td><span class="tag t-componente">Componente</span></td><td>Texto</td><td>Número do imóvel</td><td>Sim</td><td>Aceita “s/n”</td></tr>
-<tr class="sub"><td><code>&nbsp;&nbsp;↳ bairro</code></td><td><span class="tag t-componente">Componente</span></td><td>Texto</td><td>Bairro de destino</td><td>Sim</td><td>—</td></tr>
-<tr class="sub"><td><code>&nbsp;&nbsp;↳ complemento</code></td><td><span class="tag t-componente">Componente</span></td><td>Texto</td><td>Apartamento, bloco, referência</td><td>Não</td><td>—</td></tr>
-<tr><td><code>data_hora_saida</code></td><td><span class="tag t-simples">Simples</span></td><td>Data e hora</td><td>Momento em que o motoboy saiu</td><td>Não</td><td>Preenchido quando a entrega começa</td></tr>
-<tr><td><code>data_hora_entrega</code></td><td><span class="tag t-simples">Simples</span></td><td>Data e hora</td><td>Momento em que o pedido foi entregue</td><td>Não</td><td>Deve ser posterior a data_hora_saida</td></tr>
-<tr><td><code>status</code></td><td><span class="tag t-simples">Simples</span></td><td>Lista de valores</td><td>Situação da entrega</td><td>Sim</td><td>Aguardando, em rota ou entregue</td></tr>
-</tbody></table></div></section><section id="motoboy"><h2>MOTOBOY</h2><p class="lead">Entregador fixo responsável pelo delivery.</p><div class="scroll"><table><thead><tr><th>Atributo</th><th>Tipo</th><th>Domínio</th><th>Descrição</th><th>Obrigatório</th><th>Regra de negócio associada</th></tr></thead><tbody>
-<tr class="id"><td><code>id_motoboy</code></td><td><span class="tag t-identificador">Identificador</span></td><td>Número inteiro</td><td>Identifica cada motoboy</td><td>Sim</td><td>Único</td></tr>
-<tr><td><code>nome</code></td><td><span class="tag t-simples">Simples</span></td><td>Texto</td><td>Nome do motoboy</td><td>Sim</td><td>—</td></tr>
-<tr><td><code>telefone</code></td><td><span class="tag t-simples">Simples</span></td><td>Texto</td><td>Telefone para contato</td><td>Sim</td><td>—</td></tr>
-</tbody></table></div></section>
-
-<section id="relacionamentos">
-<h2>Relacionamentos</h2>
-<p class="lead">Cardinalidade no formato (mín, máx): o par ao lado de uma entidade indica quantas ocorrências dela se associam a uma ocorrência da entidade do outro lado.</p>
-<div class="scroll"><table><thead><tr><th>Relacionamento</th><th>Entidades e cardinalidades</th><th>Tipo</th><th>Significado</th></tr></thead><tbody>
-<tr><td><strong>REALIZA</strong></td><td>CLIENTE (1,1) — PEDIDO (0,N)</td><td>1:N</td><td>Cada pedido é feito por um único cliente; um cliente pode fazer vários pedidos.</td></tr>
-<tr><td><strong>CONTÉM</strong></td><td>PEDIDO (0,N) — PRODUTO (1,N)</td><td>N:N</td><td>Um pedido contém um ou mais produtos; um produto pode estar em vários pedidos.</td></tr>
-<tr><td><strong>CLASSIFICA</strong></td><td>CATEGORIA (1,1) — PRODUTO (0,N)</td><td>1:N</td><td>Cada produto pertence a uma categoria; uma categoria agrupa vários produtos.</td></tr>
-<tr><td><strong>COMPÕE</strong></td><td>PRODUTO (0,N) — INGREDIENTE (0,N)</td><td>N:N</td><td>Um produto preparado é composto por ingredientes; um ingrediente é usado em vários produtos. Produtos industrializados (ex.: refrigerante em lata) podem não ter composição.</td></tr>
-<tr><td><strong>FORNECE</strong></td><td>FORNECEDOR (1,N) — INGREDIENTE (1,N)</td><td>N:N</td><td>Um fornecedor fornece um ou mais ingredientes; um ingrediente pode ser comprado de um ou mais fornecedores.</td></tr>
-<tr><td><strong>POSSUI</strong></td><td>PEDIDO (1,1) — PAGAMENTO (0,1)</td><td>1:1</td><td>Cada pagamento se refere a um único pedido; o pedido fica sem pagamento até ser quitado.</td></tr>
-<tr><td><strong>GERA</strong></td><td>PEDIDO (1,1) — ENTREGA (0,1)</td><td>1:1</td><td>Somente pedidos de delivery geram entrega (RN10, RN11).</td></tr>
-<tr><td><strong>TRANSPORTA</strong></td><td>MOTOBOY (1,1) — ENTREGA (0,N)</td><td>1:N</td><td>Cada entrega tem um motoboy responsável; um motoboy faz várias entregas.</td></tr>
-</tbody></table></div>
-<h3>Atributos de CONTÉM</h3><p class="lead">PEDIDO (0,N) — PRODUTO (1,N)</p><div class="scroll"><table><thead><tr><th>Atributo</th><th>Tipo</th><th>Domínio</th><th>Descrição</th><th>Obrigatório</th><th>Regra de negócio associada</th></tr></thead><tbody>
-<tr><td><code>quantidade</code></td><td><span class="tag t-simples">Simples</span></td><td>Número inteiro</td><td>Quantidade do produto no pedido</td><td>Sim</td><td>Maior que zero (RN06)</td></tr>
-<tr><td><code>preco_unitario</code></td><td><span class="tag t-simples">Simples</span></td><td>Número decimal</td><td>Preço praticado no momento da venda</td><td>Sim</td><td>Copiado do preço do produto na hora do pedido</td></tr>
-<tr><td><code>observacao</code></td><td><span class="tag t-simples">Simples</span></td><td>Texto</td><td>Pedido especial do cliente (ex.: sem cebola)</td><td>Não</td><td>—</td></tr>
-</tbody></table></div><h3>Atributos de COMPÕE</h3><p class="lead">PRODUTO (0,N) — INGREDIENTE (0,N)</p><div class="scroll"><table><thead><tr><th>Atributo</th><th>Tipo</th><th>Domínio</th><th>Descrição</th><th>Obrigatório</th><th>Regra de negócio associada</th></tr></thead><tbody>
-<tr><td><code>quantidade_utilizada</code></td><td><span class="tag t-simples">Simples</span></td><td>Número decimal</td><td>Quanto do ingrediente vai em uma unidade do produto</td><td>Sim</td><td>Maior que zero, na unidade_medida do ingrediente</td></tr>
-</tbody></table></div>
+</div>
+<div>
+<h3>Tipagem Física Pré-mapeada & Índices</h3>
+<ul>
+<li><strong>Texto Simples:</strong> <code>VARCHAR(100)</code> | <strong>Descrições:</strong> <code>TEXT</code>.</li>
+<li><strong>Datas/Horas:</strong> <code>TIMESTAMP WITH TIME ZONE</code>.</li>
+<li><strong>Valores Monetários:</strong> <code>DECIMAL(10,2)</code> (nunca FLOAT).</li>
+<li><strong>Estratégia de Índices (B-Tree):</strong>
+  <ul>
+    <li>Índices Clustered automáticos em todas as PKs (<code>id_...</code>).</li>
+    <li>Índice Secundário em <code>PEDIDO(status, data_hora)</code> para fila da cozinha.</li>
+    <li>Índice Secundário em <code>CLIENTE(telefone)</code> para busca rápida no atendimento.</li>
+  </ul>
+</li>
+</ul>
+</div>
+</div>
 </section>
 
-<footer>Colossal Foods — Jardim Arantes, São Paulo/SP · Documento complementar ao README e ao DER do repositório.</footer>
-</main>
-</body>
-</html>
+<section id="fluxos">
+<h2>2. Fluxo de Dados Operacional</h2>
+<p class="lead">Ciclo de vida do dado durante o atendimento de um pedido na Colossal Foods.</p>
+
+<div class="scroll">
+<table>
+<thead><tr><th>Etapa</th><th>Entidade Origem</th><th>Processamento / Transição</th><th>Entidades Afetadas</th></tr></thead>
+<tbody>
+<tr><td><strong>1. Atendimento</strong></td><td>Cardápio Digital / Cliente</td><td>Cliente seleciona itens. O atendimento registra o pedido com tipo (Retirada/Delivery).</td><td><code>CLIENTE</code>, <code>PEDIDO</code>, <code>CONTÉM</code> (Produto + Preço Praticado)</td></tr>
+<tr><td><strong>2. Preparação</strong></td><td>Atendimento</td><td>Pedido entra com status "Recebido" e passa para "Em preparação". A chapa consulta os ingredientes associados.</td><td><code>PEDIDO</code>, <code>PRODUTO</code>, <code>COMPÕE</code>, <code>INGREDIENTE</code></td></tr>
+<tr><td><strong>3. Pagamento</strong></td><td>Caixa</td><td>O pagamento é efetuado (PIX, Cartão, Dinheiro) e validado com o valor total do pedido.</td><td><code>PEDIDO</code>, <code>PAGAMENTO</code></td></tr>
+<tr><td><strong>4. Expedição</strong></td><td>Cozinha / Caixa</td><td>Se Delivery: gera registro de entrega e vincula ao motoboy fixo. Se Retirada: cliente retira no balcão.</td><td><code>PEDIDO</code>, <code>ENTREGA</code>, <code>MOTOBOY</code></td></tr>
+</tbody>
+</table>
+</div>
+</section>
+
+<h3>Como ler o Dicionário de Entidades</h3>
+<ul class="legenda">
+<li><span class="tag t-identificador">Identificador</span> Chave primária única</li>
+<li><span class="tag">Simples</span> Atributo atômico</li>
+<li><span class="tag t-composto">Composto</span> Formado por sub-componentes</li>
+<li><span class="tag t-derivado">Derivado</span> Calculado dinamicamente</li>
+</ul>
+
+<section id="cliente"><h2>CLIENTE</h2><p class="lead">Pessoa que realiza pedidos na hamburgueria.</p><div class="scroll"><table><thead><tr><th>Atributo</th><th>Tipo Conceitual</th><th>Tipo Físico Sugerido</th><th>Descrição</th><th>Obrigatório</th><th>Regra de Negócio & Segurança</th></tr></thead><tbody>
+<tr class="id"><td><code>id_cliente</code></td><td><span class="tag t-identificador">Identificador</span></td><td><code>BIGINT AUTO_INCREMENT</code></td><td>Identifica cada cliente registrado</td><td>Sim</td><td>PK Única. Indexado.</td></tr>
+<tr><td><code>nome</code></td><td><span class="tag t-sim
