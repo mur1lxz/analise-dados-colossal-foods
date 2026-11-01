@@ -34,9 +34,9 @@
 
 -  **Evidências da organização:** o grupo realizou pesquisa de campo diretamente na organização, por meio de entrevista com a equipe. Não foram registradas fotos durante a visita; a existência da organização pode ser verificada pelos dados públicos abaixo, obtidos no perfil da empresa no Google Maps.
   
--  Volume estimado: Adicione uma estimativa da operação (ex: "A hamburgueria atende uma média estimada de 30 a 50 pedidos diários nos dias de semana e de 60 a 90 pedidos por dia aos finais de semana").
+- **Contexto, porte e volume:** hamburgueria de pequeno/médio porte localizada no Jardim Arantes, em São Paulo. Durante a pesquisa de campo, o grupo identificou **4 funcionários diretamente envolvidos na operação interna**: **2 na chapa/preparação dos alimentos** e **2 no atendimento ao público**, além de **motoboy fixo** para as entregas. A hamburgueria atende a uma **média estimada de 30 a 50 pedidos diários nos dias de semana e de 60 a 90 pedidos por dia aos finais de semana**.
 
-- Necessidade concreta: Reforce que a necessidade principal é erradicar falhas no tempo de expedição dos pedidos de delivery e controlar a precificação histórica de itens frente ao aumento do custo dos ingredientes.
+- **Problemas e necessidades identificados:** a necessidade concreta da organização é padronizar e estruturar os dados da operação para **erradicar falhas no tempo de expedição dos pedidos de delivery** e **controlar a precificação histórica dos produtos** frente à variação de custo dos ingredientes. Como o cardápio digital é terceirizado, a modelagem visa separar a operação interna da plataforma externa, garantindo consistência e rastreabilidade entre clientes, pedidos, entregas e fornecedores.
 
 | Dado | Informação |
 |---|---|
@@ -57,29 +57,18 @@
 
 ### Principais processos mapeados
 
-1. Consulta ao cardápio — O cliente consulta os produtos disponíveis no cardápio digital terceirizado.
-
-2. Realização do pedido — O cliente escolhe os produtos e envia o pedido.
-
-3. Recebimento e atendimento — A equipe de atendimento recebe, confere e registra o pedido, encaminhando-o para a chapa.
-
-4. Preparação — A equipe da chapa prepara os produtos utilizando os ingredientes disponíveis.
-
-5. Pagamento — O pagamento é registrado e associado ao pedido.
-
-6. Retirada — Quando o pedido é para retirada, o cliente o recebe no estabelecimento.
-
-7. Delivery — Quando o pedido é para entrega, ele é passado ao motoboy fixo, que o leva até o endereço do cliente.
-
-8. Finalização — Após a retirada ou a entrega, o pedido é considerado concluído.
-
-9. Abastecimento (processo de apoio) — Fornecedores entregam os ingredientes usados na preparação.
-
-10. Cancelamento e alteração — O atendimento verifica a viabilidade de cancelar ou alterar pedidos antes que entrem na etapa de preparação.
-
-11. Recebimento e conferência de insumos — A equipe realiza a conferência dos ingredientes entregues pelos fornecedores frente à nota fiscal antes de armazená-los.
-
-12. Fechamento de caixa — Ao final do expediente, a equipe consolida o total arrecadado em dinheiro, PIX e cartões com os pedidos finalizados.
+- **1. Consulta ao cardápio —** O cliente consulta os produtos disponíveis no cardápio digital terceirizado.
+- **2. Realização do pedido —** O cliente escolhe os produtos e envia o pedido.
+- **3. Recebimento e atendimento —** A equipe de atendimento recebe, confere e registra o pedido, encaminhando-o para a chapa.
+- **4. Preparação —** A equipe da chapa prepara os produtos utilizando os ingredientes disponíveis.
+- **5. Pagamento —** O pagamento é registrado e associado ao pedido.
+- **6. Retirada —** Quando o pedido é para retirada, o cliente o recebe no estabelecimento.
+- **7. Delivery —** Quando o pedido é para entrega, ele é passado ao motoboy fixo, que o leva até o endereço do cliente.
+- **8. Finalização —** Após a retirada ou a entrega, o pedido é considerado concluído.
+- **9. Abastecimento (processo de apoio) —** Fornecedores entregam os ingredientes usados na preparação.
+- **10. Cancelamento e alteração —** O atendimento verifica a viabilidade de cancelar ou alterar pedidos antes que entrem na etapa de preparação.
+- **11. Recebimento e conferência de insumos —** A equipe realiza a conferência dos ingredientes entregues pelos fornecedores frente à nota fiscal antes de armazená-los.
+- **12. Fechamento de caixa —** Ao final do expediente, a equipe consolida o total arrecadado em dinheiro, PIX e cartões com os pedidos finalizados.
 
 ### Fluxograma
 
@@ -142,48 +131,28 @@ flowchart TD
 
 ---
 
-## 4. Regras de Negócio
+### Regras operacionais
 
-Regras operacionais
-RN01 — Um cliente pode realizar vários pedidos; cada pedido pertence a um único cliente.
-
-RN02 — Todo pedido deve conter pelo menos um produto.
-
-RN03 — Um mesmo produto pode estar presente em vários pedidos.
-
-RN04 — Cada produto pertence a exatamente uma categoria.
-
-RN05 — Um produto indisponível não pode ser incluído em novos pedidos.
-
-RN06 — A quantidade de cada produto no pedido deve ser maior que zero.
-
-RN07 — O preço registrado no pedido é o praticado no momento da venda, mesmo que o preço do produto mude depois.
-
-RN08 — Cada pedido possui no máximo um pagamento, e cada pagamento se refere a um único pedido; o valor pago deve ser igual ao valor total do pedido.
-
-RN09 — Todo pedido deve ser classificado como retirada ou delivery.
-
-RN10 — Pedidos para retirada não possuem registro de entrega.
-
-RN11 — Pedidos de delivery devem possuir exatamente uma entrega associada.
-
-RN12 — Cada entrega deve ter um motoboy responsável; um motoboy pode realizar várias entregas.
-
-RN13 — Toda entrega deve possuir endereço de destino.
-
-RN14 — Um pedido de delivery só é considerado finalizado após a conclusão da entrega.
-
-RN15 — Um produto preparado é composto por um ou mais ingredientes; produtos industrializados (ex.: refrigerante em lata) podem não ter composição cadastrada.
-
-RN16 — Um ingrediente pode ser fornecido por um ou mais fornecedores, e um fornecedor pode fornecer vários ingredientes.
-
-RN17 — Um pedido só pode ser cancelado se estiver no status "Recebido". Pedidos nos status "Em preparação" ou "Pronto" não podem ser cancelados sem autorização do atendimento/gerência.
-
-RN18 — As formas de pagamento aceitas são exclusivamente PIX, dinheiro, cartão de débito e cartão de crédito, e o valor total acumulado no dia deve bater com o relatório de fechamento de caixa.
-
-RN19 — Pedidos da modalidade delivery são restritos aos bairros contidos no raio de atendimento cadastrado (Jardim Arantes e proximidades), estando sujeitos à aplicação de taxa fixa de entrega.
-
-RN20 — Todo recebimento de ingredientes de fornecedores exige conferência com nota fiscal e deve cumprir rigorosamente as normas da Vigilância Sanitária municipal para armazenamento e conservação.
+- **RN01 —** Um cliente pode realizar vários pedidos; cada pedido pertence a um único cliente.
+- **RN02 —** Todo pedido deve conter pelo menos um produto.
+- **RN03 —** Um mesmo produto pode estar presente em vários pedidos.
+- **RN04 —** Cada produto pertence a exatamente uma categoria.
+- **RN05 —** Um produto indisponível não pode ser incluído em novos pedidos.
+- **RN06 —** A quantidade de cada produto no pedido deve ser maior que zero.
+- **RN07 —** O preço registrado no pedido é o praticado no momento da venda, mesmo que o preço do produto mude depois.
+- **RN08 —** Cada pedido possui no máximo um pagamento, e cada pagamento se refere a um único pedido; o valor pago deve ser igual ao valor total do pedido.
+- **RN09 —** Todo pedido deve ser classificado como retirada ou delivery.
+- **RN10 —** Pedidos para retirada não possuem registro de entrega.
+- **RN11 —** Pedidos de delivery devem possuir exatamente uma entrega associada.
+- **RN12 —** Cada entrega deve ter um motoboy responsável; um motoboy pode realizar várias entregas.
+- **RN13 —** Toda entrega deve possuir endereço de destino.
+- **RN14 —** Um pedido de delivery só é considerado finalizado após a conclusão da entrega.
+- **RN15 —** Um produto preparado é composto por um ou mais ingredientes; produtos industrializados (ex.: refrigerante em lata) podem não ter composição cadastrada.
+- **RN16 —** Um ingrediente pode ser fornecido por um ou mais fornecedores, e um fornecedor pode fornecer vários ingredientes.
+- **RN17 —** Um pedido só pode ser cancelado se estiver no status "Recebido". Pedidos nos status "Em preparação" ou "Pronto" não podem ser cancelados sem autorização do atendimento/gerência.
+- **RN18 —** As formas de pagamento aceitas são exclusivamente PIX, dinheiro, cartão de débito e cartão de crédito, e o valor total acumulado no dia deve bater com o relatório de fechamento de caixa.
+- **RN19 —** Pedidos da modalidade delivery são restritos aos bairros contidos no raio de atendimento cadastrado (Jardim Arantes e proximidades), estando sujeitos à aplicação de taxa fixa de entrega.
+- **RN20 —** Todo recebimento de ingredientes de fornecedores exige conferência com nota fiscal e deve cumprir rigorosamente as normas da Vigilância Sanitária municipal para armazenamento e conservação.
 
 ### Restrições organizacionais
 
