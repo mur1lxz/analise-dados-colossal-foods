@@ -33,6 +33,10 @@
 - **Justificativa da escolha:** a Colossal Foods foi escolhida por ser uma organização real à qual o grupo tem acesso para pesquisa de campo. Sua operação apresenta processos suficientes para a modelagem conceitual (pedido, produção, pagamento, retirada, delivery e abastecimento) sem complexidade excessiva para esta primeira etapa.
 
 -  **Evidências da organização:** o grupo realizou pesquisa de campo diretamente na organização, por meio de entrevista com a equipe. Não foram registradas fotos durante a visita; a existência da organização pode ser verificada pelos dados públicos abaixo, obtidos no perfil da empresa no Google Maps.
+  
+-  Volume estimado: Adicione uma estimativa da operação (ex: "A hamburgueria atende uma média estimada de 30 a 50 pedidos diários nos dias de semana e de 60 a 90 pedidos por dia aos finais de semana").
+
+- Necessidade concreta: Reforce que a necessidade principal é erradicar falhas no tempo de expedição dos pedidos de delivery e controlar a precificação histórica de itens frente ao aumento do custo dos ingredientes.
 
 | Dado | Informação |
 |---|---|
