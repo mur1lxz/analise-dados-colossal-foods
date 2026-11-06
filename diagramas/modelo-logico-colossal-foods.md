@@ -7,13 +7,13 @@ erDiagram
     CLIENTE ||--o{ PEDIDO : realiza
     FUNCIONARIO ||--o{ PEDIDO : registra
     FUNCIONARIO o|--o{ PEDIDO : prepara
-    PEDIDO ||--o{ ITEM_PEDIDO : contem
+    PEDIDO o|--o{ ITEM_PEDIDO : contem
     PRODUTO ||--o{ ITEM_PEDIDO : aparece
     CATEGORIA ||--o{ PRODUTO : classifica
     PRODUTO ||--o{ PRODUTO_INGREDIENTE : compoe
     INGREDIENTE ||--o{ PRODUTO_INGREDIENTE : utilizado
-    FORNECEDOR ||--o{ FORNECEDOR_INGREDIENTE : fornece
-    INGREDIENTE ||--o{ FORNECEDOR_INGREDIENTE : fornecido
+    FORNECEDOR o|--o{ FORNECEDOR_INGREDIENTE : fornece
+    INGREDIENTE o|--o{ FORNECEDOR_INGREDIENTE : fornecido
     PEDIDO ||--o| PAGAMENTO : possui
     FECHAMENTO_CAIXA o|--o{ PAGAMENTO : concilia
     PEDIDO ||--o| ENTREGA : gera
@@ -22,13 +22,13 @@ erDiagram
     FUNCIONARIO o|--o{ FECHAMENTO_CAIXA : registra
     FORNECEDOR ||--o{ COMPRA : fornecedor
     FUNCIONARIO o|--o{ COMPRA : confere
-    COMPRA ||--o{ ITEM_COMPRA : contem
+    COMPRA o|--o{ ITEM_COMPRA : contem
     INGREDIENTE ||--o{ ITEM_COMPRA : comprado
     INGREDIENTE ||--o{ MOVIMENTACAO_ESTOQUE : possui
     FUNCIONARIO ||--o{ MOVIMENTACAO_ESTOQUE : registra
     ITEM_COMPRA o|--o{ MOVIMENTACAO_ESTOQUE : origina
     FECHAMENTO_CAIXA ||--o{ CONFERENCIA_CAIXA : possui
-    PEDIDO ||--o{ HISTORICO_STATUS_PEDIDO : historico
+    PEDIDO o|--o{ HISTORICO_STATUS_PEDIDO : historico
     FUNCIONARIO ||--o{ HISTORICO_STATUS_PEDIDO : responsavel
     FUNCIONARIO o|--o{ HISTORICO_STATUS_PEDIDO : autoriza
 ```
