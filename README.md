@@ -447,6 +447,7 @@ A segunda etapa converte o modelo conceitual em um modelo relacional e prepara s
 ### Arquivos desta etapa
 
 - **[Modelo lógico relacional](modelo-logico-colossal-foods-revisado.md)** — tabelas, atributos, tipos, PK, FK e cardinalidades.
+- **[Prévia visual dos relacionamentos](diagramas/modelo-logico-colossal-foods.md)** — diagrama Mermaid para visualizar as ligações entre as 20 tabelas.
 - **[Script SQL](docs/script.sql)** — criação do banco `colossal_foods`, 20 tabelas, 11 triggers, dados fictícios, consultas gerenciais e consultas de auditoria.
 - **[Dicionário de dados lógico](dicionario-dados-logico.html)** — convenções físicas MySQL, estrutura das 20 tabelas, índices, fluxo de dados, papéis de acesso, log proposto e orientações LGPD.
 - **[Dicionário conceitual da Entrega 1](dicionario-dados.html)** — versão original da etapa conceitual.
