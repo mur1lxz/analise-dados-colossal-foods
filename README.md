@@ -436,7 +436,7 @@ A modelagem busca reduzir redundâncias, representar as regras observadas e perm
 | **Resposta recebida** | Proposta de tabelas, chaves primárias e estrangeiras, tipos MySQL, regras de integridade, massa de dados fictícia e consultas para gestão e auditoria |
 | **Fontes consultadas e verificadas** | README do projeto, correção registrada na Issue #1 e informações operacionais compartilhadas pelo grupo |
 | **Trechos rejeitados ou corrigidos** | Foram ajustadas hipóteses não confirmadas, o cálculo do delivery, o recebimento de compras e a conciliação do caixa; valores de bairros, taxas e estoque da massa são identificados como ilustrativos |
-| **Justificativa da escolha final** | O grupo deve validar a estrutura com a operação e executar o script no MySQL antes de considerar a implementação testada |
+| **Justificativa da escolha final** | A estrutura foi revisada com base na correção da Entrega 1; o script foi executado no MySQL Workbench e as consultas de auditoria foram verificadas pelo grupo |
 | **Reflexão crítica** | A IA acelerou a organização do modelo, mas não substitui a validação de campo nem a execução técnica no SGBD |
 
 
@@ -477,7 +477,7 @@ A massa de demonstração contém 138 pedidos, 276 itens, 44 entregas, 132 pagam
 
 Os bairros além de Jardim Arantes, as taxas e os estoques mínimos são parâmetros demonstrativos e precisam ser confirmados em campo. A escala individual dos funcionários não foi modelada porque não foi confirmada no levantamento.
 
-**Validação:** o script passou por verificações estáticas de estrutura e consistência da massa. A execução em um servidor MySQL 8.0.16 ou superior ainda deve ser realizada e registrada pelo grupo; não se afirma que o teste no servidor já foi concluído.
+**Validação prática registrada pelo grupo:** o script foi executado no MySQL Workbench. As consultas gerenciais G01–G08 foram executadas. Após o ajuste do valor contado no fechamento de caixa, as consultas de auditoria A01–A12 retornaram zero registros, indicando que não foram encontradas as inconsistências verificadas por essas consultas na massa de demonstração. A existência das 11 triggers foi conferida; isso não equivale a um teste funcional isolado de cada trigger.
 
 ---
 
