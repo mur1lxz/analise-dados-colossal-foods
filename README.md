@@ -6,8 +6,7 @@
 ## Metadados
 
 - **Murilo Silva Magalhães — RGM: 47820471**
-- **Kauê de Lima Pereira — RGM: 48477940**
-- **Kauê Gregorio dos Santos — RGM: 47908904**
+- **Kauê de Lima Pereira — RGM: 
 
 ### Estrutura do repositório
 
