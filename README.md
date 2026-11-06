@@ -14,15 +14,15 @@
 | Arquivo | Conteúdo |
 |---|---|
 | `README.md` | Documentação das Entregas 1 e 2 |
-| `dicionario-dados.html` | Dicionário conceitual da Entrega 1 |
-| `dicionario-dados-logico.html` | Dicionário lógico MySQL da Entrega 2: 20 tabelas, tipos, índices, fluxo e governança |
-| `diagramas/DER-Colossal-Foods.png` | Diagrama Entidade-Relacionamento conceitual |
-| `diagramas/fluxograma-Colossal-Foods.png` | Fluxograma do processo de pedido |
-| `diagramas/gerar_der.py` e `diagramas/fluxograma.dot` | Arquivos-fonte usados para gerar os diagramas |
-| `modelo-logico-colossal-foods-revisado.md` | Modelo lógico relacional com PKs, FKs, tipos e cardinalidades |
-| `docs/script.sql` | Criação do banco, tabelas, triggers, dados fictícios e consultas |
-| `docs/adendo-readme-entrega2.md` | Adendo de problemas, requisitos, regras e rastreabilidade |
-| `como-executar-script-mysql.md` | Instruções para executar e conferir o SQL |
+| `entrega-1/dicionario-dados.html` | Dicionário conceitual da Entrega 1 |
+| `entrega-2/dicionario-dados-logico.html` | Dicionário lógico MySQL da Entrega 2: 20 tabelas, tipos, índices, fluxo e governança |
+| `entrega-1/diagramas/DER-Colossal-Foods.png` | Diagrama Entidade-Relacionamento conceitual |
+| `entrega-1/diagramas/fluxograma-Colossal-Foods.png` | Fluxograma do processo de pedido |
+| `entrega-1/diagramas/gerar_der.py` e `entrega-1/diagramas/fluxograma.dot` | Arquivos-fonte usados para gerar os diagramas |
+| `entrega-2/modelo-logico-relacional.md` | Modelo lógico relacional com PKs, FKs, tipos e cardinalidades |
+| `entrega-2/script.sql` | Criação do banco, tabelas, triggers, dados fictícios e consultas |
+| `entrega-2/adendo-rastreabilidade.md` | Adendo de problemas, requisitos, regras e rastreabilidade |
+| `entrega-2/guia-execucao-mysql.md` | Instruções para executar e conferir o SQL |
 
 
 ---
@@ -80,7 +80,7 @@
 
 ### Fluxograma
 
-![Fluxograma do processo de pedido](diagramas/fluxograma-Colossal-Foods.png)
+![Fluxograma do processo de pedido](entrega-1/diagramas/fluxograma-Colossal-Foods.png)
 
 <details>
 <summary>Versão em Mermaid (renderizada pelo GitHub)</summary>
@@ -190,7 +190,7 @@ flowchart TD
 
 O dicionário completo, com tipo de atributo, domínio, obrigatoriedade e regras associadas, está em:
 
-**[📄 dicionario-dados.html](dicionario-dados.html)**
+**[📄 entrega-1/dicionario-dados.html](entrega-1/dicionario-dados.html)**
 
 Resumo por entidade (🔑 = identificador):
 
@@ -330,7 +330,7 @@ Os relacionamentos muitos-para-muitos (CONTÉM, COMPÕE e FORNECE) são mantidos
 
 ## 7. Diagrama Entidade-Relacionamento (DER)
 
-![DER da Colossal Foods](diagramas/DER-Colossal-Foods.png)
+![DER da Colossal Foods](entrega-1/diagramas/DER-Colossal-Foods.png)
 
 O diagrama utiliza a notação de Peter Chen com atributos (estilo brModelo) e representa:
 
@@ -446,13 +446,15 @@ A segunda etapa converte o modelo conceitual em um modelo relacional e prepara s
 
 ### Arquivos desta etapa
 
-- **[Modelo lógico relacional](modelo-logico-colossal-foods-revisado.md)** — tabelas, atributos, tipos, PK, FK e cardinalidades.
-- **[Prévia visual dos relacionamentos](diagramas/modelo-logico-colossal-foods.md)** — diagrama Mermaid para visualizar as ligações entre as 20 tabelas.
-- **[Script SQL](docs/script.sql)** — criação do banco `colossal_foods`, 20 tabelas, 11 triggers, dados fictícios, consultas gerenciais e consultas de auditoria.
-- **[Dicionário de dados lógico](dicionario-dados-logico.html)** — convenções físicas MySQL, estrutura das 20 tabelas, índices, fluxo de dados, papéis de acesso, log proposto e orientações LGPD.
-- **[Dicionário conceitual da Entrega 1](dicionario-dados.html)** — versão original da etapa conceitual.
-- **[Guia de execução](como-executar-script-mysql.md)** — passos para executar o script no MySQL Workbench.
-- **[Adendo de rastreabilidade](docs/adendo-readme-entrega2.md)** — relação entre problemas, requisitos, regras e consultas.
+- **[Modelo lógico relacional](entrega-2/modelo-logico-relacional.md)** — tabelas, atributos, tipos, PK, FK e cardinalidades.
+- **[Diagrama lógico em imagem](entrega-2/diagramas/modelo-logico-colossal-foods.svg) · [Fonte Mermaid](entrega-2/diagramas/modelo-logico-colossal-foods.md)** — diagrama Mermaid para visualizar as ligações entre as 20 tabelas.
+- **[Script SQL](entrega-2/script.sql)** — criação do banco `colossal_foods`, 20 tabelas, 11 triggers, dados fictícios, consultas gerenciais e consultas de auditoria.
+- **[Dicionário de dados lógico](entrega-2/dicionario-dados-logico.html)** — convenções físicas MySQL, estrutura das 20 tabelas, índices, fluxo de dados, papéis de acesso, log proposto e orientações LGPD.
+- **[Dicionário conceitual da Entrega 1](entrega-1/dicionario-dados.html)** — versão original da etapa conceitual.
+- **[Guia de execução](entrega-2/guia-execucao-mysql.md)** — passos para executar o script no MySQL Workbench.
+- **[Adendo de rastreabilidade](entrega-2/adendo-rastreabilidade.md)** — relação entre problemas, requisitos, regras e consultas.
+
+- **[Apresentação final](entrega-2/apresentacao-final.md)** — roteiro de 10 slides e divisão sugerida para oito integrantes.
 
 ### Consultas gerenciais
 
