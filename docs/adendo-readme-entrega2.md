@@ -75,3 +75,7 @@ A massa do script é integralmente fictícia. Os 138 pedidos demonstrativos fora
 Somente Jardim Arantes está identificado no material atual como área de atendimento. Os outros dois bairros da massa de dados são identificados como exemplos fictícios. Os estoques mínimos e as taxas usadas na demonstração também precisam ser confirmados com o responsável antes de serem descritos como parâmetros reais.
 
 A escala individual dos funcionários não foi modelada porque o material levantado informa a composição geral da equipe, mas não confirma uma escala por pessoa. O sistema registra o funcionário responsável por cada operação quando essa informação estiver disponível.
+
+## Registro de execução e validação
+
+O grupo executou `docs/script.sql` no MySQL Workbench. As consultas gerenciais G01–G08 foram executadas. Após o ajuste do valor contado no fechamento de caixa para R$ 453,00, as consultas de auditoria A01–A12 retornaram zero registros na massa fictícia. A existência das 11 triggers foi conferida, mas isso não comprova, por si só, o funcionamento de cada trigger em todos os cenários.
