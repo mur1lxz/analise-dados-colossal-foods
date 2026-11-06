@@ -245,24 +245,24 @@ A cardinalidade abaixo é descrita em linguagem direta para evitar ambiguidade: 
 | Relacionamento | Cardinalidade | Implementação relacional |
 |---|---|---|
 | CLIENTE realiza PEDIDO | Um cliente realiza `0..N` pedidos; cada pedido pertence a `1..1` cliente. | FK `PEDIDO.id_cliente`. |
-| PEDIDO contém PRODUTO | Um pedido contém `1..N` linhas; um produto aparece em `0..N` linhas de pedido. | Associativa `ITEM_PEDIDO`. |
+| PEDIDO contém PRODUTO | Um pedido pode conter `0..N` linhas segundo as restrições físicas; um produto aparece em `0..N` linhas de pedido. O fluxo de pagamento exige ao menos um item, mas a FK isolada não impõe essa participação mínima. | Associativa `ITEM_PEDIDO`. |
 | CATEGORIA classifica PRODUTO | Uma categoria classifica `0..N` produtos; cada produto pertence a `1..1` categoria. | FK `PRODUTO.id_categoria`. |
 | PRODUTO compõe INGREDIENTE | Um produto tem `0..N` ingredientes; um ingrediente compõe `0..N` produtos. | Associativa `PRODUTO_INGREDIENTE`. |
-| FORNECEDOR fornece INGREDIENTE | Um fornecedor fornece `1..N` ingredientes; um ingrediente pode ser fornecido por `1..N` fornecedores, conforme o DER original. | Associativa `FORNECEDOR_INGREDIENTE`. |
+| FORNECEDOR fornece INGREDIENTE | Um fornecedor pode estar associado a `0..N` ingredientes e um ingrediente a `0..N` fornecedores no modelo físico; a tabela associativa não impõe mínimo de uma associação. | Associativa `FORNECEDOR_INGREDIENTE`. |
 | PEDIDO possui PAGAMENTO | Um pedido possui `0..1` pagamento; cada pagamento pertence a `1..1` pedido. | FK `PAGAMENTO.id_pedido` com UNIQUE. |
 | PEDIDO gera ENTREGA | Um pedido gera `0..1` entrega; cada entrega pertence a `1..1` pedido. | FK `ENTREGA.id_pedido` com UNIQUE. |
 | MOTOBOY transporta ENTREGA | Um motoboy realiza `0..N` entregas; cada entrega tem `1..1` motoboy. | FK `ENTREGA.id_motoboy`. |
 | FUNCIONARIO registra PEDIDO | Um funcionário registra `0..N` pedidos; cada pedido tem `1..1` funcionário registrador. | FK `PEDIDO.id_funcionario_registro`. |
 | FUNCIONARIO prepara PEDIDO | Um funcionário prepara `0..N` pedidos; cada pedido possui `0..1` funcionário de preparo identificado. | FK `PEDIDO.id_funcionario_preparo`, nullable. |
 | FORNECEDOR realiza COMPRA | Um fornecedor aparece em `0..N` compras; cada compra pertence a `1..1` fornecedor. | FK `COMPRA.id_fornecedor`. |
-| COMPRA possui ITEM_COMPRA | Uma compra possui `1..N` itens; cada item pertence a `1..1` compra. | FK `ITEM_COMPRA.id_compra`. |
+| COMPRA possui ITEM_COMPRA | Uma compra pode possuir `0..N` itens segundo as FKs; cada item pertence a `1..1` compra. A regra de recebimento exige itens recebidos quando a compra passa a RECEBIDA. | FK `ITEM_COMPRA.id_compra`. |
 | INGREDIENTE aparece em ITEM_COMPRA | Um ingrediente aparece em `0..N` itens de compra; cada item aponta para `1..1` ingrediente. | FK `ITEM_COMPRA.id_ingrediente`. |
 | INGREDIENTE possui MOVIMENTACAO_ESTOQUE | Um ingrediente possui `0..N` movimentações; cada movimentação se refere a `1..1` ingrediente. | FK `MOVIMENTACAO_ESTOQUE.id_ingrediente`. |
 | FUNCIONARIO registra MOVIMENTACAO_ESTOQUE | Um funcionário registra `0..N` movimentações; cada movimentação tem `1..1` responsável. | FK `MOVIMENTACAO_ESTOQUE.id_funcionario`. |
 | ITEM_COMPRA origina MOVIMENTACAO_ESTOQUE | Um item de compra origina `0..N` movimentações; uma movimentação está ligada a `0..1` item de compra. | FK nullable `MOVIMENTACAO_ESTOQUE.id_item_compra`. |
 | FECHAMENTO_CAIXA possui CONFERENCIA_CAIXA | Um fechamento em preenchimento pode possuir `0..4` conferências; cada conferência pertence a `1..1` fechamento. Um fechamento concluído deve ter ao menos uma conferência para cada forma utilizada. | FK `CONFERENCIA_CAIXA.id_fechamento`, UNIQUE (`id_fechamento`, `forma_pagamento`) e auditoria A11 para fechamento sem conferência. |
 | FECHAMENTO_CAIXA reúne PAGAMENTO | Um fechamento reúne `0..N` pagamentos; cada pagamento pertence a `0..1` fechamento. | FK nullable `PAGAMENTO.id_fechamento`. |
-| PEDIDO possui HISTORICO_STATUS_PEDIDO | Um pedido possui `1..N` eventos; cada evento pertence a `1..1` pedido. | FK `HISTORICO_STATUS_PEDIDO.id_pedido`. |
+| PEDIDO possui HISTORICO_STATUS_PEDIDO | Um pedido pode possuir `0..N` eventos no modelo físico; cada evento pertence a `1..1` pedido. | FK `HISTORICO_STATUS_PEDIDO.id_pedido`. |
 | FUNCIONARIO registra HISTORICO_STATUS_PEDIDO | Um funcionário registra `0..N` eventos; cada evento tem `1..1` responsável pelo registro. | FK `HISTORICO_STATUS_PEDIDO.id_funcionario_responsavel`. |
 | AREA_ENTREGA atende ENTREGA | Uma área atende `0..N` entregas; cada entrega está vinculada a `1..1` área. | FK `ENTREGA.id_area_entrega`. |
 
