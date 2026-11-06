@@ -1,38 +1,38 @@
 # Modelo lógico relacional — Colossal Foods
 
-Diagrama gerado a partir das definições reais de `CREATE TABLE` e das chaves estrangeiras do arquivo [script.sql](../script.sql). Contém as 20 tabelas, atributos e relacionamentos implementados.
+Diagrama derivado diretamente das definições de tabelas, chaves primárias, chaves estrangeiras e restrições UNIQUE do [script SQL](../script.sql). São apresentadas as 20 tabelas e os 27 vínculos de chave estrangeira implementados.
 
-## Diagrama completo
+## Diagrama
 
 ```mermaid
 erDiagram
-  FUNCIONARIO o|--o{ FECHAMENTO_CAIXA : "registra"
-  FORNECEDOR o|--o{ COMPRA : "fornece"
-  FUNCIONARIO o|--o{ COMPRA : "confere"
-  CATEGORIA o|--o{ PRODUTO : "classifica"
-  CLIENTE o|--o{ PEDIDO : "realiza"
-  FUNCIONARIO o|--o{ PEDIDO : "registra"
-  FUNCIONARIO o|--o{ PEDIDO : "prepara"
-  COMPRA o|--o| ITEM_COMPRA : "contém"
-  INGREDIENTE o|--o| ITEM_COMPRA : "utiliza"
-  PRODUTO o|--o{ PRODUTO_INGREDIENTE : "inclui"
-  INGREDIENTE o|--o{ PRODUTO_INGREDIENTE : "utiliza"
-  FORNECEDOR o|--o{ FORNECEDOR_INGREDIENTE : "fornece"
-  INGREDIENTE o|--o{ FORNECEDOR_INGREDIENTE : "utiliza"
-  PEDIDO o|--o{ ITEM_PEDIDO : "vincula"
-  PRODUTO o|--o{ ITEM_PEDIDO : "inclui"
-  INGREDIENTE o|--o{ MOVIMENTACAO_ESTOQUE : "utiliza"
-  FUNCIONARIO o|--o{ MOVIMENTACAO_ESTOQUE : "registra"
-  ITEM_COMPRA o|--o{ MOVIMENTACAO_ESTOQUE : "origina"
-  PEDIDO o|--o| PAGAMENTO : "vincula"
-  FECHAMENTO_CAIXA o|--o{ PAGAMENTO : "concilia"
-  PEDIDO o|--o| ENTREGA : "vincula"
-  MOTOBOY o|--o{ ENTREGA : "transporta"
-  AREA_ENTREGA o|--o{ ENTREGA : "atende"
-  FECHAMENTO_CAIXA o|--o| CONFERENCIA_CAIXA : "concilia"
-  PEDIDO o|--o{ HISTORICO_STATUS_PEDIDO : "vincula"
-  FUNCIONARIO o|--o{ HISTORICO_STATUS_PEDIDO : "registra"
-  FUNCIONARIO o|--o{ HISTORICO_STATUS_PEDIDO : "autoriza"
+  FUNCIONARIO ||--o{ FECHAMENTO_CAIXA : "registra"
+  FORNECEDOR ||--o{ COMPRA : "fornece"
+  FUNCIONARIO ||--o{ COMPRA : "confere"
+  CATEGORIA ||--o{ PRODUTO : "classifica"
+  CLIENTE ||--o{ PEDIDO : "realiza"
+  FUNCIONARIO ||--o{ PEDIDO : "registra"
+  FUNCIONARIO ||--o{ PEDIDO : "prepara"
+  COMPRA ||--o{ ITEM_COMPRA : "contém"
+  INGREDIENTE ||--o{ ITEM_COMPRA : "utiliza"
+  PRODUTO ||--o| PRODUTO_INGREDIENTE : "inclui"
+  INGREDIENTE ||--o| PRODUTO_INGREDIENTE : "utiliza"
+  FORNECEDOR ||--o| FORNECEDOR_INGREDIENTE : "fornece"
+  INGREDIENTE ||--o| FORNECEDOR_INGREDIENTE : "utiliza"
+  PEDIDO ||--o{ ITEM_PEDIDO : "vincula"
+  PRODUTO ||--o{ ITEM_PEDIDO : "inclui"
+  INGREDIENTE ||--o{ MOVIMENTACAO_ESTOQUE : "utiliza"
+  FUNCIONARIO ||--o{ MOVIMENTACAO_ESTOQUE : "registra"
+  ITEM_COMPRA ||--o{ MOVIMENTACAO_ESTOQUE : "origina"
+  PEDIDO ||--o| PAGAMENTO : "vincula"
+  FECHAMENTO_CAIXA ||--o{ PAGAMENTO : "concilia"
+  PEDIDO ||--o| ENTREGA : "vincula"
+  MOTOBOY ||--o{ ENTREGA : "transporta"
+  AREA_ENTREGA ||--o{ ENTREGA : "atende"
+  FECHAMENTO_CAIXA ||--o{ CONFERENCIA_CAIXA : "concilia"
+  PEDIDO ||--o{ HISTORICO_STATUS_PEDIDO : "vincula"
+  FUNCIONARIO ||--o{ HISTORICO_STATUS_PEDIDO : "registra"
+  FUNCIONARIO ||--o{ HISTORICO_STATUS_PEDIDO : "autoriza"
   CATEGORIA {
     BIGINT id_categoria PK
     VARCHAR(80) nome
@@ -186,16 +186,16 @@ erDiagram
 ## Legenda
 - **PK**: chave primária.
 - **FK**: chave estrangeira.
-- **PK, FK**: atributo que participa da chave primária e também referencia outra tabela.
-- **||**: exatamente um.
+- **PK, FK**: atributo que é simultaneamente parte da chave primária e chave estrangeira.
+- **||**: exatamente um registro relacionado.
 - **o|**: zero ou um.
 - **o{**: zero ou muitos.
 
-## Observações importantes
-- `PRODUTO_INGREDIENTE` tem chave primária composta por `id_produto` e `id_ingrediente`.
-- `FORNECEDOR_INGREDIENTE` tem chave primária composta por `id_fornecedor` e `id_ingrediente`.
-- `ITEM_PEDIDO` representa os produtos que compõem cada pedido.
-- `PAGAMENTO.id_pedido` e `ENTREGA.id_pedido` são únicos: cada pedido pode ter no máximo um pagamento e uma entrega.
-- Campos opcionais permanecem identificados como FK; a cardinalidade do relacionamento considera a possibilidade de nulo no banco.
-- O diagrama representa o esquema implementado no MySQL. Regras de negócio adicionais estão documentadas no [modelo lógico relacional](../modelo-logico-relacional.md) e no script SQL.
+## Observações
+- `PRODUTO_INGREDIENTE`: chave primária composta por `id_produto` e `id_ingrediente`; ambos também são FKs.
+- `FORNECEDOR_INGREDIENTE`: chave primária composta por `id_fornecedor` e `id_ingrediente`; ambos também são FKs.
+- `ITEM_PEDIDO` liga pedidos aos produtos.
+- `PAGAMENTO.id_pedido` e `ENTREGA.id_pedido` são únicos, limitando cada pedido a no máximo um pagamento e uma entrega.
+- A cardinalidade mínima do lado da tabela dependente considera se a FK aceita NULL; a cardinalidade máxima considera as restrições UNIQUE.
+- Regras de negócio adicionais, como exigir itens antes do pagamento e validar delivery, estão implementadas por triggers e consultas de auditoria no SQL.
 
