@@ -5,7 +5,7 @@
 **Codificação sugerida:** `utf8mb4`  
 **Notação de nomes:** `snake_case`, nomes de tabelas em maiúsculas no diagrama e nomes de colunas em minúsculas no script SQL.
 
-> **Situação do documento:** especificação lógica revisada e alinhada ao arquivo `docs/script.sql`. Ela orienta a montagem do diagrama no brModelo, mas não substitui o diagrama gráfico exigido pelo professor. As tabelas novas ampliam o modelo original para cobrir os processos apontados na correção. Os pontos marcados como “validar” e os valores ilustrativos da massa de dados precisam ser confirmados com a organização antes de serem apresentados como fatos observados.
+> **Situação do documento:** especificação lógica revisada e alinhada ao arquivo `entrega-2/script.sql`. Ela orienta a montagem do diagrama no brModelo, mas não substitui o diagrama gráfico exigido pelo professor. As tabelas novas ampliam o modelo original para cobrir os processos apontados na correção. Os pontos marcados como “validar” e os valores ilustrativos da massa de dados precisam ser confirmados com a organização antes de serem apresentados como fatos observados.
 
 ## 1. Convenções
 
@@ -315,7 +315,7 @@ A cardinalidade abaixo é descrita em linguagem direta para evitar ambiguidade: 
 
 ## 5.1 Alinhamento com o script SQL e decisões revisadas
 
-O arquivo `docs/script.sql` implementa as 20 tabelas deste modelo, na ordem necessária para criar as chaves estrangeiras no MySQL. Além das constraints, o script contém 11 triggers para as regras que dependem de mais de uma tabela:
+O arquivo `entrega-2/script.sql` implementa as 20 tabelas deste modelo, na ordem necessária para criar as chaves estrangeiras no MySQL. Além das constraints, o script contém 11 triggers para as regras que dependem de mais de uma tabela:
 
 - Produto indisponível não pode ser incluído em novo item de pedido (RN05).
 - Pagamento deve corresponder ao total dos itens mais a taxa de delivery, quando houver (RN08/RN19).
