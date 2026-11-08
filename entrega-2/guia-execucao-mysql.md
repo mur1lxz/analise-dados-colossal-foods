@@ -9,7 +9,7 @@
 ## Executar no MySQL Workbench
 
 1. Abra o MySQL Workbench e conecte-se ao servidor local.
-2. Abra o arquivo `docs/script.sql` em uma nova aba SQL.
+2. Abra o arquivo `entrega-2/script.sql` em uma nova aba SQL.
 3. Confira a versão do servidor com `SELECT VERSION();`.
 4. Execute o script completo pelo botão de execução (ícone de raio).
 5. Atualize a lista de schemas e confirme que o banco `colossal_foods` foi criado.
@@ -26,7 +26,7 @@ Para recriar a demonstração, execute antes:
 DROP DATABASE IF EXISTS colossal_foods;
 ```
 
-**Atenção:** esse comando apaga o banco `colossal_foods` e todos os dados que estiverem nele. Não o execute se houver dados que deseja preservar. Depois, execute novamente o arquivo completo `docs/script.sql`.
+**Atenção:** esse comando apaga o banco `colossal_foods` e todos os dados que estiverem nele. Não o execute se houver dados que deseja preservar. Depois, execute novamente o arquivo completo `entrega-2/script.sql`.
 
 ## Resultados esperados das consultas gerenciais
 
