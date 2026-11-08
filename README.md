@@ -1,499 +1,441 @@
-# Entrega 1 — Modelo Conceitual (DER)
-### Modelagem de um sistema de gestão de informações para uma organização de pequeno porte
+# Relatório Técnico Final — Colossal Foods
+## Modelagem de dados, implementação SQL e apoio à gestão
+
+**Curso:** Análise e Desenvolvimento de Sistemas — UNICID  
+**Integrantes:** Murilo Silva Magalhães — RGM 47820471; Kauê de Lima Pereira — RGM 48477940  
+**Banco de dados:** MySQL 8.0.16 ou superior  
+**Repositório:** [mur1lxz/analise-dados-colossal-foods](https://github.com/mur1lxz/analise-dados-colossal-foods)
+
+> **Sobre este relatório:** este README reúne as Entregas 1 e 2 no formato de relatório técnico solicitado. Os arquivos originais da Entrega 1 permanecem preservados em `entrega-1/`. Os artefatos técnicos da Entrega 2 permanecem em `entrega-2/`. Informações que ainda dependem de confirmação presencial estão identificadas como pendentes ou ilustrativas; não devem ser apresentadas como fatos confirmados.
 
 ---
 
-## Metadados
+# 1. Levantamento e modelagem conceitual — Entrega 1
 
-- **Murilo Silva Magalhães — RGM: 47820471**
-- **Kauê de Lima Pereira — RGM:  48477940**
+## 1.1 Caracterização da organização
 
-### Estrutura do repositório
+A **Colossal Foods** é uma empresa privada com fins lucrativos do segmento de alimentação, identificada no projeto como hamburgueria de pequeno/médio porte, localizada no Jardim Arantes, em São Paulo/SP.
 
-| Arquivo | Conteúdo |
+No levantamento compartilhado pelo grupo, foram identificados quatro funcionários diretamente envolvidos na operação interna: duas pessoas na chapa/preparação e duas no atendimento, além de um motoboy fixo para delivery. O cardápio digital é fornecido por uma empresa terceirizada, contratada mediante pagamento mensal, e a equipe consulta as informações manualmente. O grupo não possui acesso ao banco de dados interno dessa plataforma.
+
+O material do projeto registra uma estimativa de 30 a 50 pedidos por dia durante a semana e de 60 a 90 aos finais de semana. Esses números são estimativas de dimensionamento utilizadas no trabalho, não uma extração de dados do sistema da hamburgueria.
+
+### Problemas e necessidades identificados
+
+Os problemas foram organizados em identificadores para permitir rastreabilidade entre o levantamento, o banco de dados e as consultas gerenciais.
+
+| Código | Problema/necessidade de informação | Objetivo do sistema |
+|---|---|---|
+| P1 | Acompanhamento do tempo de expedição do delivery | Registrar horários de recebimento, preparo, saída e conclusão para medir tempos e identificar atrasos. |
+| P2 | Histórico de preços e custos | Preservar o preço praticado em cada venda e o custo de aquisição dos ingredientes ao longo do tempo. |
+| P3 | Acompanhamento manual do estoque | Registrar entradas, saídas e ajustes, calcular saldos e sinalizar itens abaixo do mínimo cadastrado. |
+| P4 | Acompanhamento de cancelamentos | Registrar mudanças de status, motivos, responsáveis e autorizações. |
+| P5 | Conferência diária do caixa | Comparar pagamentos registrados por forma com os valores contados no fechamento. |
+| P6 | Rastreabilidade de compras e fornecedores | Relacionar fornecedor, compra, nota fiscal, ingrediente, quantidades e custos. |
+| P7 | Controle de áreas e taxas de delivery | Cadastrar áreas atendidas e preservar a taxa aplicada em cada entrega. |
+
+P1 e P2 representam as necessidades centrais descritas na caracterização do projeto. P3 a P7 ampliam a cobertura informacional para os processos operacionais modelados após a revisão da primeira entrega. Devem ser entendidos como necessidades de informação propostas pelo grupo, e não como reclamações literais atribuídas ao responsável sem confirmação específica.
+
+### Justificativa e escopo
+
+A organização foi escolhida por ser uma empresa real acessível ao grupo para levantamento. O escopo considera os processos de atendimento, pedidos, preparação, pagamentos, retirada, delivery, abastecimento, recebimento de ingredientes, movimentação manual de estoque, fechamento de caixa e acompanhamento de preços e custos.
+
+O projeto não pretende reproduzir o sistema terceirizado de cardápio nem afirmar integração automática com ele. O banco proposto organiza os registros necessários à operação interna e à análise gerencial.
+
+### Levantamento, entrevista e evidências
+
+O README da primeira entrega registra pesquisa de campo e conversa com a equipe. Também registra que não foram feitas fotografias durante a visita. O material disponível no repositório não documenta de forma completa a data e o local exatos da entrevista, o nome/função do entrevistado, os integrantes presentes, nem uma fotografia JPG/PNG da visita.
+
+**Pendência documental:** completar esses dados somente com informações reais do grupo e anexar evidência autorizada, caso exista. Não foram inventados nome de entrevistado, data, participantes ou fotografia. O perfil público da organização pode ajudar a identificar a empresa, mas não substitui a evidência da entrevista exigida pelo roteiro do professor.
+
+### Processos de negócio considerados
+
+1. Consulta ao cardápio digital terceirizado.
+2. Escolha e envio do pedido pelo cliente.
+3. Recebimento, conferência e registro do pedido pelo atendimento.
+4. Encaminhamento e preparação do pedido pela equipe da chapa.
+5. Registro e associação do pagamento ao pedido.
+6. Separação entre pedidos para retirada e pedidos para delivery.
+7. Entrega ao cliente pelo motoboy fixo, quando aplicável.
+8. Finalização ou cancelamento do pedido, conforme seu status.
+9. Abastecimento de ingredientes por fornecedores.
+10. Recebimento e conferência de insumos com nota fiscal.
+11. Controle manual de entradas, saídas e ajustes de estoque.
+12. Fechamento diário do caixa e conferência dos valores por forma de pagamento.
+13. Registro de compras e acompanhamento dos custos dos ingredientes.
+
+O controle de escala individual não foi incluído porque o levantamento disponível informa a composição geral da equipe, mas não confirma a escala de cada funcionário. A integração automática com o cardápio terceirizado também ficou fora do escopo por não haver acesso à plataforma.
+
+### Requisitos funcionais
+
+| Código | Requisito |
 |---|---|
-| `README.md` | Documentação das Entregas 1 e 2 |
-| `entrega-1/dicionario-dados.html` | Dicionário conceitual da Entrega 1 |
-| `entrega-2/dicionario-dados-logico.html` | Dicionário lógico MySQL da Entrega 2: 20 tabelas, tipos, índices, fluxo e governança |
-| `entrega-1/diagramas/DER-Colossal-Foods.png` | Diagrama Entidade-Relacionamento conceitual |
-| `entrega-1/diagramas/fluxograma-Colossal-Foods.png` | Fluxograma do processo de pedido |
-| `entrega-1/diagramas/gerar_der.py` e `entrega-1/diagramas/fluxograma.dot` | Arquivos-fonte usados para gerar os diagramas |
-| `entrega-2/modelo-logico-relacional.md` | Modelo lógico relacional com PKs, FKs, tipos e cardinalidades |
-| `entrega-2/script.sql` | Criação do banco, tabelas, triggers, dados fictícios e consultas |
-| `entrega-2/adendo-rastreabilidade.md` | Adendo de problemas, requisitos, regras e rastreabilidade |
-| `entrega-2/guia-execucao-mysql.md` | Instruções para executar e conferir o SQL |
+| RF01 | Registrar e consultar clientes. |
+| RF02 | Cadastrar, consultar e marcar produtos como indisponíveis. |
+| RF03 | Organizar produtos por categorias. |
+| RF04 | Registrar pedidos. |
+| RF05 | Incluir um ou mais produtos no pedido, com quantidade, preço praticado e observação. |
+| RF06 | Calcular o total pela soma de quantidade × preço unitário dos itens e, para delivery, acrescentar a taxa registrada na entrega. |
+| RF07 | Registrar o pagamento do pedido. |
+| RF08 | Identificar se o pedido é para retirada ou delivery. |
+| RF09 | Registrar a entrega e associar o motoboy responsável. |
+| RF10 | Acompanhar o status do pedido e da entrega. |
+| RF11 | Cadastrar ingredientes e sua composição nos produtos. |
+| RF12 | Cadastrar fornecedores e relacioná-los aos ingredientes fornecidos. |
+| RF13 | Manter o histórico de pedidos. |
+| RF14 | Cadastrar funcionários e suas funções/situação, vinculando-os às operações quando identificados. |
+| RF15 | Registrar compras por fornecedor, com data, status e itens comprados. |
+| RF16 | Registrar recebimento de ingredientes, nota fiscal, data, conferente e quantidades recebidas. |
+| RF17 | Registrar manualmente entradas, saídas e ajustes de estoque, com quantidade, data/hora, responsável e motivo. Não há baixa automática por venda nesta versão. |
+| RF18 | Cadastrar áreas de entrega, taxa padrão e situação ativa/inativa, preservando a taxa aplicada em cada entrega. |
+| RF19 | Registrar o fechamento de caixa e os valores contados por forma de pagamento. |
+| RF20 | Registrar mudanças de status dos pedidos, com data/hora, funcionário responsável e justificativa/autorizador quando houver cancelamento. |
 
+### Requisitos não funcionais
 
----
+- **RNF01 — Usabilidade:** interface simples e adequada à rotina de uma operação de pequeno/médio porte.
+- **RNF02 — Segurança:** acesso controlado aos dados de clientes, pedidos e pagamentos.
+- **RNF03 — Disponibilidade:** disponibilidade durante o horário de funcionamento.
+- **RNF04 — Desempenho:** registro e consulta de pedidos sem atrasos que prejudiquem o atendimento.
+- **RNF05 — Integridade:** manutenção da consistência entre pedidos, produtos, ingredientes, pagamentos e entregas.
+- **RNF06 — Privacidade:** uso dos dados pessoais somente para atendimento e entrega, respeitando a LGPD.
 
-## 1. Caracterização da Organização
+### Regras de negócio
 
-- - **Nome e natureza da organização:** **Colossal Foods**, empresa privada com fins lucrativos do segmento de alimentação, classificada publicamente como hamburgueria.
+- **RN01:** um cliente pode realizar vários pedidos; cada pedido pertence a um único cliente.
+- **RN02:** todo pedido confirmado deve conter pelo menos um produto.
+- **RN03:** um produto pode aparecer em vários pedidos.
+- **RN04:** cada produto pertence a uma categoria.
+- **RN05:** produto indisponível não pode ser incluído em novo pedido.
+- **RN06:** a quantidade de cada item deve ser maior que zero.
+- **RN07:** o preço do item deve preservar o valor praticado no momento da venda.
+- **RN08:** cada pedido possui no máximo um pagamento; o pagamento corresponde ao total dos itens mais a taxa de delivery, quando houver.
+- **RN09:** todo pedido deve ser classificado como retirada ou delivery.
+- **RN10:** pedidos para retirada não possuem entrega.
+- **RN11:** pedidos de delivery devem possuir uma entrega associada para serem concluídos.
+- **RN12:** cada entrega possui um motoboy responsável; um motoboy pode realizar várias entregas.
+- **RN13:** toda entrega possui endereço de destino.
+- **RN14:** um pedido de delivery só pode ser finalizado depois que a entrega estiver concluída.
+- **RN15:** produtos preparados podem ser compostos por ingredientes; produtos industrializados podem não possuir composição cadastrada.
+- **RN16:** um ingrediente pode ser fornecido por mais de um fornecedor e um fornecedor pode fornecer vários ingredientes.
+- **RN17:** cancelamentos após o início da preparação ou após o pedido ficar pronto exigem justificativa e autorização; o cancelamento no status inicial segue o fluxo registrado.
+- **RN18:** as formas aceitas são PIX, dinheiro, cartão de débito e cartão de crédito; os valores devem ser conciliados no fechamento.
+- **RN19:** delivery depende de área atendida e taxa cadastrada; a taxa efetivamente aplicada deve ser preservada no registro da entrega.
+- **RN20:** recebimento de ingredientes exige conferência com nota fiscal e observância das normas sanitárias aplicáveis.
+- **RN21:** uma compra só pode passar para RECEBIDA quando tiver nota fiscal, data de recebimento, conferente, resultado da conferência e ao menos um item com quantidade recebida maior que zero.
+- **RN22:** o saldo do ingrediente é calculado por entradas e ajustes de entrada menos saídas e ajustes de saída; saldo negativo deve ser identificado.
+- **RN23:** movimentação vinculada a item de compra deve ser do tipo ENTRADA, referir-se ao mesmo ingrediente e não superar a quantidade recebida.
+- **RN24:** toda mudança de status gera histórico com data/hora e responsável; o status atual deve corresponder ao último evento registrado.
 
-- **Contexto, porte e volume:** hamburgueria de pequeno/médio porte localizada no Jardim Arantes, em São Paulo. Durante a pesquisa de campo, o grupo identificou **4 funcionários diretamente envolvidos na operação interna**: **2 na chapa/preparação dos alimentos** e **2 no atendimento ao público**, além de **motoboy fixo** para as entregas. A hamburgueria atende a uma **média estimada de 30 a 50 pedidos diários nos dias de semana e de 60 a 90 pedidos por dia aos finais de semana**.
+### DER conceitual revisado
 
-- **Problemas e necessidades identificados:** a necessidade concreta da organização é padronizar e estruturar os dados da operação para **erradicar falhas no tempo de expedição dos pedidos de delivery** e **controlar a precificação histórica dos produtos** frente à variação de custo dos ingredientes. Como o cardápio digital é terceirizado, a modelagem visa separar a operação interna da plataforma externa, garantindo consistência e rastreabilidade entre clientes, pedidos, entregas e fornecedores.
+O modelo conceitual preserva as entidades centrais **CLIENTE, PEDIDO, PRODUTO, CATEGORIA, INGREDIENTE, FORNECEDOR, PAGAMENTO, ENTREGA e MOTOBOY**. O relacionamento CONTÉM entre PEDIDO e PRODUTO mantém quantidade, preço praticado e observação como atributos do relacionamento; COMPÕE mantém quantidade utilizada; FORNECE representa o vínculo entre fornecedor e ingrediente.
 
-- **Justificativa da escolha:** a Colossal Foods foi escolhida por ser uma organização real à qual o grupo tem acesso para pesquisa de campo. Sua operação apresenta processos suficientes para a modelagem conceitual (pedido, produção, pagamento, retirada, delivery e abastecimento) sem complexidade excessiva para esta primeira etapa.
+O DER conceitual utiliza a notação de Peter Chen/brModelo: entidades em retângulos, relacionamentos em losangos, atributos em elipses, identificadores destacados, atributo composto de endereço e atributo derivado para o total do pedido. As cardinalidades mínimas e máximas são apresentadas no diagrama. Entidades associativas pertencem à conversão lógica, não ao DER conceitual desta versão.
 
-- **Evidências da organização:** o grupo realizou pesquisa de campo diretamente na organização, por meio de entrevista com a equipe. Não foram registradas fotos durante a visita; a existência da organização pode ser verificada pelos dados públicos abaixo, obtidos no perfil da empresa no Google Maps.
-  
-- **Contexto, porte e volume:** hamburgueria de pequeno/médio porte localizada no Jardim Arantes, em São Paulo. Durante a pesquisa de campo, o grupo identificou **4 funcionários diretamente envolvidos na operação interna**: **2 na chapa/preparação dos alimentos** e **2 no atendimento ao público**, além de **motoboy fixo** para as entregas. A hamburgueria atende a uma **média estimada de 30 a 50 pedidos diários nos dias de semana e de 60 a 90 pedidos por dia aos finais de semana**.
+![DER conceitual da Colossal Foods](entrega-1/diagramas/DER-Colossal-Foods.png)
 
-- **Problemas e necessidades identificados:** a necessidade concreta da organização é padronizar e estruturar os dados da operação para **erradicar falhas no tempo de expedição dos pedidos de delivery** e **controlar a precificação histórica dos produtos** frente à variação de custo dos ingredientes. Como o cardápio digital é terceirizado, a modelagem visa separar a operação interna da plataforma externa, garantindo consistência e rastreabilidade entre clientes, pedidos, entregas e fornecedores.
+**Fluxograma do processo de pedido:**
 
-| Dado | Informação |
+![Fluxograma da Colossal Foods](entrega-1/diagramas/fluxograma-Colossal-Foods.png)
+
+**Software e arquivos:** o material do DER inclui imagem PNG e arquivo-fonte Python em `entrega-1/diagramas/`. A imagem é o artefato visual preservado da Entrega 1. A validação formal de cada símbolo deve ser conferida no arquivo gráfico final.
+
+### Revisões da Entrega 1 e justificativas
+
+| Ponto revisto | Decisão adotada |
 |---|---|
-| **Nome** | Colossal Foods |
-| **Segmento** | Hamburgueria (alimentação) |
-| **Natureza** | Empresa privada com fins lucrativos |
-| **Endereço** | Rua do Carvalho Brasileiro, Jardim Arantes — São Paulo/SP |
-| **CEP** | 08382-520 |
-| **Telefone** | (11) 95950-6213 |
-| **Avaliação no Google** | 5,0 (228 avaliações, na consulta feita durante o projeto) |
-| **Equipe observada** | 2 funcionários na chapa, 2 no atendimento e 1 motoboy fixo |
-| **Cardápio** | Digital, fornecido por empresa terceirizada |
-| **Referência pública** | Pesquisar no Google Maps por “Colossal Foods — Jardim Arantes, São Paulo — SP” |
+| Produto vendido e ingrediente consumido são conceitos diferentes | PRODUTO foi mantido e relacionado a INGREDIENTE por COMPÕE. |
+| Fornecedor deve estar ligado aos ingredientes | FORNECE representa a relação N:N entre FORNECEDOR e INGREDIENTE. |
+| Quantidade, preço e observação dependem da combinação pedido-produto | Permanecem como atributos de CONTÉM no conceitual e passam para ITEM_PEDIDO no lógico. |
+| Preço precisa preservar o histórico da venda | O modelo lógico armazena `preco_unitario` em ITEM_PEDIDO. |
+| Pagamento tem dados próprios e pode ocorrer após o registro do pedido | PAGAMENTO permanece separado e associado a PEDIDO. |
+| Retirada não exige endereço nem motoboy | ENTREGA é opcional para PEDIDO no modelo físico; regras impedem entrega para retirada. |
+| Operação de estoque e recebimento precisa de rastreabilidade | Foram acrescentadas estruturas de compra, item de compra e movimentação manual de estoque. |
+| Caixa é conferido por forma de pagamento | Foram acrescentadas FECHAMENTO_CAIXA e CONFERENCIA_CAIXA. |
+| Cancelamentos e mudanças de status precisam de histórico | Foi acrescentada HISTORICO_STATUS_PEDIDO. |
+| Áreas de entrega e taxas precisam ser preservadas | Foi acrescentada AREA_ENTREGA e a taxa aplicada é copiada para ENTREGA. |
 
----
+## 1.2 Conversão do modelo conceitual para o lógico
 
-## 2. Processos de Negócio
+A conversão seguiu estas decisões:
 
-### Principais processos mapeados
+1. Cada entidade conceitual tornou-se uma tabela relacional.
+2. Atributos simples tornaram-se colunas; atributos compostos foram decompostos em colunas atômicas.
+3. Relacionamentos 1:N foram implementados por chave estrangeira no lado N.
+4. Relacionamentos N:N foram convertidos em tabelas associativas.
+5. Relacionamentos 1:1 foram implementados por FK com restrição UNIQUE, quando necessário.
+6. Atributos do relacionamento CONTÉM foram transferidos para ITEM_PEDIDO; o atributo quantidade_utilizada de COMPÕE foi transferido para PRODUTO_INGREDIENTE.
+7. O total do pedido permanece derivado: soma dos itens mais taxa de entrega, quando existir. Não é armazenado como coluna redundante.
 
-- **1. Consulta ao cardápio —** O cliente consulta os produtos disponíveis no cardápio digital terceirizado.
-- **2. Realização do pedido —** O cliente escolhe os produtos e envia o pedido.
-- **3. Recebimento e atendimento —** A equipe de atendimento recebe, confere e registra o pedido, encaminhando-o para a chapa.
-- **4. Preparação —** A equipe da chapa prepara os produtos utilizando os ingredientes disponíveis.
-- **5. Pagamento —** O pagamento é registrado e associado ao pedido.
-- **6. Retirada —** Quando o pedido é para retirada, o cliente o recebe no estabelecimento.
-- **7. Delivery —** Quando o pedido é para entrega, ele é passado ao motoboy fixo, que o leva até o endereço do cliente.
-- **8. Finalização —** Após a retirada ou a entrega, o pedido é considerado concluído.
-- **9. Abastecimento (processo de apoio) —** Fornecedores entregam os ingredientes usados na preparação.
-- **10. Cancelamento e alteração —** O atendimento verifica a viabilidade de cancelar ou alterar pedidos antes que entrem na etapa de preparação.
-- **11. Recebimento e conferência de insumos —** A equipe realiza a conferência dos ingredientes entregues pelos fornecedores frente à nota fiscal antes de armazená-los.
-- **12. Fechamento de caixa —** Ao final do expediente, a equipe consolida o total arrecadado em dinheiro, PIX e cartões com os pedidos finalizados.
+## 1.3 Modelo lógico relacional, chaves primárias e estrangeiras
 
-- **13. Controle manual do estoque —** A equipe verifica o estoque manualmente no sistema terceirizado. A modelagem registra movimentações de ingredientes para permitir histórico e cálculo de saldo, sem afirmar integração automática com a plataforma.
-- **14. Rastreabilidade de compras —** O recebimento dos ingredientes é relacionado ao fornecedor e à nota fiscal, com quantidades solicitadas e recebidas. O fluxo exato de autorização/realização do pedido de compra deve ser confirmado com a organização.
+O modelo implementado possui **20 tabelas**:
 
-### Fluxograma
+**Entidades principais:** CLIENTE, PEDIDO, PRODUTO, CATEGORIA, INGREDIENTE, FORNECEDOR, PAGAMENTO, ENTREGA e MOTOBOY.
 
-![Fluxograma do processo de pedido](entrega-1/diagramas/fluxograma-Colossal-Foods.png)
+**Tabelas associativas:** ITEM_PEDIDO, PRODUTO_INGREDIENTE e FORNECEDOR_INGREDIENTE.
 
-<details>
-<summary>Versão em Mermaid (renderizada pelo GitHub)</summary>
+**Estruturas complementares:** FUNCIONARIO, COMPRA, ITEM_COMPRA, MOVIMENTACAO_ESTOQUE, FECHAMENTO_CAIXA, CONFERENCIA_CAIXA, HISTORICO_STATUS_PEDIDO e AREA_ENTREGA.
 
-```mermaid
-flowchart TD
-    INI([Início]) --> A[Cliente consulta o cardápio digital]
-    A --> B[Cliente escolhe os produtos e envia o pedido]
-    B --> C[Atendimento recebe, confere e registra o pedido]
-    C --> D[Chapa prepara os produtos com os ingredientes]
-    D --> E[Pedido pronto]
-    E --> F[Registro do pagamento]
-    F --> G{Tipo do pedido?}
-    G -->|Retirada| H[Cliente retira no estabelecimento]
-    G -->|Delivery| I[Pedido entregue ao motoboy fixo]
-    I --> J[Motoboy entrega no endereço do cliente]
-    H --> K[Pedido finalizado]
-    J --> K
-    K --> FIM([Fim])
+### Chaves primárias
 
-    subgraph Abastecimento [Processo de apoio: abastecimento]
-        S1[Fornecedores entregam os ingredientes] --> S2[Ingredientes disponíveis na cozinha]
-    end
-    S2 -.->|insumos| D
-```
-</details>
+Todas as tabelas possuem PK. Nas tabelas com identificador simples, a PK é um campo `BIGINT UNSIGNED AUTO_INCREMENT`. As tabelas associativas PRODUTO_INGREDIENTE e FORNECEDOR_INGREDIENTE utilizam chaves primárias compostas:
 
----
+- `PRODUTO_INGREDIENTE(id_produto, id_ingrediente)`
+- `FORNECEDOR_INGREDIENTE(id_fornecedor, id_ingrediente)`
 
-## 3. Requisitos do Sistema
+### Chaves estrangeiras
 
-### 3.1 Requisitos Funcionais
+| Tabela | Chaves estrangeiras |
+|---|---|
+| PEDIDO | id_cliente → CLIENTE; id_funcionario_registro e id_funcionario_preparo → FUNCIONARIO |
+| PRODUTO | id_categoria → CATEGORIA |
+| PAGAMENTO | id_pedido → PEDIDO; id_fechamento → FECHAMENTO_CAIXA |
+| ENTREGA | id_pedido → PEDIDO; id_motoboy → MOTOBOY; id_area_entrega → AREA_ENTREGA |
+| ITEM_PEDIDO | id_pedido → PEDIDO; id_produto → PRODUTO |
+| PRODUTO_INGREDIENTE | id_produto → PRODUTO; id_ingrediente → INGREDIENTE |
+| FORNECEDOR_INGREDIENTE | id_fornecedor → FORNECEDOR; id_ingrediente → INGREDIENTE |
+| COMPRA | id_fornecedor → FORNECEDOR; id_funcionario_conferente → FUNCIONARIO |
+| ITEM_COMPRA | id_compra → COMPRA; id_ingrediente → INGREDIENTE |
+| MOVIMENTACAO_ESTOQUE | id_ingrediente → INGREDIENTE; id_funcionario → FUNCIONARIO; id_item_compra → ITEM_COMPRA |
+| FECHAMENTO_CAIXA | id_funcionario_responsavel → FUNCIONARIO |
+| CONFERENCIA_CAIXA | id_fechamento → FECHAMENTO_CAIXA |
+| HISTORICO_STATUS_PEDIDO | id_pedido → PEDIDO; id_funcionario_responsavel e id_funcionario_autorizador → FUNCIONARIO |
 
-- **RF01 —** O sistema deve permitir registrar clientes.
-- **RF02 —** O sistema deve permitir cadastrar, consultar e marcar como indisponíveis os produtos do cardápio.
-- **RF03 —** O sistema deve permitir organizar os produtos por categorias.
-- **RF04 —** O sistema deve permitir registrar pedidos.
-- **RF05 —** O sistema deve permitir incluir um ou mais produtos em um pedido, com quantidade, preço praticado e observação.
-- **RF06 —** O sistema deve calcular o valor total do pedido pela soma de quantidade × preço unitário dos itens; quando for delivery, deve acrescentar a taxa registrada na entrega.
-- **RF07 —** O sistema deve permitir registrar o pagamento de um pedido.
-- **RF08 —** O sistema deve identificar se o pedido é para retirada ou delivery.
-- **RF09 —** O sistema deve permitir registrar os dados de uma entrega e associar o motoboy responsável.
-- **RF10 —** O sistema deve permitir acompanhar o status do pedido e da entrega.
-- **RF11 —** O sistema deve permitir cadastrar ingredientes e registrar quais ingredientes compõem cada produto.
-- **RF12 —** O sistema deve permitir cadastrar fornecedores e relacioná-los aos ingredientes que fornecem.
-- **RF13 —** O sistema deve manter o histórico dos pedidos realizados.
-- **RF14 —** O sistema deve permitir cadastrar funcionários, suas funções e a situação ativo/inativo, vinculando-os às operações quando identificados.
-- **RF15 —** O sistema deve permitir registrar compras de ingredientes por fornecedor, com data, status e itens comprados.
-- **RF16 —** O sistema deve registrar o recebimento dos ingredientes, incluindo nota fiscal, data, funcionário conferente e quantidades efetivamente recebidas.
-- **RF17 —** O sistema deve permitir registrar manualmente entradas, saídas e ajustes de estoque por ingrediente, com quantidade, data/hora, responsável e motivo. Nesta versão não há baixa automática por venda.
-- **RF18 —** O sistema deve permitir cadastrar áreas de entrega, taxa padrão e situação ativa/inativa, preservando a taxa aplicada em cada entrega.
-- **RF19 —** O sistema deve registrar o fechamento do caixa e os valores contados por forma de pagamento para comparação com os pagamentos associados.
-- **RF20 —** O sistema deve registrar as mudanças de status dos pedidos, com data/hora e funcionário responsável, incluindo justificativa e autorizador quando houver cancelamento.
+O modelo lógico completo contém as colunas, tipos, nulabilidade, PKs, FKs, restrições e cardinalidades: [abrir especificação do modelo lógico](entrega-2/modelo-logico-relacional.md). O diagrama lógico está em [SVG](entrega-2/diagramas/modelo-logico-colossal-foods.svg) e sua fonte em [Markdown/Mermaid](entrega-2/diagramas/modelo-logico-colossal-foods.md).
 
-### 3.2 Requisitos Não Funcionais
+## 1.4 Normalização — 1FN, 2FN e 3FN
 
-- **RNF01 — Usabilidade:** o sistema deve ser simples e adequado à rotina de uma operação de pequeno/médio porte.
-- **RNF02 — Segurança:** o acesso aos dados de clientes, pedidos e pagamentos deve ser controlado.
-- **RNF03 — Disponibilidade:** o sistema deve estar disponível durante todo o horário de funcionamento da hamburgueria.
-- **RNF04 — Desempenho:** o registro e a consulta de pedidos devem ocorrer sem atrasos que prejudiquem o atendimento.
-- **RNF05 — Integridade:** os relacionamentos entre pedidos, produtos, ingredientes, pagamentos e entregas devem permanecer consistentes.
-- **RNF06 — Privacidade:** dados pessoais de clientes devem ser usados somente para atendimento e entrega, em conformidade com a LGPD.
+A estrutura foi organizada para reduzir repetição e anomalias de inserção, atualização e exclusão.
 
----
+- **Primeira Forma Normal (1FN):** cada coluna representa um valor atômico. Endereço de entrega foi dividido em logradouro, número, complemento, CEP e área/bairro. Itens de pedido, itens de compra e formas de conferência são armazenados em registros separados, em vez de listas dentro de uma coluna.
+- **Segunda Forma Normal (2FN):** nas tabelas com chave composta, os atributos não-chave dependem da chave completa. Em PRODUTO_INGREDIENTE, quantidade_utilizada depende do par produto–ingrediente; em FORNECEDOR_INGREDIENTE, o próprio par identifica a associação. Nas demais tabelas, as PKs são simples, evitando dependência parcial.
+- **Terceira Forma Normal (3FN):** dados de entidades independentes foram separados. Nome de categoria fica em CATEGORIA, dados do fornecedor em FORNECEDOR, dados do motoboy em MOTOBOY, dados da área e taxa padrão em AREA_ENTREGA. As tabelas de pedido e compra guardam referências por FK em vez de repetir os dados descritivos dessas entidades. Preço praticado e custo unitário permanecem nos itens transacionais porque representam o valor histórico daquela venda/compra, não uma cópia do valor atual.
 
-## 4. Regras de Negócio
+O valor_total do pedido e o saldo atual do ingrediente são calculados por consultas a partir dos itens, taxas e movimentações, evitando armazenar totais derivados que poderiam ficar inconsistentes.
 
-### Regras operacionais
+## 1.5 Justificativas técnicas e integridade
 
-- **RN01 —** Um cliente pode realizar vários pedidos; cada pedido pertence a um único cliente.
-- **RN02 —** Todo pedido deve conter pelo menos um produto.
-- **RN03 —** Um mesmo produto pode estar presente em vários pedidos.
-- **RN04 —** Cada produto pertence a exatamente uma categoria.
-- **RN05 —** Um produto indisponível não pode ser incluído em novos pedidos.
-- **RN06 —** A quantidade de cada produto no pedido deve ser maior que zero.
-- **RN07 —** O preço registrado no pedido é o praticado no momento da venda, mesmo que o preço do produto mude depois.
-- **RN08 —** Cada pedido possui no máximo um pagamento, e cada pagamento se refere a um único pedido; o valor pago deve corresponder à soma dos itens mais a taxa de entrega aplicada, quando houver delivery.
-- **RN09 —** Todo pedido deve ser classificado como retirada ou delivery.
-- **RN10 —** Pedidos para retirada não possuem registro de entrega.
-- **RN11 —** Pedidos de delivery devem possuir exatamente uma entrega associada.
-- **RN12 —** Cada entrega deve ter um motoboy responsável; um motoboy pode realizar várias entregas.
-- **RN13 —** Toda entrega deve possuir endereço de destino.
-- **RN14 —** Um pedido de delivery só é considerado finalizado após a conclusão da entrega.
-- **RN15 —** Um produto preparado é composto por um ou mais ingredientes; produtos industrializados (ex.: refrigerante em lata) podem não ter composição cadastrada.
-- **RN16 —** Um ingrediente pode ser fornecido por um ou mais fornecedores, e um fornecedor pode fornecer vários ingredientes.
-- **RN17 —** Um pedido só pode ser cancelado se estiver no status "Recebido". Pedidos nos status "Em preparação" ou "Pronto" não podem ser cancelados sem autorização do atendimento/gerência.
-- **RN18 —** As formas de pagamento aceitas são exclusivamente PIX, dinheiro, cartão de débito e cartão de crédito, e o valor total acumulado no dia deve bater com o relatório de fechamento de caixa.
-- **RN19 —** Pedidos da modalidade delivery são restritos aos bairros contidos no raio de atendimento cadastrado (Jardim Arantes e proximidades), estando sujeitos à aplicação de taxa fixa de entrega.
-- **RN20 —** Todo recebimento de ingredientes de fornecedores exige conferência com nota fiscal e deve cumprir rigorosamente as normas da Vigilância Sanitária municipal para armazenamento e conservação.
-- **RN21 —** Uma compra só pode passar para `RECEBIDA` quando tiver nota fiscal, data de recebimento, funcionário conferente, resultado da conferência e ao menos um item com quantidade recebida maior que zero.
-- **RN22 —** O saldo de cada ingrediente é calculado pelas entradas e ajustes de entrada, menos as saídas e ajustes de saída. Saldo negativo deve ser identificado e analisado.
-- **RN23 —** Uma entrada de estoque vinculada a item de compra deve referenciar o mesmo ingrediente, usar o tipo `ENTRADA` e não superar a quantidade efetivamente recebida.
-- **RN24 —** Toda mudança de status deve gerar um registro no histórico, e o status atual deve corresponder ao último evento registrado.
+- **Identificadores:** PKs numéricas BIGINT UNSIGNED com AUTO_INCREMENT facilitam a identificação dos registros.
+- **Relacionamentos:** FKs garantem que os registros relacionados existam; a política de exclusão preserva o histórico operacional.
+- **Valores monetários:** DECIMAL(10,2) evita imprecisão de ponto flutuante.
+- **Quantidades de insumos:** DECIMAL(12,3) permite quantidades fracionadas.
+- **Datas:** DATETIME registra data e hora local.
+- **Domínios:** CHECKs limitam tipo/status do pedido, forma de pagamento, tipo de movimentação, status de compra e entrega.
+- **Obrigatoriedade:** NOT NULL é usado nos dados essenciais; campos ainda desconhecidos no momento do cadastro podem aceitar NULL, como funcionário de preparo, data de recebimento e associação de pagamento ao fechamento.
+- **Unicidade:** nomes de categoria e bairro/área são únicos; pagamento e entrega usam UNIQUE em id_pedido para limitar um registro de cada tipo por pedido; conferências são únicas por fechamento e forma.
+- **Valores positivos:** CHECKs controlam quantidades, preços, custos e taxas não negativas/positivas conforme sua finalidade.
+- **Preço histórico:** ITEM_PEDIDO.preco_unitario preserva o preço no momento da venda, mesmo que PRODUTO.preco seja alterado depois.
+- **Estoque:** o saldo é calculado por movimentações manuais. Não há baixa automática por venda nesta versão.
+- **Privacidade:** contatos de clientes e funcionários devem ter acesso restrito e ser usados somente para finalidades operacionais.
 
-### Restrições organizacionais
+As regras que dependem de mais de uma tabela são complementadas por triggers e consultas de auditoria. O detalhamento de todas as colunas e restrições está no [dicionário lógico em HTML](entrega-2/dicionario-dados-logico.html).
 
-- O cardápio digital é fornecido por uma **empresa terceirizada**, contratada mediante pagamento mensal.
-- O grupo não possui acesso ao banco de dados interno dessa plataforma.
-- A empresa utiliza **motoboy fixo** para o delivery.
-- A operação interna observada possui **2 funcionários na chapa** e **2 funcionários no atendimento**.
-- A modelagem representa os dados necessários aos processos observados e não pretende reproduzir a implementação interna do sistema terceirizado.
-- O controle automático de estoque não faz parte do escopo, pois não foi confirmado durante a pesquisa de campo.
+## 1.6 BI, indicadores e apoio à decisão
 
----
+O banco foi preparado para apoiar consultas gerenciais. Os indicadores abaixo são calculados a partir dos registros do sistema; metas e limites operacionais precisam ser definidos com a organização.
 
-## 5. Dicionário de Dados Conceitual (Preliminar)
-
-O dicionário completo, com tipo de atributo, domínio, obrigatoriedade e regras associadas, está em:
-
-**[📄 entrega-1/dicionario-dados.html](entrega-1/dicionario-dados.html)**
-
-Resumo por entidade (🔑 = identificador):
-
-### CLIENTE
-| Atributo | Descrição | Regra de negócio associada |
-|---|---|---|
-| 🔑 id_cliente | Identificador do cliente | Único |
-| nome | Nome do cliente | Obrigatório |
-| telefone | Telefone para contato | Uso restrito a atendimento e entrega (RNF06) |
-
-### PEDIDO
-| Atributo | Descrição | Regra de negócio associada |
-|---|---|---|
-| 🔑 id_pedido | Identificador do pedido | Único |
-| data_hora | Momento em que o pedido foi registrado | Obrigatório |
-| tipo_pedido | Forma de recebimento | Retirada ou delivery (RN09) |
-| status | Situação atual do pedido | Recebido, em preparação, pronto ou finalizado |
-| valor_total *(derivado)* | Valor total do pedido | Soma de quantidade × preco_unitario dos itens, mais taxa de entrega quando houver delivery |
-
-### PRODUTO
-| Atributo | Descrição | Regra de negócio associada |
-|---|---|---|
-| 🔑 id_produto | Identificador do produto | Único |
-| nome | Nome exibido no cardápio | Obrigatório |
-| descricao | Descrição do produto | Opcional |
-| preco | Preço de venda atual | Maior que zero |
-| disponivel | Indica se pode ser pedido | Indisponível não entra em novos pedidos (RN05) |
-
-### CATEGORIA
-| Atributo | Descrição | Regra de negócio associada |
-|---|---|---|
-| 🔑 id_categoria | Identificador da categoria | Único |
-| nome | Nome da categoria | Obrigatório, sem repetição |
-| descricao | Descrição da categoria | Opcional |
-
-### INGREDIENTE
-| Atributo | Descrição | Regra de negócio associada |
-|---|---|---|
-| 🔑 id_ingrediente | Identificador do ingrediente | Único |
-| nome | Nome do ingrediente | Obrigatório |
-| unidade_medida | Unidade de medida | Ex.: g, kg, unidade, litro |
-
-### FORNECEDOR
-| Atributo | Descrição | Regra de negócio associada |
-|---|---|---|
-| 🔑 id_fornecedor | Identificador do fornecedor | Único |
-| nome | Nome ou razão social | Obrigatório |
-| telefone | Telefone para contato | Opcional |
-| email | E-mail para contato | Opcional |
-
-### PAGAMENTO
-| Atributo | Descrição | Regra de negócio associada |
-|---|---|---|
-| 🔑 id_pagamento | Identificador do pagamento | Único |
-| forma_pagamento | Meio utilizado | PIX, dinheiro, débito ou crédito |
-| valor | Valor pago | Igual ao valor total do pedido (RN08) |
-| data_hora | Momento do pagamento | Obrigatório |
-
-### ENTREGA
-| Atributo | Descrição | Regra de negócio associada |
-|---|---|---|
-| 🔑 id_entrega | Identificador da entrega | Único |
-| endereco_entrega *(composto)* | Destino: logradouro, numero, bairro, complemento | Obrigatório (RN13) |
-| data_hora_saida | Momento da saída do motoboy | Preenchido ao iniciar a entrega |
-| data_hora_entrega | Momento da conclusão | Posterior à saída |
-| status | Situação da entrega | Aguardando, em rota ou entregue |
-
-### MOTOBOY
-| Atributo | Descrição | Regra de negócio associada |
-|---|---|---|
-| 🔑 id_motoboy | Identificador do motoboy | Único |
-| nome | Nome do motoboy | Obrigatório |
-| telefone | Telefone para contato | Obrigatório |
-
-### Atributos de relacionamento
-| Relacionamento | Atributo | Descrição | Regra |
+| Problema | Indicador / KPI | Fórmula ou critério | Consulta |
 |---|---|---|---|
-| CONTÉM | quantidade | Quantidade do produto no pedido | Maior que zero (RN06) |
-| CONTÉM | preco_unitario | Preço praticado na venda | Preço no momento do pedido (RN07) |
-| CONTÉM | observacao | Pedido especial (ex.: sem cebola) | Opcional |
-| COMPÕE | quantidade_utilizada | Quanto do ingrediente vai em uma unidade do produto | Maior que zero |
-
-> **Privacidade:** os atributos acima representam apenas a estrutura conceitual. Nenhum dado pessoal real de clientes, funcionários ou fornecedores foi utilizado.
-
----
-
-## 6. Modelagem Conceitual (Entidades, Atributos, Relacionamentos)
-
-### Entidades reconhecidas
-
-- **CLIENTE:** pessoa que realiza pedidos.
-- **PEDIDO:** solicitação de compra; entidade central do modelo.
-- **PRODUTO:** item vendido no cardápio.
-- **CATEGORIA:** agrupamento dos produtos no cardápio.
-- **INGREDIENTE:** insumo utilizado na preparação dos produtos.
-- **FORNECEDOR:** quem fornece ingredientes à hamburgueria.
-- **PAGAMENTO:** registro financeiro da quitação de um pedido.
-- **ENTREGA:** deslocamento de um pedido de delivery até o cliente.
-- **MOTOBOY:** entregador fixo responsável pelas entregas.
-
-### Atributos e classificações
-
-Os atributos estão detalhados na Seção 5 e no dicionário HTML. O modelo utiliza:
-
-- **Identificadores** (`id_...`), que distinguem cada ocorrência das entidades;
-- **Atributos simples**, como `nome`, `preco` e `status`;
-- **Atributo composto:** `endereco_entrega` (logradouro, número, bairro, complemento);
-- **Atributo derivado:** `valor_total`, calculado a partir dos itens do pedido, com acréscimo da taxa de entrega quando houver delivery;
-- **Atributos de relacionamento:** `quantidade`, `preco_unitario` e `observacao` em CONTÉM, e `quantidade_utilizada` em COMPÕE.
-
-### Relacionamentos pertinentes
-
-Cardinalidade no formato **(mín, máx)**: o par ao lado de uma entidade indica quantas ocorrências dela se associam a **uma** ocorrência da entidade do outro lado.
-
-| Relacionamento | Entidades e cardinalidades | Tipo |
-|---|---|---|
-| **REALIZA** | CLIENTE (1,1) — PEDIDO (0,N) | 1:N |
-| **CONTÉM** | PEDIDO (0,N) — PRODUTO (1,N) | N:N |
-| **CLASSIFICA** | CATEGORIA (1,1) — PRODUTO (0,N) | 1:N |
-| **COMPÕE** | PRODUTO (0,N) — INGREDIENTE (0,N) | N:N |
-| **FORNECE** | FORNECEDOR (1,N) — INGREDIENTE (1,N) | N:N |
-| **POSSUI** | PEDIDO (1,1) — PAGAMENTO (0,1) | 1:1 |
-| **GERA** | PEDIDO (1,1) — ENTREGA (0,1) | 1:1 |
-| **TRANSPORTA** | MOTOBOY (1,1) — ENTREGA (0,N) | 1:N |
-
-Os relacionamentos muitos-para-muitos (CONTÉM, COMPÕE e FORNECE) são mantidos diretamente no modelo conceitual. A transformação deles em tabelas associativas será feita apenas na etapa de modelagem lógica.
-
-### Restrições e políticas aplicadas
-
-- Todo pedido deve conter pelo menos um produto.
-- Entrega só existe para pedidos do tipo delivery.
-- Toda entrega deve ter motoboy responsável e endereço de destino.
-- Dados de contato dos clientes são usados apenas para atendimento e entrega.
-- A plataforma terceirizada de cardápio não foi modelada como entidade, pois é um sistema externo.
-
----
-
-## 7. Diagrama Entidade-Relacionamento (DER)
-
-![DER da Colossal Foods](entrega-1/diagramas/DER-Colossal-Foods.png)
-
-O diagrama utiliza a notação de Peter Chen com atributos (estilo brModelo) e representa:
-
-- entidades (retângulos) e relacionamentos (losangos);
-- atributos, com identificadores em destaque (círculo preenchido), atributo composto e atributo derivado (círculo tracejado);
-- atributos de relacionamento em CONTÉM e COMPÕE;
-- cardinalidades mínimas e máximas em todos os relacionamentos.
-
----
-
-## 8. Justificativa Técnica
-
-A entidade **PEDIDO** ocupa posição central porque representa a principal operação da hamburgueria: ela conecta o cliente, os produtos vendidos, o pagamento e, quando necessário, a entrega.
-
-**PRODUTO** e **INGREDIENTE** foram modelados como entidades distintas porque representam coisas diferentes. O cliente pede **produtos** do cardápio (um lanche, uma porção, uma bebida), enquanto a cozinha consome **ingredientes** para prepará-los. Ligar o pedido diretamente aos ingredientes eliminaria o cardápio do modelo, que é justamente o ponto de partida do processo. Por isso o pedido se relaciona com PRODUTO (**CONTÉM**) e o produto se relaciona com INGREDIENTE (**COMPÕE**).
-
-Os relacionamentos N:N foram mantidos no nível conceitual, sem entidade associativa. As informações que dependem da combinação pedido–produto — **quantidade**, **preço praticado** e **observação** — foram representadas como **atributos do relacionamento CONTÉM**. O preço praticado precisa ser guardado no relacionamento porque o preço do produto pode mudar depois da venda, e o histórico do pedido não pode ser alterado por isso. Pelo mesmo motivo, a quantidade de cada ingrediente usada em um produto é atributo de **COMPÕE**.
-
-**CATEGORIA** foi separada de PRODUTO para evitar repetição de classificações e permitir organizar o cardápio.
-
-**FORNECEDOR** foi incluído porque os ingredientes precisam ser obtidos de terceiros. O relacionamento **FORNECE** é N:N, pois um fornecedor pode fornecer vários ingredientes e um mesmo ingrediente pode ser comprado de fornecedores diferentes. O controle automático de estoque ficou fora do escopo, já que não foi confirmado em campo.
-
-**PAGAMENTO** foi separada de PEDIDO porque tem características próprias (forma, valor, momento) e porque o pedido existe antes de ser pago. Por isso a cardinalidade é PEDIDO (1,1) — PAGAMENTO (0,1): o pedido pode ainda não ter pagamento, mas todo pagamento pertence a exatamente um pedido.
-
-**ENTREGA** não foi incorporada a PEDIDO porque pedidos para retirada não precisam de endereço, horário de saída ou motoboy. Assim, um pedido gera zero ou uma entrega. O endereço fica na ENTREGA, e não no CLIENTE, porque o mesmo cliente pode pedir para endereços diferentes. Ele foi modelado como **atributo composto** para permitir consultas por bairro, por exemplo.
-
-**MOTOBOY** foi mantido porque é um elemento real do delivery observado. O relacionamento recebeu o nome **TRANSPORTA** para não ser confundido com a entidade ENTREGA.
-
-O **valor_total** do pedido foi marcado como **derivado**, pois pode ser calculado a partir dos produtos e seus preços praticados.
-
-O cardápio digital terceirizado não virou entidade porque é uma ferramenta externa contratada, e não um objeto de informação da organização.
-
-A modelagem busca reduzir redundâncias, representar as regras observadas e permitir a evolução para o modelo lógico e a implementação em banco de dados relacional.
-
----
-
-## 9. Uso de Inteligência Artificial
-
-| **Trechos rejeitados ou corrigidos** | Foi rejeitada a criação de entidades associativas na notação conceitual e ajustadas as descrições dos processos de delivery com motoboy fixo. |
-
-### Uso 1 — Preparação da entrevista
-
-| Item | Registro |
-|---|---|
-| **Ferramenta e etapa** | ChatGPT — preparação das perguntas de levantamento de requisitos |
-| **Motivação** | Identificar perguntas importantes para entender como os dados circulam na hamburgueria |
-| **Prompt utilizado** | “Chat, preciso fazer uma entrevista com uma empresa e entender como funciona o sistema deles de dados e montar um fluxo e fazer um MER e DER.” |
-| **Resposta recebida** | Sugestões de perguntas sobre pedidos, produtos, clientes, pagamentos, sistemas, estoque e delivery |
-| **Fontes consultadas e verificadas** | As sugestões foram confrontadas com a pesquisa de campo na Colossal Foods |
-| **Trechos rejeitados ou corrigidos** | Hipóteses não confirmadas, como integração automática de estoque, foram retiradas |
-| **Justificativa da escolha final** | Foram mantidas apenas perguntas úteis para os processos acessíveis ao grupo |
-| **Reflexão crítica** | A IA tende a sugerir práticas comuns do setor como se fizessem parte da empresa analisada; a validação em campo foi indispensável |
-
-### Uso 2 — Estruturação inicial do modelo
-
-| Item | Registro |
-|---|---|
-| **Ferramenta e etapa** | ChatGPT — organização de requisitos, entidades, relacionamentos e cardinalidades |
-| **Motivação** | Transformar as informações coletadas em uma estrutura inicial de modelagem |
-| **Prompt utilizado** | “A empresa que vou é uma hamburgueria de baixo/médio porte, é possível adiantar algo?” |
-| **Resposta recebida** | Sugestões de entidades como Cliente, Pedido, Produto, Item do Pedido, Pagamento, Entrega e Motoboy |
-| **Fontes consultadas e verificadas** | Entrevista, observação da operação e informações públicas da organização |
-| **Trechos rejeitados ou corrigidos** | Removidas entidades e funcionalidades sem confirmação, como estoque automático |
-| **Justificativa da escolha final** | Mantidos apenas elementos coerentes com os processos observados |
-| **Reflexão crítica** | As sugestões da IA foram tratadas como hipóteses, não como evidências |
-
-### Uso 3 — Documentação no GitHub
-
-| Item | Registro |
-|---|---|
-| **Ferramenta e etapa** | ChatGPT — estruturação do README |
-| **Motivação** | Adaptar o conteúdo ao modelo de entrega fornecido pelo professor |
-| **Prompt utilizado** | “Mude o arquivo para esse formato: Entrega 1 — Modelo Conceitual (DER).” |
-| **Resposta recebida** | Organização do conteúdo nas seções exigidas |
-| **Fontes consultadas e verificadas** | Modelo oficial da atividade, pesquisa de campo e perfil público da organização |
-| **Trechos rejeitados ou corrigidos** | Removidos conteúdos fora do modelo solicitado e afirmações não confirmadas |
-| **Justificativa da escolha final** | A versão final preserva os títulos e critérios da atividade |
-| **Reflexão crítica** | O texto gerado precisou de revisão humana para manter fidelidade ao levantamento de campo |
-
-### Uso 4 — Revisão e correção do modelo
-
-| Item | Registro |
-|---|---|
-| **Ferramenta e etapa** | Claude (Anthropic) — revisão do repositório e reestruturação da entrega |
-| **Motivação** | Verificar a consistência entre README, DER e dicionário de dados após as correções |
-| **Prompts utilizados** | “Analise esse projeto e verifique se está correto.”; “Monte o projeto inteiro de forma atualizada e correta com dicionário em HTML, o DER e o fluxograma.” |
-| **Resposta recebida** | Apontou que o README descrevia um modelo diferente do DER e do dicionário, que a entidade PRODUTO havia sido removida, que faltavam atributos nos relacionamentos N:N e cardinalidades mínimas, e gerou nova versão do README, do DER, do fluxograma e do dicionário |
-| **Fontes consultadas e verificadas** | Versões anteriores do próprio repositório, pesquisa de campo e orientações recebidas em aula |
-| **Trechos rejeitados ou corrigidos** | *(o grupo deve preencher com o que alterou na versão sugerida)* |
-| **Justificativa da escolha final** | PRODUTO foi reintroduzido e ligado a INGREDIENTE, mantendo os relacionamentos N:N no nível conceitual, conforme a orientação de não usar entidade associativa |
-| **Reflexão crítica** | A revisão por IA ajudou a encontrar inconsistências entre os arquivos, mas as informações sobre a operação real continuam dependendo da validação em campo feita pelo grupo |
-
----
-
-
-### Uso 5 — Modelo lógico e implementação SQL
-
-| Item | Registro |
-|---|---|
-| **Ferramenta e etapa** | ChatGPT — apoio à revisão do modelo lógico, estruturação do script SQL e organização das consultas gerenciais e de auditoria |
-| **Motivação** | Converter o modelo conceitual em tabelas relacionais e atender aos pontos de melhoria listados na correção da Entrega 1 |
-| **Prompt utilizado** | “Revise o modelo lógico para ver se está tudo certo e faça a próxima etapa.” |
-| **Resposta recebida** | Proposta de tabelas, chaves primárias e estrangeiras, tipos MySQL, regras de integridade, massa de dados fictícia e consultas para gestão e auditoria |
-| **Fontes consultadas e verificadas** | README do projeto, correção registrada na Issue #1 e informações operacionais compartilhadas pelo grupo |
-| **Trechos rejeitados ou corrigidos** | Foram ajustadas hipóteses não confirmadas, o cálculo do delivery, o recebimento de compras e a conciliação do caixa; valores de bairros, taxas e estoque da massa são identificados como ilustrativos |
-| **Justificativa da escolha final** | A estrutura foi revisada com base na correção da Entrega 1; o script foi executado no MySQL Workbench e as consultas de auditoria foram verificadas pelo grupo |
-| **Reflexão crítica** | A IA acelerou a organização do modelo, mas não substitui a validação de campo nem a execução técnica no SGBD |
-
-
-## 10. Entrega 2 — Modelo Lógico e Implementação SQL
-
-A segunda etapa converte o modelo conceitual em um modelo relacional e prepara sua implementação em MySQL. O modelo lógico possui 20 tabelas, com chaves primárias, chaves estrangeiras, restrições e índices descritos no dicionário.
-
-### Arquivos desta etapa
-
-- **[Modelo lógico relacional](entrega-2/modelo-logico-relacional.md)** — tabelas, atributos, tipos, PK, FK e cardinalidades.
-- **[Diagrama lógico em imagem](entrega-2/diagramas/modelo-logico-colossal-foods.svg) · [Fonte Mermaid](entrega-2/diagramas/modelo-logico-colossal-foods.md)** — diagrama Mermaid para visualizar as ligações entre as 20 tabelas.
-- **[Script SQL](entrega-2/script.sql)** — criação do banco `colossal_foods`, 20 tabelas, 11 triggers, dados fictícios, consultas gerenciais e consultas de auditoria.
-- **[Dicionário de dados lógico](entrega-2/dicionario-dados-logico.html)** — convenções físicas MySQL, estrutura das 20 tabelas, índices, fluxo de dados, papéis de acesso, log proposto e orientações LGPD.
-- **[Dicionário conceitual da Entrega 1](entrega-1/dicionario-dados.html)** — versão original da etapa conceitual.
-- **[Guia de execução](entrega-2/guia-execucao-mysql.md)** — passos para executar o script no MySQL Workbench.
-- **[Adendo de rastreabilidade](entrega-2/adendo-rastreabilidade.md)** — relação entre problemas, requisitos, regras e consultas.
-
-- **[Apresentação final](entrega-2/apresentacao-final.md)** — roteiro de 10 slides e divisão sugerida para oito integrantes.
+| P1 | Tempo médio de preparo | Média entre registro do pedido e início/fim do preparo conforme eventos disponíveis | G01 |
+| P1 | Tempo médio de deslocamento | Média entre saída do motoboy e conclusão da entrega | G01 |
+| P2 | Variação do preço de venda | Comparação entre preço atual do produto e preço histórico em ITEM_PEDIDO | G02 |
+| P2/P6 | Variação do custo de aquisição | Comparação dos custos unitários registrados em ITEM_COMPRA ao longo do tempo | G03 |
+| P3 | Ingredientes abaixo do mínimo | Saldo calculado menor que estoque_minimo cadastrado | G04 |
+| P4 | Taxa de cancelamento | Pedidos cancelados ÷ total de pedidos no período × 100 | G05 |
+| P5 | Diferença de caixa por forma | Valor contado menos total de pagamentos associados ao fechamento | G06 |
+| P6 | Compras por fornecedor/ingrediente | Quantidade e custo das compras agrupados por fornecedor e ingrediente | G07 |
+| P7 | Entregas e taxas por área | Quantidade de entregas e soma/média das taxas por área | G08 |
 
 ### Consultas gerenciais
 
-| Código | Objetivo |
-|---|---|
-| G01 | Medir tempos médios de preparo e deslocamento dos deliveries concluídos |
-| G02 | Comparar preços atuais e preços praticados historicamente |
-| G03 | Comparar custos unitários de aquisição de ingredientes |
-| G04 | Identificar ingredientes abaixo do estoque mínimo |
-| G05 | Acompanhar quantidade e percentual de pedidos cancelados |
-| G06 | Comparar pagamentos por forma com valores contados no fechamento |
-| G07 | Acompanhar compras por fornecedor e ingrediente |
-| G08 | Acompanhar entregas e taxas por área |
+- **G01:** tempos médios de preparo e deslocamento dos deliveries concluídos.
+- **G02:** comparação entre preço atual e preço praticado historicamente.
+- **G03:** análise de custos unitários de aquisição de ingredientes.
+- **G04:** ingredientes abaixo do estoque mínimo cadastrado.
+- **G05:** quantidade e percentual de pedidos cancelados.
+- **G06:** conciliação de pagamentos por forma com valores contados.
+- **G07:** compras por fornecedor e ingrediente.
+- **G08:** entregas e taxas por área.
+
+### Possibilidades futuras de BI/IA
+
+Com maior histórico validado, os dados poderão apoiar previsões de demanda por dia/horário, identificação de ingredientes com maior risco de reposição e análise de variação de custos. Essas são possibilidades futuras, não funcionalidades de previsão já implementadas. Qualquer modelo preditivo exigiria dados históricos suficientes, validação de qualidade e acompanhamento humano.
+
+---
+
+# 2. Modelo lógico relacional
+
+O modelo lógico possui 20 tabelas e 27 vínculos de chave estrangeira, conforme a especificação técnica e o diagrama. A notação do diagrama mostra tabelas, colunas, PKs, FKs e cardinalidades.
+
+- [Modelo lógico relacional completo](entrega-2/modelo-logico-relacional.md)
+- [Diagrama lógico em SVG](entrega-2/diagramas/modelo-logico-colossal-foods.svg)
+- [Fonte Mermaid do diagrama](entrega-2/diagramas/modelo-logico-colossal-foods.md)
+- [Dicionário de dados lógico em HTML](entrega-2/dicionario-dados-logico.html)
+
+**Observação:** o Markdown/Mermaid documenta o modelo e facilita sua visualização. Caso o professor exija especificamente exportação do brModelo, a imagem final deve ser gerada/conferida no próprio brModelo e anexada ao repositório; não se deve declarar que um diagrama Mermaid foi produzido pelo brModelo.
+
+---
+
+# 3. Implementação SQL
+
+O script principal está em [entrega-2/script.sql](entrega-2/script.sql). Ele utiliza MySQL e contém criação do banco, criação das tabelas, restrições, triggers, inserção de massa fictícia, consultas gerenciais e consultas de auditoria.
+
+### Componentes implementados
+
+- Banco de dados: `colossal_foods`.
+- 20 tabelas relacionais.
+- 27 vínculos de chave estrangeira documentados no modelo.
+- 11 triggers para validações que envolvem mais de uma tabela.
+- Consultas gerenciais G01–G08.
+- Consultas de auditoria A01–A12.
+
+As triggers complementam regras como indisponibilidade de produto, validação de pagamento, restrições de delivery, recebimento de compra, movimentação de estoque e autorização de cancelamentos. A descrição técnica está no modelo lógico e no próprio script SQL.
 
 ### Consultas de auditoria
 
-As consultas A01–A12 verificam pedidos sem itens, valores pagos, cardinalidade de entregas, motoboys, saldo de estoque, entradas de compras, cancelamentos, conciliação de caixa, histórico de status, recebimento de compras e finalização de delivery.
+| Código | Regra verificada |
+|---|---|
+| A01 | RN02 — pedido sem item de produto |
+| A02 | RN08/RN19 — valor do pagamento em relação aos itens e à taxa de delivery |
+| A03 | RN10/RN11 — coerência entre modalidade do pedido e existência de entrega |
+| A04 | RN12 — entrega com motoboy responsável |
+| A05 | RN22 — saldo de estoque não negativo |
+| A06 | RN23 — movimentação de entrada coerente com item de compra |
+| A07 | RN17 — cancelamento com justificativa e autorização quando exigida |
+| A08 | RN18 — conciliação de pagamentos por forma |
+| A09 | RN24 — status atual coerente com o último evento do histórico |
+| A10 | RN20/RN21 — recebimento de compra documentado e conferido |
+| A11 | RN18 — fechamento com registros de conferência |
+| A12 | RN14 — delivery finalizado somente após entrega concluída |
 
-### Massa de dados e limites
+### Execução no MySQL Workbench
 
-A massa de demonstração contém 138 pedidos, 276 itens, 44 entregas, 132 pagamentos, cinco compras, movimentações de estoque e três fechamentos de caixa. Todos os nomes, contatos, endereços, notas, preços, custos, taxas e quantidades são fictícios. Não devem ser apresentados como dados reais da Colossal Foods.
+1. Instalar/iniciar o MySQL Server 8.0.16 ou superior.
+2. Abrir o MySQL Workbench e conectar ao servidor local.
+3. Abrir o arquivo `entrega-2/script.sql`.
+4. Executar o script completo, permitindo os comandos DELIMITER usados pelas triggers.
+5. Atualizar a lista de schemas e confirmar a criação de `colossal_foods`.
+6. Conferir as 20 tabelas e executar G01–G08 e A01–A12.
 
-Os bairros além de Jardim Arantes, as taxas e os estoques mínimos são parâmetros demonstrativos e precisam ser confirmados em campo. A escala individual dos funcionários não foi modelada porque não foi confirmada no levantamento.
+O passo a passo está no [guia de execução do MySQL](entrega-2/guia-execucao-mysql.md).
 
-**Validação prática registrada pelo grupo:** o script foi executado no MySQL Workbench. As consultas gerenciais G01–G08 foram executadas. Após o ajuste do valor contado no fechamento de caixa, as consultas de auditoria A01–A12 retornaram zero registros, indicando que não foram encontradas as inconsistências verificadas por essas consultas na massa de demonstração. A existência das 11 triggers foi conferida; isso não equivale a um teste funcional isolado de cada trigger.
+**Atenção:** o script contém comandos de criação do banco. Para recriar a demonstração do zero, o banco anterior deve ser removido conscientemente; isso apaga os dados existentes. Não executar DROP DATABASE em uma base com dados que devam ser preservados.
 
 ---
 
-## Critérios Atitudinais (20%)
+# 4. Massa de dados e validação
 
-Os critérios atitudinais são demonstrados pela participação dos integrantes, pelo cumprimento das responsabilidades, pela colaboração no projeto e pelo histórico de commits no GitHub. Cada integrante realiza contribuições reais no repositório utilizando sua própria conta.
+A massa de demonstração é inteiramente fictícia. O script contém:
+
+| Registro | Quantidade |
+|---|---:|
+| Pedidos | 138 |
+| Distribuição de pedidos | 34 em um dia útil, 39 em outro dia útil e 65 no sábado |
+| Itens de pedido | 276 |
+| Entregas | 44 |
+| Pagamentos | 132 |
+| Eventos de histórico de status | 484 |
+| Compras | 5 |
+| Itens de compra | 15 |
+| Movimentações de estoque | 28 |
+| Conferências de caixa | 12 |
+
+Os nomes, telefones, e-mails, endereços, notas fiscais, preços, custos, taxas, quantidades e movimentações são ilustrativos. A distribuição foi escolhida para ser compatível com a estimativa de volume apresentada na caracterização, sem representar transações reais da empresa.
+
+Jardim Arantes é a única área identificada no material do levantamento. Outros bairros, taxas e estoques mínimos usados na massa são exemplos demonstrativos e precisam de confirmação antes de serem descritos como parâmetros reais da hamburgueria.
+
+### Resultado da execução registrado pelo grupo
+
+O grupo executou o script no MySQL Workbench e as consultas gerenciais G01–G08. Após ajustar o valor contado no fechamento de caixa para R$ 453,00, as consultas de auditoria A01–A12 retornaram zero registros na massa de demonstração.
+
+Esse resultado significa apenas que as verificações implementadas nessas consultas não encontraram as inconsistências que procuram nos dados atuais. Não comprova ausência de todo tipo de erro. A existência das 11 triggers foi conferida, mas não há afirmação de que cada trigger tenha passado por testes funcionais isolados em todos os cenários.
 
 ---
 
-## Resumo dos Pesos
+# 5. Organização do repositório e histórico
 
-| Dimensão | Peso total |
-|----------|-----------|
-| Conceitual (contexto, requisitos/regras, modelagem, justificativa técnica) | 30% |
-| Procedimental (requisitos, fluxogramas, dicionário de dados, DER) | 50% |
-| Atitudinal (participação, comprometimento, colaboração, autonomia) | 20% |
+A estrutura atual preserva a documentação conceitual e mantém os artefatos da segunda entrega separados:
 
-**Entrega final:** `README.md` completo + DER em imagem + Dicionário de Dados em HTML anexados ao repositório GitHub do grupo.
+| Caminho | Conteúdo |
+|---|---|
+| `README.md` | Relatório técnico final integrado |
+| `entrega-1/dicionario-dados.html` | Dicionário conceitual da primeira entrega |
+| `entrega-1/diagramas/DER-Colossal-Foods.png` | DER conceitual |
+| `entrega-1/diagramas/fluxograma-Colossal-Foods.png` | Fluxograma do processo de pedido |
+| `entrega-1/diagramas/gerar_der.py` | Arquivo-fonte de geração do DER |
+| `entrega-1/diagramas/fluxograma.dot` | Fonte do fluxograma |
+| `entrega-2/modelo-logico-relacional.md` | Especificação lógica, colunas, tipos, PK, FK e cardinalidades |
+| `entrega-2/diagramas/modelo-logico-colossal-foods.svg` | Diagrama lógico |
+| `entrega-2/diagramas/modelo-logico-colossal-foods.md` | Fonte Mermaid do diagrama |
+| `entrega-2/dicionario-dados-logico.html` | Dicionário físico/lógico MySQL |
+| `entrega-2/script.sql` | Script SQL completo |
+| `entrega-2/adendo-rastreabilidade.md` | Detalhamento de problemas, requisitos, regras e rastreabilidade |
+| `entrega-2/guia-execucao-mysql.md` | Guia para executar e validar o banco |
+| `entrega-2/apresentacao-final.md` | Roteiro da apresentação final |
+
+O histórico de commits do GitHub deve demonstrar a evolução real do trabalho e as contribuições dos integrantes. Cada participante deve realizar seus próprios commits com sua conta. Não se deve atribuir contribuições que não foram feitas por aquela pessoa. A distribuição de commits e a identificação dos autores devem ser conferidas diretamente na aba de histórico do repositório.
+
+---
+
+# 6. Uso de inteligência artificial
+
+A IA foi utilizada como apoio à organização, revisão e implementação. As sugestões foram tratadas como hipóteses e comparadas com o levantamento, os arquivos do repositório, a correção da atividade e os testes no MySQL.
+
+| Etapa | Ferramenta | Motivação e prompts registrados | Resultado aproveitado e revisão |
+|---|---|---|---|
+| Preparação do levantamento | ChatGPT | “Chat, preciso fazer uma entrevista com uma empresa e entender como funciona o sistema deles de dados e montar um fluxo e fazer um MER e DER.” | Sugestões de perguntas sobre pedidos, clientes, pagamentos, estoque e delivery; hipóteses não confirmadas, como estoque automático, foram retiradas. |
+| Estruturação conceitual | ChatGPT | “A empresa que vou é uma hamburgueria de baixo/médio porte, é possível adiantar algo?” | Sugestão inicial de entidades e processos; o grupo manteve apenas o que era coerente com o levantamento e revisou o modelo. |
+| Organização do README | ChatGPT | “Mude o arquivo para esse formato: Entrega 1 — Modelo Conceitual (DER).” | Organização do relatório conforme a estrutura acadêmica, com revisão humana das afirmações. |
+| Revisão do repositório | Claude (Anthropic) | “Analise esse projeto e verifique se está correto.”; “Monte o projeto inteiro de forma atualizada e correta com dicionário em HTML, o DER e o fluxograma.” | A revisão apontou divergências entre README, DER e dicionário. PRODUTO foi mantido e ligado a INGREDIENTE; relacionamentos N:N e cardinalidades foram revistos. O grupo deve completar no registro de trabalho quais sugestões específicas rejeitou ou corrigiu, se necessário. |
+| Modelo lógico e SQL | ChatGPT | “Revise o modelo lógico para ver se está tudo certo e faça a próxima etapa.” | Apoio à conversão em tabelas, definição de chaves, restrições, massa fictícia e consultas. Foram revistas hipóteses não confirmadas, cálculo do delivery, recebimento de compras e conciliação do caixa. |
+
+**Fontes de validação:** roteiro da atividade e correção da Entrega 1, arquivos do próprio repositório, informações operacionais compartilhadas pelo grupo e execução do script no MySQL Workbench. A IA não foi tratada como fonte de evidência sobre a empresa.
+
+**Limitações e reflexão crítica:** respostas geradas podem sugerir processos comuns do setor que não existem na organização analisada. Por isso, integração automática, parâmetros de estoque, bairros, taxas e escala individual não foram declarados como fatos sem confirmação. O modelo e os dados fictícios precisam continuar sendo revisados pelo grupo e pela organização.
+
+---
+
+# 7. Apresentação final — pitch de 8 minutos
+
+A apresentação deve ser visual, objetiva e conter pouco texto por slide. A sequência recomendada é:
+
+1. **Capa:** Colossal Foods — Sistema de Gestão de Informações.
+2. **Organização e contexto:** operação, equipe, cardápio terceirizado e processos.
+3. **Problema e objetivo:** expedição, histórico de preços/custos, estoque, caixa e compras.
+4. **Modelo conceitual:** entidades e relacionamentos principais da Entrega 1.
+5. **Modelo lógico:** 20 tabelas, PKs, FKs e tabelas associativas.
+6. **Implementação SQL:** banco, tabelas, triggers e demonstração de execução.
+7. **Consultas gerenciais:** G01–G08 e indicadores.
+8. **Auditoria e validação:** A01–A12 e resultado da massa fictícia.
+9. **Limitações e próximos passos:** pontos que dependem de confirmação e testes funcionais adicionais.
+10. **Conclusão:** benefícios esperados e possibilidade de evolução.
+
+### Divisão sugerida para oito integrantes
+
+1. Integrante 1: slides 1–2 — apresentação e contexto da organização.
+2. Integrante 2: slide 3 — problemas e objetivos.
+3. Integrante 3: slide 4 — modelo conceitual.
+4. Integrante 4: slide 5 — modelo lógico.
+5. Integrante 5: slide 6 — implementação SQL.
+6. Integrante 6: slide 7 — consultas gerenciais.
+7. Integrante 7: slide 8 — auditoria e validação.
+8. Integrante 8: slides 9–10 — limitações e conclusão.
+
+A divisão é uma sugestão e deve ser ajustada aos integrantes reais e ao tempo disponível. Todos devem conhecer o funcionamento geral do projeto para responder às perguntas da banca.
+
+O roteiro de fala e os tópicos dos slides estão em [apresentacao-final.md](entrega-2/apresentacao-final.md).
+
+---
+
+## Pendências que precisam de validação antes da entrega definitiva
+
+- Completar os dados factuais da entrevista (data, local, função do entrevistado e integrantes presentes), se o grupo tiver esses registros.
+- Anexar fotografia/evidência autorizada da visita, caso exista; o material anterior informa que não houve registro fotográfico.
+- Confirmar bairros atendidos, taxas, estoques mínimos e processo formal de compras com a organização.
+- Conferir se o diagrama lógico atende à exigência de notação e exportação do brModelo, caso o professor exija especificamente essa ferramenta.
+- Executar cenários de teste funcionais para cada trigger, além de conferir sua existência.
+- Conferir o histórico de commits e a participação real dos integrantes.
+
+**Entrega:** este README é o relatório integrado; os diagramas, dicionários, script SQL, guia de execução e apresentação permanecem como arquivos separados e vinculados acima.
