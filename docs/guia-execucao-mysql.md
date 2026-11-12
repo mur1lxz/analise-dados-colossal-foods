@@ -2,53 +2,46 @@
 
 ## Requisitos
 
-- MySQL Server 8.0.16 ou superior.
-- MySQL Workbench ou outro cliente que aceite scripts com `DELIMITER`.
-- Usuário do MySQL com permissão para criar banco de dados, tabelas e triggers.
+- MySQL Server 8.0.16 ou superior (CHECK constraints efetivas) e MySQL Workbench.
+- Usuário com permissão para criar banco, tabelas e triggers.
 
-## Executar no MySQL Workbench
+## Executar do zero
 
-1. Abra o MySQL Workbench e conecte-se ao servidor local.
-2. Abra o arquivo `entrega-2/script.sql` em uma nova aba SQL.
-3. Confira a versão do servidor com `SELECT VERSION();`.
-4. Execute o script completo pelo botão de execução (ícone de raio).
-5. Atualize a lista de schemas e confirme que o banco `colossal_foods` foi criado.
-6. Abra o schema e confira as 20 tabelas.
-7. Execute as consultas gerenciais G01–G08 e as consultas de auditoria A01–A12, conforme a identificação no próprio script.
+1. Abra `docs/script.sql` no MySQL Workbench.
+2. Se o banco já existir de uma execução anterior, rode antes `DROP DATABASE IF EXISTS colossal_foods;` (apaga tudo nesse banco).
+3. Execute o arquivo inteiro (ícone de raio). O script usa `DELIMITER $$` para as triggers.
+4. Atualize os schemas: o banco `colossal_foods` deve ter **20 tabelas** e **11 triggers** (`SHOW TRIGGERS FROM colossal_foods;`).
+5. Confira a carga: `SELECT COUNT(*) FROM PEDIDO;` → **690**; `SELECT COUNT(*) FROM ITEM_PEDIDO;` → **1497**.
 
-O script cria o banco, as 20 tabelas, 11 triggers, insere dados fictícios e contém consultas gerenciais e de auditoria.
+O `UPDATE` da seção 5 usa faixa de chave primária (`id_compra BETWEEN 1 AND 24`), compatível com o *safe update mode* do Workbench.
 
-## Reexecutar do zero
+## Resultados esperados
 
-Para recriar a demonstração, execute antes:
+| Consulta | O que deve aparecer |
+|---|---|
+| G01 | 14 dias com tempo médio até pronto (≈ 18–24 min) e em rota |
+| G02 | Bacon Burger e Batata Frita com menor preço praticado < maior (reajuste em 02/11); Colossal Burger com preço atual 31,90 e praticado 29,90 |
+| G03 | Custo por ingrediente em 2026-10 e 2026-11 |
+| G04 | **2 linhas**: Refrigerante lata e Chocolate em pó abaixo do mínimo |
+| G05 | Cancelamentos por dia (18 no total) |
+| G06 | Conferência por forma; duas linhas com situação DIVERGENCIA |
+| G07 / G08 | Compras por fornecedor; entregas por área (Bairro Exemplo 03, inativo, com 0) |
+| G09–G11 | Ticket médio, faturamento semanal por forma, mix de produtos (Milk-shake Morango com 0 vendas) |
+| G12 | % de deliveries em até 45 min por dia — alto nos dias úteis, baixo nos fins de semana |
+| G13 | Pedidos e tempo de delivery por hora, semana × fim de semana |
+| G14 | 150 clientes; 20 sem pedido finalizado |
+| G15 | CMV teórico por produto |
+| A01–A07, A09–A13 | **0 linhas** (regras respeitadas) |
+| A08 | **2 linhas, de propósito**: fechamento 4 (falta de R$ 5,00 em dinheiro) e fechamento 12 (sobra de R$ 2,00) |
 
-```sql
-DROP DATABASE IF EXISTS colossal_foods;
-```
+## Testes das triggers (T01–T10)
 
-**Atenção:** esse comando apaga o banco `colossal_foods` e todos os dados que estiverem nele. Não o execute se houver dados que deseja preservar. Depois, execute novamente o arquivo completo `entrega-2/script.sql`.
+No fim do script há dez comandos comentados. Descomente e execute **um por vez**: cada um deve ser recusado com a mensagem indicada (ex.: T01 → `RN05: produto indisponivel nao pode entrar em novo pedido`). Depois do T04/T05, rode a linha de limpeza indicada. Registre os resultados no README (seção 3).
 
-## Resultados esperados das consultas gerenciais
+## Regerar a massa, os diagramas e o dicionário
 
-- **G01:** apresenta indicadores de tempo de preparo e deslocamento dos deliveries concluídos.
-- **G02:** compara preços atuais e preços registrados nos itens dos pedidos.
-- **G03:** permite analisar custos de aquisição dos ingredientes.
-- **G04:** lista ingredientes abaixo do estoque mínimo demonstrativo, quando houver.
-- **G05:** apresenta os pedidos cancelados por dia.
-- **G06:** compara os pagamentos por forma com os valores informados no fechamento de caixa.
-- **G07:** apresenta compras por fornecedor e ingrediente.
-- **G08:** apresenta entregas e taxas por área.
+- Massa: `python3 docs/gerador-massa/gerar_massa.py > massa.sql` (substitui a seção 3 do script).
+- Diagramas: `python3 docs/diagramas/gerar_diagramas.py` (requer Graphviz).
+- Dicionário: `python3 docs/gerador-dicionario/gerar_dicionario.py`.
 
-A quantidade de linhas retornadas depende da massa de dados e dos parâmetros demonstrativos do script.
-
-## Validação registrada pelo grupo
-
-O grupo executou o script no MySQL Workbench e executou as consultas gerenciais G01–G08. Após corrigir o valor contado no fechamento de caixa para R$ 453,00, as consultas de auditoria A01–A12 foram executadas e retornaram zero registros na massa de demonstração.
-
-Esse resultado indica que as verificações implementadas nessas consultas não encontraram as inconsistências que procuram nos dados atuais. Não significa prova de ausência de qualquer erro possível no sistema. A existência das 11 triggers foi conferida, mas cada trigger ainda precisaria de cenários próprios de teste para comprovar seu comportamento.
-
-## Observações importantes
-
-- Todos os registros da massa são fictícios; não representam clientes, funcionários, fornecedores ou transações reais.
-- Bairros de exemplo, taxas de entrega e estoques mínimos são parâmetros ilustrativos e devem ser confirmados em campo antes de serem apresentados como dados reais.
-- O controle de estoque desta versão é baseado em movimentações registradas; não se deve afirmar que há baixa automática por venda se isso não foi implementado.
+Todos os dados são fictícios; taxas, bairros, estoques mínimos e metas são ilustrativos.
