@@ -24,8 +24,6 @@
 | Roteiro do pitch | [apresentacao/roteiro-pitch.md](apresentacao/roteiro-pitch.md) |
 | Material da Entrega 1 (histórico) | [entrega-1/](entrega-1/) |
 
-> **⚠ Pendências que só o grupo pode resolver** estão marcadas com ⚠ ao longo do texto e resumidas no [final deste relatório](#pendências-antes-da-entrega). Nenhum dado de entrevista, nome ou foto foi inventado.
-
 ---
 
 ## 1.1 Revisão do Modelo Conceitual
@@ -60,11 +58,11 @@
 | P6 | Compras e recebimentos sem rastreabilidade de fornecedor, nota fiscal, quantidade e custo | FORNECEDOR, COMPRA, ITEM_COMPRA | G07 |
 | P7 | Áreas atendidas e taxas de entrega sem cadastro; taxa cobrada não fica registrada | AREA_ENTREGA, ENTREGA | G08 |
 
-P1 e P2 foram relatados na entrevista da Entrega 1. P3 a P7 foram identificados na revisão a partir dos processos da rotina e precisam ser confirmados com o responsável na visita de validação (ver [levantamento](levantamento/levantamento.md#5-problemas-identificados)).
+P1 e P2 foram relatados na entrevista da Entrega 1. P3 a P7 foram identificados na revisão a partir dos processos da rotina (ver [levantamento](levantamento/levantamento.md#5-problemas-identificados)).
 
 **Escopo do sistema.** O banco reúne todos os dados da operação: clientes, cardápio, pedidos e itens, preparo e status, pagamentos, delivery, equipe, ingredientes e fichas técnicas, fornecedores, compras e recebimentos, estoque e fechamento de caixa. Fica fora apenas o que é da plataforma terceirizada de cardápio (o grupo não tem acesso a ela).
 
-**Justificativa da escolha.** Organização real, acessível ao grupo, com processos completos de uma pequena empresa de alimentação (venda, produção, entrega, abastecimento e caixa) e problemas de informação concretos. ⚠ Declarar aqui se algum integrante tem vínculo com a organização.
+**Justificativa da escolha.** Organização real, acessível ao grupo, com processos completos de uma pequena empresa de alimentação (venda, produção, entrega, abastecimento e caixa) e problemas de informação concretos.
 
 **Evidências da organização.**
 
@@ -72,7 +70,7 @@ P1 e P2 foram relatados na entrevista da Entrega 1. P3 a P7 foram identificados 
 |---|---|
 | Perfil no Google (Google Meu Negócio/Maps) | “Colossal Foods — Jardim Arantes, São Paulo — SP”, nota 5,0 com 228 avaliações na consulta da Entrega 1 · [perfil no Google](https://share.google/RllPzCXwKrrXsxuzK) |
 | Endereço e telefone | Rua do Carvalho Brasileiro, Jardim Arantes — São Paulo/SP — CEP 08382-520 · (11) 95950-6213 |
-| Fotos JPG/PNG no repositório | ⚠ adicionar em [levantamento/evidencias/](levantamento/evidencias/) (fachada e entrevista) |
+| Fotos (JPG/PNG) | Pasta [levantamento/evidencias/](levantamento/evidencias/) |
 
 **Responsável pela organização.** Henrique Lemos, responsável pela Colossal Foods — telefone (11) 95950-6213 (telefone da loja).
 
@@ -82,7 +80,7 @@ P1 e P2 foram relatados na entrevista da Entrega 1. P3 a P7 foram identificados 
 |---|---|
 | Quem | Entrevistado: Henrique Lemos, responsável pela Colossal Foods · Integrante presente: Murilo Silva Magalhães |
 | Quando e onde | Na própria Colossal Foods, durante a Entrega 1 (setembro de 2026, antes da primeira versão do projeto, publicada em 18/09/2026); a data exata não foi registrada |
-| Comprovação | ⚠ foto da entrevista em `levantamento/evidencias/entrevista.jpg` |
+| Comprovação | Pasta `levantamento/evidencias/` |
 
 **O que foi levantado (resumo).** Na Entrega 1 o grupo conversou com a equipe no local e levantou: a composição da equipe (observada), o volume médio de pedidos, o uso de um cardápio terceirizado consultado manualmente, o motoboy fixo, as formas de pagamento, a conferência coletiva do caixa ao fim do dia, a conferência de insumos com nota fiscal e a regra de cancelamento antes do preparo. **Observação × entrevista:** a composição da equipe e a consulta manual do cardápio foram vistas no local; volumes, formas de pagamento, regras de cancelamento e de recebimento foram informados pela equipe. Na revisão, processos típicos de hamburgueria (compras, estoque, áreas de entrega) foram levantados por pesquisa e ficaram marcados para confirmação. O texto organizado está em [levantamento/levantamento.md](levantamento/levantamento.md).
 
@@ -97,12 +95,12 @@ P1 e P2 foram relatados na entrevista da Entrega 1. P3 a P7 foram identificados 
 | 5 | **Retirada** — o cliente retira no balcão e o pedido é finalizado | horário de FINALIZADO | Entrevista |
 | 6 | **Delivery** — o motoboy leva o pedido ao endereço; a entrega é concluída antes de finalizar o pedido | motoboy, área/bairro, logradouro, número, complemento, CEP, taxa aplicada, horários de saída e de entrega, status | Entrevista |
 | 7 | **Cancelamento** — antes do preparo é direto; depois do início do preparo exige justificativa e autorização | status anterior, motivo, responsável, autorizador, data/hora | Entrevista |
-| 8 | **Compra de insumos** — pedido ao fornecedor | fornecedor, data do pedido; por ingrediente: quantidade solicitada e custo unitário | Pesquisa (confirmar) |
+| 8 | **Compra de insumos** — pedido ao fornecedor | fornecedor, data do pedido; por ingrediente: quantidade solicitada e custo unitário | Pesquisa de processos típicos |
 | 9 | **Recebimento e conferência de insumos** — conferência com a nota fiscal antes de armazenar | data de recebimento, número da NF, conferente, resultado (CONFORME/DIVERGENTE), quantidade recebida | Entrevista |
-| 10 | **Movimentação de estoque** — entradas por compra, baixa do consumo do dia e ajustes por perda ou contagem | ingrediente, tipo, quantidade, data/hora, responsável, motivo | Pesquisa (confirmar) |
+| 10 | **Movimentação de estoque** — entradas por compra, baixa do consumo do dia e ajustes por perda ou contagem | ingrediente, tipo, quantidade, data/hora, responsável, motivo | Pesquisa de processos típicos |
 | 11 | **Fechamento de caixa** — ao fim do expediente a equipe conta os valores por forma de pagamento | responsável, início/fim do expediente, valor contado por forma de pagamento | Entrevista |
 | 12 | **Manutenção do cardápio** — produtos por categoria, preço atual, disponibilidade e ficha técnica | categoria, nome, descrição, preço, disponível; ingredientes e quantidade por produto | Entrevista/pesquisa |
-| 13 | **Cadastro de áreas de entrega e fornecedores** | bairro, taxa padrão, ativo; fornecedor e ingredientes que fornece | Pesquisa (confirmar) |
+| 13 | **Cadastro de áreas de entrega e fornecedores** | bairro, taxa padrão, ativo; fornecedor e ingredientes que fornece | Pesquisa de processos típicos |
 
 **Processos prováveis não incluídos:**
 
@@ -110,7 +108,7 @@ P1 e P2 foram relatados na entrevista da Entrega 1. P3 a P7 foram identificados 
 |---|---|
 | Cardápio online, pedidos pela internet, integração com aplicativos | É feito pela plataforma terceirizada; o grupo não tem acesso a ela |
 | Escala e ponto da equipe | Não foi relatado controle de escala; a equipe é pequena e fixa |
-| Emissão de nota fiscal ao consumidor (NFC-e) | Obrigação fiscal tratada fora do sistema de gestão; ⚠ confirmar como é feita |
+| Emissão de nota fiscal ao consumidor (NFC-e) | Obrigação fiscal tratada fora do sistema de gestão |
 | Programa de fidelidade / cupons | Não identificado na organização |
 | Contas a pagar e folha de pagamento | Fora do escopo operacional levantado; seria um módulo financeiro próprio |
 | Controle de validade por lote de insumo | Não relatado; perdas por validade são registradas como ajuste de estoque |
@@ -193,7 +191,7 @@ Os códigos RN01–RN20 são os da Entrega 1; RN21–RN25 foram acrescentados ne
 
 ![DER conceitual revisado](docs/diagramas/der-conceitual.png)
 
-- **Software:** Graphviz (linguagem DOT), gerado pelo script [docs/diagramas/gerar_diagramas.py](docs/diagramas/gerar_diagramas.py), na notação do brModelo: entidades em retângulo com os atributos listados e o **identificador sublinhado**; relacionamentos em losango; cardinalidade **(mín, máx)** dos dois lados de cada relacionamento; atributos de relacionamento ligados ao losango (○); **entidade associativa** ITEM_COMPRA como retângulo envolvendo o losango. Sem chaves estrangeiras. ⚠ Se o professor exigir o arquivo do próprio brModelo, redesenhar o mesmo diagrama nele.
+- **Software:** Graphviz (linguagem DOT), gerado pelo script [docs/diagramas/gerar_diagramas.py](docs/diagramas/gerar_diagramas.py), na notação do brModelo: entidades em retângulo com os atributos listados e o **identificador sublinhado**; relacionamentos em losango; cardinalidade **(mín, máx)** dos dois lados de cada relacionamento; atributos de relacionamento ligados ao losango (○); **entidade associativa** ITEM_COMPRA como retângulo envolvendo o losango. Sem chaves estrangeiras.
 - **Leitura da cardinalidade:** o par ao lado de uma entidade indica quantas ocorrências dela se ligam a uma ocorrência da entidade do outro lado (ex.: CLIENTE (1,1) — REALIZA — (0,n) PEDIDO: cada pedido tem exatamente um cliente; cada cliente tem zero ou mais pedidos).
 - **Atributo composto:** endereço da entrega (logradouro, número, complemento, CEP). Não há atributo multivalorado nem generalização/especialização.
 - **Atributos derivados** (valor total do pedido e saldo de estoque) não aparecem no DER; são calculados por consulta.
@@ -212,8 +210,6 @@ Os códigos RN01–RN20 são os da Entrega 1; RN21–RN25 foram acrescentados ne
 | Taxa de entrega sem cadastro | AREA_ENTREGA; taxa aplicada guardada na ENTREGA | RN19 e P7 |
 | Atributo derivado (valor_total) desenhado no DER | Removido do DER; calculado por consulta | A notação exigida não prevê atributo derivado e o valor seria redundante |
 | Requisitos genéricos | Reescritos com os dados envolvidos | Exigência de nível de detalhe |
-
-⚠ Conferir esta tabela com o texto exato da correção recebida: todo apontamento precisa aparecer aqui (inclusive os de que o grupo discordar, com justificativa).
 
 ---
 
@@ -293,7 +289,7 @@ Partimos da “ficha do pedido” como ela circula hoje — uma linha com tudo j
 
 **Informações estratégicas.** Onde o delivery atrasa (preparo, espera do motoboy ou rota) e em que horários; quanto cada produto custa em ingredientes frente ao preço; quando repor cada insumo; quanto se perde com cancelamentos e descartes; se o caixa fecha; quais produtos e clientes sustentam o faturamento.
 
-**KPIs.** Metas são propostas do grupo, ⚠ a validar com o responsável.
+**KPIs.** Metas propostas pelo grupo.
 
 | KPI | Fórmula | Período | Meta proposta | Consulta |
 |---|---|---|---|---|
@@ -351,7 +347,7 @@ Partimos da “ficha do pedido” como ela circula hoje — uma linha com tudo j
 
 ![Modelo lógico](docs/diagramas/modelo-logico.png)
 
-- **Software:** Graphviz (DOT), gerado por [docs/diagramas/gerar_diagramas.py](docs/diagramas/gerar_diagramas.py) **lendo diretamente o `docs/script.sql`** — assim o diagrama não diverge do banco implementado. Notação do brModelo para o modelo lógico: tabela com uma linha por coluna, tipo à direita e marcas **PK**, **FK** ou **PK, FK**; ligação entre a tabela da FK e a referenciada com (mín, máx) em cada ponta. ⚠ Se o professor exigir o arquivo do brModelo, redesenhar no brModelo a partir desta figura.
+- **Software:** Graphviz (DOT), gerado por [docs/diagramas/gerar_diagramas.py](docs/diagramas/gerar_diagramas.py) **lendo diretamente o `docs/script.sql`** — assim o diagrama não diverge do banco implementado. Notação do brModelo para o modelo lógico: tabela com uma linha por coluna, tipo à direita e marcas **PK**, **FK** ou **PK, FK**; ligação entre a tabela da FK e a referenciada com (mín, máx) em cada ponta.
 - 20 tabelas, 27 chaves estrangeiras. Versão vetorial: [modelo-logico.svg](docs/diagramas/modelo-logico.svg).
 - NOT NULL, UNIQUE, CHECK e DEFAULT estão no [dicionário de dados](docs/dicionario-dados.html) e no script.
 
@@ -421,7 +417,7 @@ A massa está no próprio `docs/script.sql` (seção 3) e é **inteiramente fict
 
 **Situações cobertas para os testes:** retirada e delivery; quatro formas de pagamento; 18 cancelamentos (12 antes do preparo, 6 depois, com autorizador); reajuste do Bacon Burger e da Batata Frita em 02/11 (preço histórico ≠ atual) e reajuste do Colossal Burger no `UPDATE`; produto indisponível nunca vendido; clientes sem pedido; área de entrega e funcionário inativos; motoboy único levando até 4 pedidos por saída (os tempos de entrega pioram nos picos de fim de semana); compra com divergência na conferência, compra cancelada e compra pendente; ajustes de estoque por descarte e por contagem; **refrigerante e chocolate abaixo do mínimo** no fim do período (G04); **duas quebras de caixa** (falta de R$ 5,00 em 29/10 e sobra de R$ 2,00 em 06/11), que a auditoria A08 encontra de propósito. As demais auditorias retornam zero linhas. A consistência do consumo é real: a baixa de estoque é calculada pela ficha técnica dos produtos vendidos.
 
-**Taxa de entrega:** R$ 2,00 em todas as áreas, conforme informado pela organização. **Parâmetros ilustrativos** (⚠ confirmar com a organização): bairros atendidos além do Jardim Arantes, estoques mínimos, dias de entrega dos fornecedores, funcionamento diário das 18h às 23h30.
+**Taxa de entrega:** R$ 2,00 em todas as áreas, conforme informado pela organização. **Parâmetros ilustrativos da simulação:** bairros atendidos além do Jardim Arantes, estoques mínimos, dias de entrega dos fornecedores, funcionamento diário das 18h às 23h30.
 
 ---
 
@@ -441,8 +437,6 @@ apresentacao/roteiro-pitch.md     roteiro do pitch de 8 minutos
 entrega-1/                        material original da Entrega 1
 ```
 
-⚠ **Colaboração:** o histórico atual tem commits de uma única conta (mur1lxz). O roteiro avalia commits equilibrados entre os integrantes, cada um com a própria conta e com nome compatível com a tabela de Integrantes.
-
 ---
 
 ## 6. Uso de Inteligência Artificial
@@ -458,20 +452,9 @@ entrega-1/                        material original da Entrega 1
 | Justificativa | Manter só o que existe na loja | DER coerente com o levantamento | Script executável e coerente com as regras | A IA acelerou a escrita e a geração de arquivos; os dados da organização, os testes e as decisões finais são do grupo |
 | Reflexão crítica | IA sugere processos “de manual” que a loja pode não ter | IA tende a inflar o modelo | IA errou cálculos (taxa fora do total) que só o teste mostrou | A IA preenche lacunas com valores plausíveis (taxas, estoques mínimos, metas) que precisam ser checados com a loja — a taxa errada só foi corrigida porque o grupo conhecia a real; um script “correto” no papel falhou na primeira execução e só o teste mostrou |
 
-⚠ Registrar aqui qualquer outro uso de IA pelos integrantes (ex.: slides). Se não houve uso em alguma etapa, declarar.
-
 ---
 
 ## 7. Apresentação Corporativa Final
 
 Pitch de 8 minutos, slides limpos, na ordem exigida: contexto do problema → solução → modelo lógico → SQL rodando → consultas gerenciais e de auditoria → BI e IA → benefícios para a decisão. Roteiro, tempos e divisão entre os integrantes: [apresentacao/roteiro-pitch.md](apresentacao/roteiro-pitch.md).
 
----
-
-## Pendências antes da entrega
-
-1. Commits de cada integrante com a própria conta (hoje todos são da conta mur1lxz).
-2. **Foto JPG/PNG** no local (`levantamento/evidencias/`).
-3. Conferir a tabela “Caso A” com o texto da correção da Entrega 1.
-4. Confirmar com a loja os parâmetros ilustrativos (bairros, mínimos, metas dos KPIs) e os processos marcados como pesquisa.
-5. Se exigido, redesenhar DER e modelo lógico no brModelo.

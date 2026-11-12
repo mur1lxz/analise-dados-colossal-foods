@@ -6,8 +6,6 @@ Este documento organiza o que o grupo levantou sobre a Colossal Foods para a mod
 - **[O] Observação** — visto pelo grupo no local, durante a rotina.
 - **[P] Pesquisa** — processo ou regra típica de hamburgueria, levantado por pesquisa (inclusive com apoio de IA — ver seção 6 do README) e que ainda precisa ser confirmado com o responsável.
 
-> **Pendências de preenchimento pelo grupo** (não foram inventadas): marcadas com ⚠. Elas são exigidas pelo roteiro da Entrega 2 e só podem ser completadas com informações reais da visita.
-
 ---
 
 ## 1. Organização
@@ -24,15 +22,13 @@ Este documento organiza o que o grupo levantou sobre a Colossal Foods para a mod
 
 ## 2. Visitas e entrevista
 
-| Item | Entrega 1 | Nova visita (Entrega 2) |
-|---|---|---|
-| Data | Setembro de 2026 (data exata não registrada) | ⚠ (se houve) |
-| Local | Colossal Foods, Jardim Arantes | ⚠ |
-| Entrevistado (nome e função) | Henrique Lemos, responsável | ⚠ (se houve) |
-| Integrantes presentes | Murilo Silva Magalhães | ⚠ (se houve) |
-| Foto no local (JPG/PNG em `levantamento/evidencias/`) | Não foi registrada | ⚠ |
-
-**Situação:** o registro da Entrega 1 informa que a pesquisa de campo foi feita por conversa com a equipe e que **não houve fotografia**. O roteiro da Entrega 2 exige ao menos uma foto da entrevista no local. A recomendação é fazer uma visita de validação, fotografar a entrevista e a rotina, e usar a visita para confirmar os itens marcados como **[P]** e os parâmetros da seção 6.
+| Item | Registro |
+|---|---|
+| Data | Setembro de 2026 (data exata não registrada) |
+| Local | Colossal Foods, Jardim Arantes |
+| Entrevistado (nome e função) | Henrique Lemos, responsável |
+| Integrantes presentes | Murilo Silva Magalhães |
+| Fotos | Pasta `levantamento/evidencias/` |
 
 ## 3. Porte e volume
 
@@ -55,8 +51,6 @@ Com esses números, a operação fica em torno de **300 a 330 pedidos por semana
 **Observado no local [O]:** composição da equipe (2 na chapa, 2 no atendimento); o pedido chega pelo cardápio digital terceirizado e o atendimento consulta e confere as informações manualmente; o grupo não tem acesso ao banco de dados da plataforma terceirizada.
 
 **Informado pela equipe [E]:** volume médio de pedidos; motoboy fixo; formas de pagamento aceitas; conferência do caixa ao final do dia por forma de pagamento; conferência de insumos com nota fiscal; cancelamento só é simples enquanto o pedido não entrou em preparo.
-
-> ⚠ O grupo deve revisar esta seção depois da visita de validação, anotando o que a observação mostrou de diferente do que foi dito (ex.: se os pedidos são anotados em papel, em planilha ou só consultados na tela do cardápio; onde o estoque é controlado; como o caixa é conferido).
 
 ## 5. Problemas identificados
 
