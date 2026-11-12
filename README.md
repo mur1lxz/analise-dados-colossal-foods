@@ -397,7 +397,7 @@ Arquivo: **[docs/script.sql](docs/script.sql)** — MySQL 8.0.16 ou superior. Or
 
 Passo a passo e resultados esperados: [docs/guia-execucao-mysql.md](docs/guia-execucao-mysql.md).
 
-**Status de teste:** a versão anterior do script foi executada pelo grupo no MySQL Workbench sem erros. Nesta versão, as tabelas e triggers não mudaram; a massa foi regerada e as consultas G09–G15, A13 e T01–T10 foram acrescentadas. A massa nova foi validada fora do MySQL (carga com as mesmas PKs, FKs e CHECKs em um banco de teste SQLite e reprodução das regras das triggers no gerador). ⚠ **Rodar o script do zero no MySQL antes da entrega** e registrar o resultado aqui.
+**Status de teste:** o script completo foi executado do zero pelo grupo em 12/11/2026 e terminou sem erros (o script recria o banco a cada execução).
 
 ---
 
@@ -474,5 +474,4 @@ Pitch de 8 minutos, slides limpos, na ordem exigida: contexto do problema → so
 2. Nome e função do responsável, data da entrevista, integrantes presentes e **foto JPG/PNG** no local (`levantamento/evidencias/`); link direto do perfil no Google.
 3. Conferir a tabela “Caso A” com o texto da correção da Entrega 1.
 4. Confirmar com a loja os parâmetros ilustrativos (bairros, mínimos, metas dos KPIs) e os processos marcados como pesquisa.
-5. Executar `docs/script.sql` do zero no MySQL e registrar o resultado na seção 3.
-6. Se exigido, redesenhar DER e modelo lógico no brModelo.
+5. Se exigido, redesenhar DER e modelo lógico no brModelo.
