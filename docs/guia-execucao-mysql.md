@@ -44,4 +44,4 @@ No fim do script há dez comandos comentados. Descomente e execute **um por vez*
 - Diagramas: `python3 docs/diagramas/gerar_diagramas.py` (requer Graphviz).
 - Dicionário: `python3 docs/gerador-dicionario/gerar_dicionario.py`.
 
-Todos os dados são fictícios; taxas, bairros, estoques mínimos e metas são ilustrativos.
+Todos os dados são fictícios; a taxa de entrega (R$ 2,00) é a informada pela loja; bairros, estoques mínimos e metas são ilustrativos.

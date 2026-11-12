@@ -29,4 +29,4 @@ Total: 8:00. Ensaiar com cronômetro; deixar as consultas da demo abertas em aba
 ## Lembretes
 
 - Traje corporativo (sem boné, bermuda, chinelo, camisa de time ou roupa esportiva).
-- Não apresentar dados fictícios (taxas, mínimos, metas) como dados reais da loja.
+- Não apresentar dados fictícios (bairros, mínimos, metas) como dados reais da loja.

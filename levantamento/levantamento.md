@@ -43,6 +43,7 @@ Este documento organiza o que o grupo levantou sobre a Colossal Foods para a mod
 | Motoboy fixo | 1 | [E] |
 | Pedidos por dia em dias de semana | 30 a 50 (estimativa) | [E] |
 | Pedidos por dia no fim de semana | 60 a 90 (estimativa) | [E] |
+| Taxa de entrega | R$ 2,00 | [E] |
 | Formas de pagamento | PIX, dinheiro, cartão de débito, cartão de crédito | [E] |
 | Fechamento de caixa | Conferência coletiva ao fim do expediente | [E] |
 | Recebimento de insumos | Conferência com a nota fiscal antes de armazenar | [E] |
@@ -73,7 +74,7 @@ Com esses números, a operação fica em torno de **300 a 330 pedidos por semana
 
 Os valores abaixo foram usados na massa de dados como **exemplos plausíveis**, não como dados reais:
 
-- bairros atendidos além do Jardim Arantes e as taxas de cada área (R$ 5,00, R$ 6,00 e R$ 7,00 na massa);
+- bairros atendidos além do Jardim Arantes (a taxa de entrega é de R$ 2,00, informada pela organização, e é a mesma em todas as áreas da massa);
 - estoque mínimo de cada ingrediente e as embalagens de compra;
 - dias de entrega de cada fornecedor;
 - dias e horário de funcionamento (a massa considera todos os dias, das 18h às 23h30);

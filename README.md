@@ -7,7 +7,7 @@
 | Nome completo do aluno | RGM | Usuário do GitHub |
 |---|---|---|
 | Murilo Silva Magalhães | 47820471 | [mur1lxz](https://github.com/mur1lxz) |
-| Kauê de Lima Pereira | 48477940 | ⚠ informar |
+| Kauê de Lima Pereira | 48477940 | [kauedelimapereira](https://github.com/kauedelimapereira) |
 
 ## Artefatos da entrega
 
@@ -44,6 +44,7 @@
 | Pedidos por dia, sábado e domingo | 60 a 90 (média ≈ 75) |
 | Volume semanal estimado | ≈ 300 a 330 pedidos |
 | Modalidades | retirada no balcão e delivery |
+| Taxa de entrega | R$ 2,00 por entrega (informada pela organização) |
 | Formas de pagamento | PIX, dinheiro, cartão de débito e cartão de crédito |
 | Cardápio | digital, de empresa terceirizada (mensalidade); sem acesso ao banco da plataforma |
 
@@ -420,7 +421,7 @@ A massa está no próprio `docs/script.sql` (seção 3) e é **inteiramente fict
 
 **Situações cobertas para os testes:** retirada e delivery; quatro formas de pagamento; 18 cancelamentos (12 antes do preparo, 6 depois, com autorizador); reajuste do Bacon Burger e da Batata Frita em 02/11 (preço histórico ≠ atual) e reajuste do Colossal Burger no `UPDATE`; produto indisponível nunca vendido; clientes sem pedido; área de entrega e funcionário inativos; motoboy único levando até 4 pedidos por saída (os tempos de entrega pioram nos picos de fim de semana); compra com divergência na conferência, compra cancelada e compra pendente; ajustes de estoque por descarte e por contagem; **refrigerante e chocolate abaixo do mínimo** no fim do período (G04); **duas quebras de caixa** (falta de R$ 5,00 em 29/10 e sobra de R$ 2,00 em 06/11), que a auditoria A08 encontra de propósito. As demais auditorias retornam zero linhas. A consistência do consumo é real: a baixa de estoque é calculada pela ficha técnica dos produtos vendidos.
 
-**Parâmetros ilustrativos** (⚠ confirmar com a organização): bairros e taxas além do Jardim Arantes, estoques mínimos, dias de entrega dos fornecedores, funcionamento diário das 18h às 23h30.
+**Taxa de entrega:** R$ 2,00 em todas as áreas, conforme informado pela organização. **Parâmetros ilustrativos** (⚠ confirmar com a organização): bairros atendidos além do Jardim Arantes, estoques mínimos, dias de entrega dos fornecedores, funcionamento diário das 18h às 23h30.
 
 ---
 
@@ -469,9 +470,9 @@ Pitch de 8 minutos, slides limpos, na ordem exigida: contexto do problema → so
 
 ## Pendências antes da entrega
 
-1. Usuário do GitHub do Kauê na tabela de Integrantes; commits de cada integrante com a própria conta.
+1. Commits de cada integrante com a própria conta (hoje todos são da conta mur1lxz).
 2. Nome e função do responsável, data da entrevista, integrantes presentes e **foto JPG/PNG** no local (`levantamento/evidencias/`); link direto do perfil no Google.
 3. Conferir a tabela “Caso A” com o texto da correção da Entrega 1.
-4. Confirmar com a loja os parâmetros ilustrativos (bairros, taxas, mínimos, metas dos KPIs) e os processos marcados como pesquisa.
+4. Confirmar com a loja os parâmetros ilustrativos (bairros, mínimos, metas dos KPIs) e os processos marcados como pesquisa.
 5. Executar `docs/script.sql` do zero no MySQL e registrar o resultado na seção 3.
 6. Se exigido, redesenhar DER e modelo lógico no brModelo.

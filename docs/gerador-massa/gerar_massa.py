@@ -106,10 +106,10 @@ FUNCIONARIOS = [
     (5, 'Funcionario Ficticio 05', 'ATENDIMENTO', '(11) 90000-3005', 0),
 ]
 AREAS = [  # id, bairro, taxa, ativo, deslocamento (min, max) em minutos
-    (1, 'Jardim Arantes', 5.00, 1, (5, 10)),
-    (2, 'Bairro Exemplo 01', 6.00, 1, (8, 14)),
-    (3, 'Bairro Exemplo 02', 7.00, 1, (10, 17)),
-    (4, 'Bairro Exemplo 03', 9.00, 0, (20, 30)),
+    (1, 'Jardim Arantes', 2.00, 1, (5, 10)),
+    (2, 'Bairro Exemplo 01', 2.00, 1, (8, 14)),
+    (3, 'Bairro Exemplo 02', 2.00, 1, (10, 17)),
+    (4, 'Bairro Exemplo 03', 2.00, 0, (20, 30)),
 ]
 AREA = {a[0]: a for a in AREAS}
 
