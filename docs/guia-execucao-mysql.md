@@ -8,7 +8,7 @@
 ## Executar do zero
 
 1. Abra `docs/script.sql` no MySQL Workbench.
-2. Se o banco já existir de uma execução anterior, rode antes `DROP DATABASE IF EXISTS colossal_foods;` (apaga tudo nesse banco).
+2. O script começa com `DROP DATABASE IF EXISTS colossal_foods;`, então pode ser executado quantas vezes for preciso: sempre recria o banco do zero (e apaga o que houver nele).
 3. Execute o arquivo inteiro (ícone de raio). O script usa `DELIMITER $$` para as triggers.
 4. Atualize os schemas: o banco `colossal_foods` deve ter **20 tabelas** e **11 triggers** (`SHOW TRIGGERS FROM colossal_foods;`).
 5. Confira a carga: `SELECT COUNT(*) FROM PEDIDO;` → **690**; `SELECT COUNT(*) FROM ITEM_PEDIDO;` → **1497**.

@@ -359,7 +359,7 @@ Partimos da “ficha do pedido” como ela circula hoje — uma linha com tudo j
 
 ## 3. Script SQL Completo
 
-Arquivo: **[docs/script.sql](docs/script.sql)** — MySQL 8.0.16 ou superior. Ordem: `CREATE DATABASE` → `CREATE TABLE` com PK, FK, NOT NULL, UNIQUE, CHECK e DEFAULT → 11 triggers → `INSERT INTO` (massa) → `SELECT` com `JOIN` → `UPDATE` → `DELETE` → consultas gerenciais **G01–G15** → consultas de auditoria **A01–A13** → testes das triggers **T01–T10** (comentados, para executar um a um na demonstração).
+Arquivo: **[docs/script.sql](docs/script.sql)** — MySQL 8.0.16 ou superior. Ordem: `DROP/CREATE DATABASE` (recria o banco a cada execução) → `CREATE TABLE` com PK, FK, NOT NULL, UNIQUE, CHECK e DEFAULT → 11 triggers → `INSERT INTO` (massa) → `SELECT` com `JOIN` → `UPDATE` → `DELETE` → consultas gerenciais **G01–G15** → consultas de auditoria **A01–A13** → testes das triggers **T01–T10** (comentados, para executar um a um na demonstração).
 
 | Gerenciais | Pergunta |
 |---|---|

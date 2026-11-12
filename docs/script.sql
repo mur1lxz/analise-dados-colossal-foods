@@ -7,12 +7,13 @@
 -- Massa de dados integralmente fictícia (gerada por docs/gerador-massa/gerar_massa.py).
 -- Charset: utf8mb4 | Engine: InnoDB
 -- ============================================================================
--- Para executar novamente do zero, rode antes (apaga todos os dados do banco):
--- DROP DATABASE IF EXISTS colossal_foods;
+-- O script recria o banco do zero a cada execução (DROP DATABASE abaixo).
+-- ATENÇÃO: apaga todos os dados do banco colossal_foods — use só no banco de demonstração.
 -- ============================================================================
 
 
-CREATE DATABASE IF NOT EXISTS colossal_foods
+DROP DATABASE IF EXISTS colossal_foods;
+CREATE DATABASE colossal_foods
     CHARACTER SET utf8mb4
     COLLATE utf8mb4_0900_ai_ci;
 USE colossal_foods;
@@ -350,6 +351,7 @@ CREATE TABLE IF NOT EXISTS HISTORICO_STATUS_PEDIDO (
 -- 2. TRIGGERS DE INTEGRIDADE (regras que dependem de mais de uma tabela)
 -- ============================================================================
 DELIMITER $$
+DROP TRIGGER IF EXISTS trg_item_pedido_bi$$
 CREATE TRIGGER trg_item_pedido_bi
 BEFORE INSERT ON ITEM_PEDIDO
 FOR EACH ROW
@@ -362,6 +364,7 @@ BEGIN
     END IF;
 END$$
 
+DROP TRIGGER IF EXISTS trg_item_pedido_bu$$
 CREATE TRIGGER trg_item_pedido_bu
 BEFORE UPDATE ON ITEM_PEDIDO
 FOR EACH ROW
@@ -374,6 +377,7 @@ BEGIN
     END IF;
 END$$
 
+DROP TRIGGER IF EXISTS trg_pagamento_bi$$
 CREATE TRIGGER trg_pagamento_bi
 BEFORE INSERT ON PAGAMENTO
 FOR EACH ROW
@@ -392,6 +396,7 @@ BEGIN
     END IF;
 END$$
 
+DROP TRIGGER IF EXISTS trg_pagamento_bu$$
 CREATE TRIGGER trg_pagamento_bu
 BEFORE UPDATE ON PAGAMENTO
 FOR EACH ROW
@@ -407,6 +412,7 @@ BEGIN
     END IF;
 END$$
 
+DROP TRIGGER IF EXISTS trg_entrega_bi$$
 CREATE TRIGGER trg_entrega_bi
 BEFORE INSERT ON ENTREGA
 FOR EACH ROW
@@ -428,6 +434,7 @@ BEGIN
     END IF;
 END$$
 
+DROP TRIGGER IF EXISTS trg_entrega_bu$$
 CREATE TRIGGER trg_entrega_bu
 BEFORE UPDATE ON ENTREGA
 FOR EACH ROW
@@ -439,6 +446,7 @@ BEGIN
     END IF;
 END$$
 
+DROP TRIGGER IF EXISTS trg_pedido_bu$$
 CREATE TRIGGER trg_pedido_bu
 BEFORE UPDATE ON PEDIDO
 FOR EACH ROW
@@ -452,6 +460,7 @@ BEGIN
     END IF;
 END$$
 
+DROP TRIGGER IF EXISTS trg_compra_bi$$
 CREATE TRIGGER trg_compra_bi
 BEFORE INSERT ON COMPRA
 FOR EACH ROW
@@ -464,6 +473,7 @@ BEGIN
     END IF;
 END$$
 
+DROP TRIGGER IF EXISTS trg_compra_bu$$
 CREATE TRIGGER trg_compra_bu
 BEFORE UPDATE ON COMPRA
 FOR EACH ROW
@@ -484,6 +494,7 @@ BEGIN
     END IF;
 END$$
 
+DROP TRIGGER IF EXISTS trg_movimentacao_estoque_bi$$
 CREATE TRIGGER trg_movimentacao_estoque_bi
 BEFORE INSERT ON MOVIMENTACAO_ESTOQUE
 FOR EACH ROW
@@ -509,6 +520,7 @@ BEGIN
     END IF;
 END$$
 
+DROP TRIGGER IF EXISTS trg_historico_status_bi$$
 CREATE TRIGGER trg_historico_status_bi
 BEFORE INSERT ON HISTORICO_STATUS_PEDIDO
 FOR EACH ROW
