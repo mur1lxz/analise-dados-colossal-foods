@@ -18,7 +18,7 @@ Este documento organiza o que o grupo levantou sobre a Colossal Foods para a mod
 | Natureza | Empresa privada, com fins lucrativos, do segmento de alimentação (hamburgueria) |
 | Endereço | Rua do Carvalho Brasileiro, Jardim Arantes — São Paulo/SP — CEP 08382-520 |
 | Telefone da organização | (11) 95950-6213 |
-| Referência pública | Perfil no Google Maps: “Colossal Foods — Jardim Arantes, São Paulo — SP” (nota 5,0 com 228 avaliações na consulta feita durante a Entrega 1) |
+| Referência pública | Perfil no Google Maps: “Colossal Foods — Jardim Arantes, São Paulo — SP” (nota 5,0 com 228 avaliações na consulta feita durante a Entrega 1) — [link do perfil](https://share.google/RllPzCXwKrrXsxuzK) |
 | Responsável que atendeu o grupo | Henrique Lemos, responsável pela Colossal Foods — (11) 95950-6213 |
 | Cardápio | Digital, fornecido por empresa terceirizada mediante mensalidade **[E]** |
 
@@ -26,10 +26,10 @@ Este documento organiza o que o grupo levantou sobre a Colossal Foods para a mod
 
 | Item | Entrega 1 | Nova visita (Entrega 2) |
 |---|---|---|
-| Data | ⚠ | ⚠ (se houve) |
+| Data | Setembro de 2026 (data exata não registrada) | ⚠ (se houve) |
 | Local | Colossal Foods, Jardim Arantes | ⚠ |
 | Entrevistado (nome e função) | Henrique Lemos, responsável | ⚠ (se houve) |
-| Integrantes presentes | ⚠ | ⚠ |
+| Integrantes presentes | Murilo Silva Magalhães | ⚠ (se houve) |
 | Foto no local (JPG/PNG em `levantamento/evidencias/`) | Não foi registrada | ⚠ |
 
 **Situação:** o registro da Entrega 1 informa que a pesquisa de campo foi feita por conversa com a equipe e que **não houve fotografia**. O roteiro da Entrega 2 exige ao menos uma foto da entrevista no local. A recomendação é fazer uma visita de validação, fotografar a entrevista e a rotina, e usar a visita para confirmar os itens marcados como **[P]** e os parâmetros da seção 6.

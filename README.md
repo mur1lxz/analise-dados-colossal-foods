@@ -70,7 +70,7 @@ P1 e P2 foram relatados na entrevista da Entrega 1. P3 a P7 foram identificados 
 
 | Evidência | Situação |
 |---|---|
-| Perfil no Google (Google Meu Negócio/Maps) | “Colossal Foods — Jardim Arantes, São Paulo — SP”, nota 5,0 com 228 avaliações na consulta da Entrega 1 · ⚠ colar o link direto do perfil |
+| Perfil no Google (Google Meu Negócio/Maps) | “Colossal Foods — Jardim Arantes, São Paulo — SP”, nota 5,0 com 228 avaliações na consulta da Entrega 1 · [perfil no Google](https://share.google/RllPzCXwKrrXsxuzK) |
 | Endereço e telefone | Rua do Carvalho Brasileiro, Jardim Arantes — São Paulo/SP — CEP 08382-520 · (11) 95950-6213 |
 | Fotos JPG/PNG no repositório | ⚠ adicionar em [levantamento/evidencias/](levantamento/evidencias/) (fachada e entrevista) |
 
@@ -80,8 +80,8 @@ P1 e P2 foram relatados na entrevista da Entrega 1. P3 a P7 foram identificados 
 
 | Item | Registro |
 |---|---|
-| Quem | Henrique Lemos, responsável pela Colossal Foods; ⚠ integrantes presentes |
-| Quando e onde | ⚠ data; na própria Colossal Foods |
+| Quem | Entrevistado: Henrique Lemos, responsável pela Colossal Foods · Integrante presente: Murilo Silva Magalhães |
+| Quando e onde | Na própria Colossal Foods, durante a Entrega 1 (setembro de 2026, antes da primeira versão do projeto, publicada em 18/09/2026); a data exata não foi registrada |
 | Comprovação | ⚠ foto da entrevista em `levantamento/evidencias/entrevista.jpg` |
 
 **O que foi levantado (resumo).** Na Entrega 1 o grupo conversou com a equipe no local e levantou: a composição da equipe (observada), o volume médio de pedidos, o uso de um cardápio terceirizado consultado manualmente, o motoboy fixo, as formas de pagamento, a conferência coletiva do caixa ao fim do dia, a conferência de insumos com nota fiscal e a regra de cancelamento antes do preparo. **Observação × entrevista:** a composição da equipe e a consulta manual do cardápio foram vistas no local; volumes, formas de pagamento, regras de cancelamento e de recebimento foram informados pela equipe. Na revisão, processos típicos de hamburgueria (compras, estoque, áreas de entrega) foram levantados por pesquisa e ficaram marcados para confirmação. O texto organizado está em [levantamento/levantamento.md](levantamento/levantamento.md).
@@ -471,7 +471,7 @@ Pitch de 8 minutos, slides limpos, na ordem exigida: contexto do problema → so
 ## Pendências antes da entrega
 
 1. Commits de cada integrante com a própria conta (hoje todos são da conta mur1lxz).
-2. Data da entrevista, integrantes presentes e **foto JPG/PNG** no local (`levantamento/evidencias/`); link direto do perfil no Google.
+2. **Foto JPG/PNG** no local (`levantamento/evidencias/`).
 3. Conferir a tabela “Caso A” com o texto da correção da Entrega 1.
 4. Confirmar com a loja os parâmetros ilustrativos (bairros, mínimos, metas dos KPIs) e os processos marcados como pesquisa.
 5. Se exigido, redesenhar DER e modelo lógico no brModelo.
