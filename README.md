@@ -74,13 +74,13 @@ P1 e P2 foram relatados na entrevista da Entrega 1. P3 a P7 foram identificados 
 | Endereço e telefone | Rua do Carvalho Brasileiro, Jardim Arantes — São Paulo/SP — CEP 08382-520 · (11) 95950-6213 |
 | Fotos JPG/PNG no repositório | ⚠ adicionar em [levantamento/evidencias/](levantamento/evidencias/) (fachada e entrevista) |
 
-**Responsável pela organização.** ⚠ Nome e função — telefone (11) 95950-6213 (telefone da loja; informar o contato direto, se diferente).
+**Responsável pela organização.** Henrique Lemos, responsável pela Colossal Foods — telefone (11) 95950-6213 (telefone da loja).
 
 ### Relato da entrevista
 
 | Item | Registro |
 |---|---|
-| Quem | ⚠ nome e função do entrevistado; integrantes presentes |
+| Quem | Henrique Lemos, responsável pela Colossal Foods; ⚠ integrantes presentes |
 | Quando e onde | ⚠ data; na própria Colossal Foods |
 | Comprovação | ⚠ foto da entrevista em `levantamento/evidencias/entrevista.jpg` |
 
@@ -447,16 +447,16 @@ entrega-1/                        material original da Entrega 1
 
 ## 6. Uso de Inteligência Artificial
 
-| Item | Uso 1 — levantamento (E1) | Uso 2 — DER e requisitos (E1) | Uso 3 — modelo lógico e SQL (E2) | Uso 4 — reorganização final (E2) |
+| Item | Uso 1 — levantamento (E1) | Uso 2 — DER e requisitos (E1) | Uso 3 — modelo lógico e SQL (E2) | Uso 4 — revisão final e apresentação (E2) |
 |---|---|---|---|---|
-| Ferramenta e etapa | ChatGPT — roteiro de entrevista e processos típicos | ChatGPT e Claude — entidades, DER, dicionário | ChatGPT — conversão, chaves, restrições, consultas e primeira massa | Claude (Anthropic) — adequação ao esqueleto do professor, nova massa, KPIs, diagramas e dicionário |
-| Motivação | Preparar a visita a uma hamburgueria | Revisar coerência entre README, DER e dicionário | Apoio na conversão e na escrita do SQL | Alinhar todo o repositório ao roteiro da Entrega 2 |
-| Prompts | “Chat, preciso fazer uma entrevista com uma empresa e entender como funciona o sistema deles de dados e montar um fluxo e fazer um MER e DER.”; “A empresa que vou é uma hamburgueria de baixo/médio porte, é possível adiantar algo?” | “Analise esse projeto e verifique se está correto.”; “Monte o projeto inteiro de forma atualizada e correta com dicionário em HTML, o DER e o fluxograma.” | “Revise o modelo lógico para ver se está tudo certo e faça a próxima etapa.” | Link do repositório + roteiro da Entrega 2: “atualize de acordo com a modelagem do professor” |
-| Resposta recebida | Perguntas sobre pedidos, pagamentos, estoque, delivery; lista de entidades possíveis | Divergências entre artefatos; produto × ingrediente; N:N e cardinalidades | Tabelas, PK/FK, CHECKs, triggers, consultas G01–G08 e A01–A12 | README no esqueleto; DER com todas as entidades; gerador de massa (2 semanas); G09–G15, A13, testes T01–T10; dicionário e diagramas gerados do script; levantamento organizado |
-| Fontes verificadas | Comparado com o que a equipe informou na visita | Arquivos do repositório e correção da E1 | Execução no MySQL Workbench | Roteiro do professor; carga da massa em SQLite com as mesmas restrições; conferência visual dos diagramas |
-| Rejeitado / corrigido | Estoque com baixa automática e outros processos não confirmados foram retirados | Atributos sem origem no levantamento | Valor do caixa ajustado para R$ 453,00; cálculo do pagamento passou a incluir a taxa de entrega | A primeira simulação gerou entregas de até 7 horas (um motoboy sem agrupar pedidos) — corrigida com até 4 pedidos por saída e tempos por bairro; o DER antigo tinha 9 entidades e não sustentava as 20 tabelas — refeito; dados de entrevista, nome do responsável e fotos **não** foram gerados e ficaram como pendência |
-| Justificativa | Manter só o que existe na loja | DER coerente com o levantamento | Script executável e coerente com as regras | Atender cada item do roteiro sem inventar evidências |
-| Reflexão crítica | IA sugere processos “de manual” que a loja pode não ter | IA tende a inflar o modelo | IA errou cálculos (taxa fora do total) que só o teste mostrou | Dados gerados parecem reais, mas parâmetros (taxas, mínimos, metas) são suposições a validar; a validação em SQLite não substitui rodar no MySQL |
+| Ferramenta e etapa | ChatGPT — roteiro de entrevista e processos típicos | ChatGPT e Claude — entidades, DER, dicionário | ChatGPT — conversão, chaves, restrições, consultas e primeira massa | Claude (Anthropic) — revisão do repositório frente ao roteiro da E2, massa de dados, consultas G09–G15, diagramas, dicionário, slides e roteiro de fala |
+| Motivação | Preparar a visita a uma hamburgueria | Revisar coerência entre README, DER e dicionário | Apoio na conversão e na escrita do SQL | Adequar todos os artefatos ao novo esqueleto no prazo; a IA foi apoio de produtividade, com o grupo fornecendo os dados da loja, testando e decidindo o que ficava |
+| Prompts | “Chat, preciso fazer uma entrevista com uma empresa e entender como funciona o sistema deles de dados e montar um fluxo e fazer um MER e DER.”; “A empresa que vou é uma hamburgueria de baixo/médio porte, é possível adiantar algo?” | “Analise esse projeto e verifique se está correto.”; “Monte o projeto inteiro de forma atualizada e correta com dicionário em HTML, o DER e o fluxograma.” | “Revise o modelo lógico para ver se está tudo certo e faça a próxima etapa.” | Link do repositório + roteiro da E2: “atualize de acordo com a modelagem do professor”; “taxas de 2 reais na entrega”; “faça os slides”; “mande texto de como irei apresentar”; “faça uma análise geral no repositório” |
+| Resposta recebida | Perguntas sobre pedidos, pagamentos, estoque, delivery; lista de entidades possíveis | Divergências entre artefatos; produto × ingrediente; N:N e cardinalidades | Tabelas, PK/FK, CHECKs, triggers, consultas G01–G08 e A01–A12 | README no esqueleto; DER com todas as entidades; gerador de massa (2 semanas); G09–G15, A13 e testes T01–T10; dicionário e diagramas gerados do script; rascunho dos slides e do roteiro de fala |
+| Fontes verificadas | Comparado com o que a equipe informou na visita | Arquivos do repositório e correção da E1 | Execução no MySQL Workbench | Roteiro do professor; execução do script no MySQL pelo grupo; conferência dos diagramas e dos resultados das consultas; dados da loja informados pelo grupo (responsável, taxa de entrega) |
+| Rejeitado / corrigido | Estoque com baixa automática e outros processos não confirmados foram retirados | Atributos sem origem no levantamento | Valor do caixa ajustado para R$ 453,00; cálculo do pagamento passou a incluir a taxa de entrega | Ao rodar o script no MySQL o grupo encontrou o erro 1359 (trigger já existente) e pediu a correção (o script passou a recriar o banco); a massa usava taxas de entrega supostas (R$ 5 a R$ 7) e o grupo corrigiu para a taxa real, R$ 2,00; simulação inicial com entregas de até 7 horas foi descartada; DER antigo refeito; nome do responsável e dados da entrevista vieram do grupo, não da IA |
+| Justificativa | Manter só o que existe na loja | DER coerente com o levantamento | Script executável e coerente com as regras | A IA acelerou a escrita e a geração de arquivos; os dados da organização, os testes e as decisões finais são do grupo |
+| Reflexão crítica | IA sugere processos “de manual” que a loja pode não ter | IA tende a inflar o modelo | IA errou cálculos (taxa fora do total) que só o teste mostrou | A IA preenche lacunas com valores plausíveis (taxas, estoques mínimos, metas) que precisam ser checados com a loja — a taxa errada só foi corrigida porque o grupo conhecia a real; um script “correto” no papel falhou na primeira execução e só o teste mostrou |
 
 ⚠ Registrar aqui qualquer outro uso de IA pelos integrantes (ex.: slides). Se não houve uso em alguma etapa, declarar.
 
@@ -471,7 +471,7 @@ Pitch de 8 minutos, slides limpos, na ordem exigida: contexto do problema → so
 ## Pendências antes da entrega
 
 1. Commits de cada integrante com a própria conta (hoje todos são da conta mur1lxz).
-2. Nome e função do responsável, data da entrevista, integrantes presentes e **foto JPG/PNG** no local (`levantamento/evidencias/`); link direto do perfil no Google.
+2. Data da entrevista, integrantes presentes e **foto JPG/PNG** no local (`levantamento/evidencias/`); link direto do perfil no Google.
 3. Conferir a tabela “Caso A” com o texto da correção da Entrega 1.
 4. Confirmar com a loja os parâmetros ilustrativos (bairros, mínimos, metas dos KPIs) e os processos marcados como pesquisa.
 5. Se exigido, redesenhar DER e modelo lógico no brModelo.

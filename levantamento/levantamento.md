@@ -19,7 +19,7 @@ Este documento organiza o que o grupo levantou sobre a Colossal Foods para a mod
 | Endereço | Rua do Carvalho Brasileiro, Jardim Arantes — São Paulo/SP — CEP 08382-520 |
 | Telefone da organização | (11) 95950-6213 |
 | Referência pública | Perfil no Google Maps: “Colossal Foods — Jardim Arantes, São Paulo — SP” (nota 5,0 com 228 avaliações na consulta feita durante a Entrega 1) |
-| Responsável que atendeu o grupo | ⚠ nome, função e telefone de contato |
+| Responsável que atendeu o grupo | Henrique Lemos, responsável pela Colossal Foods — (11) 95950-6213 |
 | Cardápio | Digital, fornecido por empresa terceirizada mediante mensalidade **[E]** |
 
 ## 2. Visitas e entrevista
@@ -28,7 +28,7 @@ Este documento organiza o que o grupo levantou sobre a Colossal Foods para a mod
 |---|---|---|
 | Data | ⚠ | ⚠ (se houve) |
 | Local | Colossal Foods, Jardim Arantes | ⚠ |
-| Entrevistado (nome e função) | ⚠ | ⚠ |
+| Entrevistado (nome e função) | Henrique Lemos, responsável | ⚠ (se houve) |
 | Integrantes presentes | ⚠ | ⚠ |
 | Foto no local (JPG/PNG em `levantamento/evidencias/`) | Não foi registrada | ⚠ |
 
