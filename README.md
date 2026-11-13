@@ -72,7 +72,7 @@ P1 e P2 foram relatados na entrevista da Entrega 1. P3 a P7 foram identificados 
 |---|---|
 | Perfil no Google (Google Meu Negócio/Maps) | “Colossal Foods — Jardim Arantes, São Paulo — SP”, nota 5,0 com 228 avaliações na consulta da Entrega 1 · [perfil no Google](https://share.google/RllPzCXwKrrXsxuzK) |
 | Endereço e telefone | Rua do Carvalho Brasileiro, Jardim Arantes — São Paulo/SP — CEP 08382-520 · (11) 95950-6213 |
-| Fotos (JPG/PNG) | Pasta [levantamento/evidencias/](levantamento/evidencias/) |
+| Fotos (JPG/PNG) | Fachada: [fachada.jpg](levantamento/evidencias/fachada.jpg) · demais fotos na pasta [levantamento/evidencias/](levantamento/evidencias/) |
 
 **Responsável pela organização.** Henrique Lemos, responsável pela Colossal Foods — telefone (11) 95950-6213 (telefone da loja).
 

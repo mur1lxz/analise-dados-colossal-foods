@@ -28,7 +28,7 @@ Este documento organiza o que o grupo levantou sobre a Colossal Foods para a mod
 | Local | Colossal Foods, Jardim Arantes |
 | Entrevistado (nome e função) | Henrique Lemos, responsável |
 | Integrantes presentes | Murilo Silva Magalhães |
-| Fotos | Pasta `levantamento/evidencias/` |
+| Fotos | Fachada: [evidencias/fachada.jpg](evidencias/fachada.jpg) · pasta `levantamento/evidencias/` |
 
 ## 3. Porte e volume
 
