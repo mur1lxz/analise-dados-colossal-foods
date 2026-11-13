@@ -22,6 +22,8 @@
 | Script SQL completo + massa de dados | [docs/script.sql](docs/script.sql) |
 | Guia de execução no MySQL | [docs/guia-execucao-mysql.md](docs/guia-execucao-mysql.md) |
 | Roteiro do pitch | [apresentacao/roteiro-pitch.md](apresentacao/roteiro-pitch.md) |
+| Slides da apresentação (PowerPoint) | [apresentacao/apresentacao-colossal-foods.pptx](apresentacao/apresentacao-colossal-foods.pptx) |
+| Slides da apresentação (abrir no navegador) | [apresentacao/slides.html](apresentacao/slides.html) |
 | Material da Entrega 1 (histórico) | [entrega-1/](entrega-1/) |
 
 ---
@@ -434,6 +436,8 @@ docs/guia-execucao-mysql.md       como executar e validar
 docs/gerador-massa/               gerador da massa fictícia
 docs/gerador-dicionario/          gerador do dicionário a partir do script
 apresentacao/roteiro-pitch.md     roteiro do pitch de 8 minutos
+apresentacao/apresentacao-colossal-foods.pptx  slides da apresentação (PowerPoint)
+apresentacao/slides.html          slides da apresentação (navegador)
 entrega-1/                        material original da Entrega 1
 ```
 
